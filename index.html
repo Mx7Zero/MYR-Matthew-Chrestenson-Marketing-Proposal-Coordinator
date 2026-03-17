@@ -97,12 +97,10 @@
     .bento-page {
       width: 100%; min-height: 100vh; min-height: 100dvh;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(1fr));
       gap: 0;
       position: relative;
     }
 
-    /* Dynamic grid: fills viewport edge-to-edge */
     .bento-page.cols-4 { grid-template-columns: repeat(4, 1fr); }
     .bento-page.cols-3 { grid-template-columns: repeat(3, 1fr); }
     .bento-page.cols-2 { grid-template-columns: repeat(2, 1fr); }
