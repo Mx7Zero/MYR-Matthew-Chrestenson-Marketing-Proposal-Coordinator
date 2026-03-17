@@ -239,6 +239,7 @@
     .project-tint.tint-red { background: rgba(220, 38, 38, 1); transition: opacity 0.4s ease; }
 
     .project:hover .project-tint { opacity: 0; }
+    .project.revealed .project-tint { opacity: 0; }
 
     /* Click-capture overlay */
     .project-overlay {
@@ -863,6 +864,19 @@
         if (target) target.scrollIntoView({ behavior: "smooth" });
       });
     });
+
+    // Mobile: reveal tint on scroll (no hover on touch devices)
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          entry.target.classList.toggle("revealed", entry.isIntersecting);
+        });
+      }, { threshold: 0.5 });
+
+      document.querySelectorAll(".project").forEach((el) => {
+        revealObserver.observe(el);
+      });
+    }
 
     // Keyboard navigation
     document.addEventListener("keydown", (e) => {
