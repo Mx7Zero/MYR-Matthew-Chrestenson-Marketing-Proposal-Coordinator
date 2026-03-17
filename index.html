@@ -477,14 +477,11 @@
   <section class="section-header" id="presentations">
     <span class="section-header-label">Section 03</span>
     <h2 class="section-header-title">Presentations</h2>
-    <span class="section-header-count">Coming Soon</span>
+    <span class="section-header-count" id="presentationCount"></span>
     <div class="section-header-line"></div>
   </section>
 
-  <div class="section-placeholder" id="presentations-content">
-    <p class="section-placeholder-title">Presentation Work</p>
-    <p class="section-placeholder-sub">Content coming soon</p>
-  </div>
+  <div id="presentation-items"></div>
 
   <!-- Footer -->
   <footer class="footer">
@@ -520,13 +517,20 @@
     const total = String(projects.length).padStart(2, "0");
     const videoTotal = String(videos.length).padStart(2, "0");
     const container = document.getElementById("projects");
+    const presentations = [
+      { name: "Presentations.ai Deck", embedUrl: "https://app.presentations.ai/view/8CQXVcms7d" },
+    ];
+
     const videoContainer = document.getElementById("videos");
+    const presentationContainer = document.getElementById("presentation-items");
     const navDots = document.getElementById("navDots");
     const topMenu = document.getElementById("topMenu");
+    const presentationTotal = String(presentations.length).padStart(2, "0");
 
     // Set counts
     document.getElementById("webWorkCount").textContent = projects.length + " Projects";
     document.getElementById("videoCount").textContent = videos.length + " Videos";
+    document.getElementById("presentationCount").textContent = presentations.length + (presentations.length === 1 ? " Presentation" : " Presentations");
 
     // Hero dot
     const heroDot = document.createElement("button");
@@ -760,6 +764,41 @@
         </div>
       `;
       videoContainer.appendChild(section);
+    });
+
+    // ── Build Presentation Sections ──
+    presentations.forEach((pres, i) => {
+      const section = document.createElement("section");
+      section.className = "project video-section";
+      section.id = `presentation-${i}`;
+      section.innerHTML = `
+        <iframe
+          src="${pres.embedUrl}"
+          title="${pres.name}"
+          loading="lazy"
+          allow="clipboard-write; autoplay"
+          allowfullscreen="true"
+          scrolling="no"
+          style="pointer-events:auto"
+        ></iframe>
+        <div class="project-header">
+          <div class="project-info">
+            <span class="project-number">${String(i + 1).padStart(2, "0")} / ${presentationTotal}</span>
+            <span class="project-title">${pres.name}</span>
+          </div>
+          <a class="project-cta" href="${pres.embedUrl}" target="_blank" rel="noopener noreferrer">
+            View Full Screen <span>&rarr;</span>
+          </a>
+        </div>
+        <div class="project-bar">
+          <span class="project-bar-number">${String(i + 1).padStart(2, "0")} / ${presentationTotal}</span>
+          <span class="project-bar-divider"></span>
+          <span class="project-bar-name">${pres.name}</span>
+          <span class="project-bar-divider"></span>
+          <span class="project-bar-hint">View Full Screen &rarr;</span>
+        </div>
+      `;
+      presentationContainer.appendChild(section);
     });
 
     // Smooth scroll for menu links
