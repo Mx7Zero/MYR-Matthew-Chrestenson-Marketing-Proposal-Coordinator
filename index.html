@@ -42,6 +42,12 @@
       --yellow-start: #f5c842;
       --yellow-mid: #fde68a;
       --yellow-end: #f5c842;
+      --orange-start: #d4710a;
+      --orange-mid: #f59e0b;
+      --orange-end: #fbbf24;
+      --red-start: #991b1b;
+      --red-mid: #dc2626;
+      --red-end: #f87171;
     }
 
     html { scroll-behavior: smooth; overflow-x: hidden; }
@@ -90,9 +96,19 @@
       color: var(--text-primary); border-color: rgba(255,255,255,0.3);
     }
 
-    .top-menu-link.active {
+    .top-menu-link.active[data-section="web-work"] {
       color: #111; background: var(--yellow-mid);
       border-color: var(--yellow-mid);
+    }
+
+    .top-menu-link.active[data-section="video-work"] {
+      color: #111; background: var(--orange-end);
+      border-color: var(--orange-end);
+    }
+
+    .top-menu-link.active[data-section="presentations"] {
+      color: #fff; background: var(--red-mid);
+      border-color: var(--red-mid);
     }
 
     .top-menu-divider {
@@ -187,9 +203,24 @@
 
     .section-header-line {
       margin-top: 1.5rem; width: 40px; height: 2px;
-      background: linear-gradient(90deg, var(--yellow-start), var(--yellow-mid), var(--yellow-end));
       border-radius: 1px;
     }
+
+    .section-header.section-yellow .section-header-line {
+      background: linear-gradient(90deg, var(--yellow-start), var(--yellow-mid), var(--yellow-end));
+    }
+
+    .section-header.section-orange .section-header-line {
+      background: linear-gradient(90deg, var(--orange-start), var(--orange-mid), var(--orange-end));
+    }
+
+    .section-header.section-red .section-header-line {
+      background: linear-gradient(90deg, var(--red-start), var(--red-mid), var(--red-end));
+    }
+
+    .section-header.section-yellow .section-header-title { color: var(--yellow-mid); }
+    .section-header.section-orange .section-header-title { color: var(--orange-end); }
+    .section-header.section-red .section-header-title { color: var(--red-end); }
 
     /* ── Placeholder Section ── */
     .section-placeholder {
@@ -364,6 +395,26 @@
       font-weight: 500;
     }
 
+    /* ── Orange Gradient Bar (Video) ── */
+    .project-bar.bar-orange {
+      background: linear-gradient(90deg, #b45309 0%, #d97706 25%, #f59e0b 50%, #d97706 75%, #b45309 100%);
+      box-shadow: 0 -4px 20px rgba(245, 158, 11, 0.15);
+    }
+
+    /* ── Red Gradient Bar (Presentations) ── */
+    .project-bar.bar-red {
+      background: linear-gradient(90deg, #991b1b 0%, #dc2626 25%, #f87171 50%, #dc2626 75%, #991b1b 100%);
+      box-shadow: 0 -4px 20px rgba(220, 38, 38, 0.15);
+    }
+
+    .project-bar.bar-red .project-bar-name,
+    .project-bar.bar-red .project-bar-number,
+    .project-bar.bar-red .project-bar-hint { color: #fff; }
+
+    .project-bar.bar-red .project-bar-number { color: rgba(255,255,255,0.7); }
+    .project-bar.bar-red .project-bar-hint { color: rgba(255,255,255,0.6); }
+    .project-bar.bar-red .project-bar-divider { background: rgba(255,255,255,0.25); }
+
     /* ── Nav Dots ── */
     .nav-dots {
       position: fixed; right: 1.2rem; top: 50%;
@@ -384,7 +435,7 @@
     /* ── Progress Bar ── */
     .progress-bar {
       position:fixed;top:0;left:0;height:2px;
-      background:linear-gradient(90deg, #c9a227, #fde68a, #c9a227);
+      background:linear-gradient(90deg, #fde68a 0%, #f59e0b 50%, #dc2626 100%);
       z-index:400;transition:width .1s linear;width:0%;
     }
 
@@ -454,7 +505,7 @@
   </section>
 
   <!-- Web Work Section Header -->
-  <section class="section-header" id="web-work">
+  <section class="section-header section-yellow" id="web-work">
     <span class="section-header-label">Section 01</span>
     <h2 class="section-header-title">Web Work</h2>
     <span class="section-header-count" id="webWorkCount"></span>
@@ -464,7 +515,7 @@
   <div id="projects"></div>
 
   <!-- Video Work Section -->
-  <section class="section-header" id="video-work">
+  <section class="section-header section-orange" id="video-work">
     <span class="section-header-label">Section 02</span>
     <h2 class="section-header-title">Video</h2>
     <span class="section-header-count" id="videoCount"></span>
@@ -474,7 +525,7 @@
   <div id="videos"></div>
 
   <!-- Presentations Section -->
-  <section class="section-header" id="presentations">
+  <section class="section-header section-red" id="presentations">
     <span class="section-header-label">Section 03</span>
     <h2 class="section-header-title">Presentations</h2>
     <span class="section-header-count" id="presentationCount"></span>
@@ -518,7 +569,9 @@
     const videoTotal = String(videos.length).padStart(2, "0");
     const container = document.getElementById("projects");
     const presentations = [
-      { name: "Presentations.ai Deck", embedUrl: "https://app.presentations.ai/view/8CQXVcms7d" },
+      { name: "Presentations.ai Deck", embedUrl: "https://app.presentations.ai/view/8CQXVcms7d", type: "embed" },
+      { name: "Briotix Costco Presentation", id: "BAzL6b1WaDY", type: "youtube" },
+      { name: "Briotix PPE Training", id: "CEq9fcqbs8I", type: "youtube" },
     ];
 
     const videoContainer = document.getElementById("videos");
@@ -755,7 +808,7 @@
             Watch on YouTube <span>&rarr;</span>
           </a>
         </div>
-        <div class="project-bar">
+        <div class="project-bar bar-orange">
           <span class="project-bar-number">${String(i + 1).padStart(2, "0")} / ${videoTotal}</span>
           <span class="project-bar-divider"></span>
           <span class="project-bar-name">${video.name}</span>
@@ -771,12 +824,24 @@
       const section = document.createElement("section");
       section.className = "project video-section";
       section.id = `presentation-${i}`;
+
+      let iframeSrc, linkUrl, linkText;
+      if (pres.type === "youtube") {
+        iframeSrc = `https://www.youtube.com/embed/${pres.id}?rel=0&modestbranding=1&color=white`;
+        linkUrl = `https://www.youtube.com/watch?v=${pres.id}`;
+        linkText = "Watch on YouTube";
+      } else {
+        iframeSrc = pres.embedUrl;
+        linkUrl = pres.embedUrl;
+        linkText = "View Full Screen";
+      }
+
       section.innerHTML = `
         <iframe
-          src="${pres.embedUrl}"
+          src="${iframeSrc}"
           title="${pres.name}"
           loading="lazy"
-          allow="clipboard-write; autoplay"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen="true"
           scrolling="no"
           style="pointer-events:auto"
@@ -786,16 +851,16 @@
             <span class="project-number">${String(i + 1).padStart(2, "0")} / ${presentationTotal}</span>
             <span class="project-title">${pres.name}</span>
           </div>
-          <a class="project-cta" href="${pres.embedUrl}" target="_blank" rel="noopener noreferrer">
-            View Full Screen <span>&rarr;</span>
+          <a class="project-cta" href="${linkUrl}" target="_blank" rel="noopener noreferrer">
+            ${linkText} <span>&rarr;</span>
           </a>
         </div>
-        <div class="project-bar">
+        <div class="project-bar bar-red">
           <span class="project-bar-number">${String(i + 1).padStart(2, "0")} / ${presentationTotal}</span>
           <span class="project-bar-divider"></span>
           <span class="project-bar-name">${pres.name}</span>
           <span class="project-bar-divider"></span>
-          <span class="project-bar-hint">View Full Screen &rarr;</span>
+          <span class="project-bar-hint">${linkText} &rarr;</span>
         </div>
       `;
       presentationContainer.appendChild(section);
