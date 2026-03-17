@@ -95,26 +95,33 @@
 
     /* ── Bento Section (full page) ── */
     .bento-page {
-      width: 100%; min-height: 100vh; min-height: 100dvh;
+      width: 100%;
+      min-height: 100vh;
       display: grid;
-      gap: 0;
+      gap: 0px;
       position: relative;
     }
 
-    .bento-page.cols-4 { grid-template-columns: repeat(4, 1fr); }
-    .bento-page.cols-3 { grid-template-columns: repeat(3, 1fr); }
-    .bento-page.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    #web-work {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr 1fr;
+    }
 
-    /* Make items fill viewport height evenly */
-    .bento-page.rows-4 .bento-item { height: 25vh; height: 25dvh; }
-    .bento-page.rows-3 .bento-item { height: 33.334vh; height: 33.334dvh; }
-    .bento-page.rows-2 .bento-item { height: 50vh; height: 50dvh; }
+    #video-work {
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+    }
 
-    /* Some items span 2 columns for visual interest */
+    #presentations {
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr;
+    }
+
     .bento-item.span-2 { grid-column: span 2; }
 
     .bento-item {
       position: relative; overflow: hidden; cursor: pointer;
+      min-height: 200px;
     }
 
     .bento-item iframe {
@@ -215,12 +222,11 @@
       .top-menu{gap:0.3rem}
       .top-menu-brand{display:none}
       .top-menu-link{font-size:0.5rem;padding:0.25rem 0.5rem;letter-spacing:0.1em}
-      .bento-page.cols-4{grid-template-columns:repeat(2,1fr)}
-      .bento-page.cols-3{grid-template-columns:repeat(1,1fr)}
-      .bento-page.cols-2{grid-template-columns:repeat(1,1fr)}
-      .bento-page.rows-4 .bento-item{height:auto;min-height:30vh}
-      .bento-page.rows-3 .bento-item{height:auto;min-height:40vh}
-      .bento-page.rows-2 .bento-item{height:auto;min-height:45vh}
+      #web-work{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+      #video-work{grid-template-columns:1fr;grid-template-rows:auto}
+      #presentations{grid-template-columns:1fr;grid-template-rows:auto}
+      .bento-item{min-height:35vh}
+      .bento-item.span-2{grid-column:span 1}
       .bento-item.span-2{grid-column:span 1}
       .bento-label-name{font-size:0.6rem}
       .back-to-top{width:36px;height:36px;bottom:1rem;right:1rem}
@@ -268,13 +274,13 @@
   </section>
 
   <!-- Web Work Bento -->
-  <section class="bento-page cols-4 rows-4" id="web-work"></section>
+  <section class="bento-page" id="web-work"></section>
 
   <!-- Video Bento -->
-  <section class="bento-page cols-3 rows-2" id="video-work"></section>
+  <section class="bento-page" id="video-work"></section>
 
   <!-- Presentations Bento -->
-  <section class="bento-page cols-3 rows-2" id="presentations"></section>
+  <section class="bento-page" id="presentations"></section>
 
   <footer class="footer">
     <p class="footer-text">Matthew Chrestenson &mdash; MYR Group &mdash; 2026</p>
