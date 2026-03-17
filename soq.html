@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Statement of Qualifications — MYR Group / CSI Electrical Contractors</title>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: #111;
+  color: #f0f0f0;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+a { color: #fbbf24; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* --- NAV --- */
+.top-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(17,17,17,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(251,191,36,0.15);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2.5rem; height: 60px;
+  transition: box-shadow 0.3s;
+}
+.top-nav.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,0.5); }
+.nav-brand {
+  font-weight: 700; font-size: 1.05rem; color: #fbbf24;
+  letter-spacing: 0.5px; white-space: nowrap;
+}
+.nav-brand span { color: #f0f0f0; font-weight: 400; }
+.nav-links { display: flex; gap: 1.6rem; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+.nav-links a {
+  color: #ccc; font-size: 0.82rem; text-transform: uppercase;
+  letter-spacing: 0.6px; font-weight: 500; transition: color 0.2s;
+  text-decoration: none; white-space: nowrap;
+}
+.nav-links a:hover { color: #fbbf24; text-decoration: none; }
+.nav-toggle { display: none; background: none; border: none; color: #fbbf24; font-size: 1.5rem; cursor: pointer; }
+
+/* --- SECTIONS --- */
+section { width: 100%; }
+.section-inner { max-width: 1200px; margin: 0 auto; padding: 5rem 2rem; }
+.section-title {
+  font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;
+  color: #fff;
+}
+.section-title::after {
+  content: ''; display: block; width: 60px; height: 3px;
+  background: #fbbf24; margin-top: 0.6rem; border-radius: 2px;
+}
+.section-subtitle { color: #aaa; font-size: 1rem; margin-bottom: 2.5rem; }
+.accent { color: #fbbf24; }
+
+/* --- HERO --- */
+.hero {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  background: linear-gradient(135deg, #111 0%, #1a1a2e 50%, #111 100%);
+}
+.hero-bg-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(251,191,36,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(251,191,36,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.hero-glow {
+  position: absolute; width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(251,191,36,0.08) 0%, transparent 70%);
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+  animation: glow-pulse 6s ease-in-out infinite;
+}
+@keyframes glow-pulse {
+  0%,100% { opacity: 0.6; transform: translate(-50%,-50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%,-50%) scale(1.15); }
+}
+.hero-content { position: relative; z-index: 2; text-align: center; padding: 2rem; }
+.hero-badge {
+  display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(251,191,36,0.4);
+  border-radius: 20px; font-size: 0.78rem; text-transform: uppercase;
+  letter-spacing: 2px; color: #fbbf24; margin-bottom: 2rem;
+}
+.hero-content h1 {
+  font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 700; line-height: 1.15;
+  margin-bottom: 1rem;
+}
+.hero-content h1 span { color: #fbbf24; }
+.hero-divider { width: 80px; height: 2px; background: #fbbf24; margin: 1.5rem auto; }
+.hero-meta { color: #aaa; font-size: 1.05rem; line-height: 1.8; }
+.hero-meta strong { color: #f0f0f0; }
+.hero-scroll {
+  margin-top: 3rem; display: inline-block; color: #fbbf24;
+  font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px;
+  animation: bounce-down 2s infinite;
+}
+.hero-scroll .arrow { display: block; font-size: 1.3rem; margin-top: 0.3rem; }
+@keyframes bounce-down {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+/* --- COMPANY PROFILE --- */
+.profile-section { background: #0e0e0e; }
+.profile-narrative {
+  max-width: 800px; color: #bbb; font-size: 1.05rem; line-height: 1.8;
+  margin-bottom: 3rem;
+}
+.stats-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 1.5rem;
+}
+.stat-card {
+  background: rgba(251,191,36,0.04);
+  border: 1px solid rgba(251,191,36,0.1);
+  border-radius: 12px; padding: 1.8rem 1.2rem; text-align: center;
+  transition: transform 0.3s, border-color 0.3s;
+}
+.stat-card:hover { transform: translateY(-4px); border-color: rgba(251,191,36,0.35); }
+.stat-number {
+  font-size: 2.4rem; font-weight: 700; color: #fbbf24;
+  font-variant-numeric: tabular-nums;
+}
+.stat-number .prefix, .stat-number .suffix { font-size: 1.4rem; font-weight: 400; }
+.stat-label { font-size: 0.82rem; color: #999; text-transform: uppercase; letter-spacing: 1px; margin-top: 0.3rem; }
+
+/* --- ORG CHART --- */
+.org-section { background: #111; }
+.org-chart { display: flex; flex-direction: column; align-items: center; gap: 0; }
+.org-node {
+  background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.25);
+  border-radius: 10px; padding: 1rem 2rem; text-align: center;
+  position: relative; transition: transform 0.3s;
+}
+.org-node:hover { transform: scale(1.04); }
+.org-node .org-name { font-weight: 700; font-size: 1.1rem; color: #fff; }
+.org-node .org-role { font-size: 0.8rem; color: #aaa; }
+.org-connector { width: 2px; height: 36px; background: rgba(251,191,36,0.25); }
+.org-hline { width: 70%; max-width: 700px; height: 2px; background: rgba(251,191,36,0.25); position: relative; }
+.org-branch-row {
+  display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap;
+  margin-top: 0; position: relative;
+}
+.org-branch-item { display: flex; flex-direction: column; align-items: center; }
+.org-branch-connector { width: 2px; height: 24px; background: rgba(251,191,36,0.25); }
+.org-branch-node {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px; padding: 0.75rem 1.2rem; text-align: center; min-width: 130px;
+  transition: border-color 0.3s;
+}
+.org-branch-node:hover { border-color: rgba(251,191,36,0.4); }
+.org-branch-node .org-name { font-size: 0.9rem; }
+.org-branch-node .org-role { font-size: 0.72rem; }
+
+/* --- CAPABILITIES --- */
+.capabilities-section { background: #0e0e0e; }
+.cap-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+.cap-card {
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px; padding: 2rem 1.5rem;
+  transition: transform 0.3s, border-color 0.3s, background 0.3s;
+  position: relative; overflow: hidden;
+}
+.cap-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: #fbbf24; transform: scaleX(0); transition: transform 0.4s;
+  transform-origin: left;
+}
+.cap-card:hover { transform: translateY(-4px); border-color: rgba(251,191,36,0.3); background: rgba(251,191,36,0.04); }
+.cap-card:hover::before { transform: scaleX(1); }
+.cap-icon { font-size: 2rem; margin-bottom: 1rem; }
+.cap-card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.6rem; color: #fff; }
+.cap-card p { font-size: 0.88rem; color: #999; line-height: 1.6; }
+
+/* --- PROJECTS --- */
+.projects-section { background: #111; }
+.proj-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 1.8rem;
+}
+.proj-card {
+  background: linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 14px; overflow: hidden;
+  transition: transform 0.35s, box-shadow 0.35s;
+}
+.proj-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+.proj-header {
+  padding: 1.5rem 1.5rem 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.proj-type {
+  display: inline-block; font-size: 0.68rem; text-transform: uppercase;
+  letter-spacing: 1.5px; padding: 0.25rem 0.7rem; border-radius: 4px;
+  margin-bottom: 0.7rem; font-weight: 600;
+}
+.proj-type.solar { background: rgba(251,191,36,0.15); color: #fbbf24; }
+.proj-type.wind { background: rgba(56,189,248,0.15); color: #38bdf8; }
+.proj-type.bess { background: rgba(52,211,153,0.15); color: #34d399; }
+.proj-header h3 { font-size: 1.15rem; font-weight: 600; color: #fff; margin-bottom: 0.3rem; }
+.proj-location { font-size: 0.85rem; color: #888; }
+.proj-body { padding: 1rem 1.5rem; }
+.proj-body p { font-size: 0.88rem; color: #aaa; line-height: 1.6; margin-bottom: 1rem; }
+.proj-stats { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+.proj-stat { text-align: center; }
+.proj-stat .val { font-size: 1.3rem; font-weight: 700; color: #fbbf24; }
+.proj-stat .lbl { font-size: 0.7rem; text-transform: uppercase; color: #777; letter-spacing: 0.5px; }
+
+/* --- PERSONNEL --- */
+.personnel-section { background: #0e0e0e; }
+.personnel-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.8rem;
+}
+.person-card {
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 14px; padding: 2rem 1.5rem; text-align: center;
+  transition: transform 0.3s, border-color 0.3s;
+}
+.person-card:hover { transform: translateY(-4px); border-color: rgba(251,191,36,0.3); }
+.person-avatar {
+  width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 1rem;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; font-weight: 700; color: #111;
+}
+.person-card h3 { font-size: 1.1rem; font-weight: 600; color: #fff; margin-bottom: 0.2rem; }
+.person-title { font-size: 0.85rem; color: #fbbf24; margin-bottom: 0.5rem; }
+.person-meta { font-size: 0.78rem; color: #888; margin-bottom: 0.8rem; }
+.person-certs { display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: center; margin-bottom: 0.8rem; }
+.person-cert {
+  font-size: 0.68rem; padding: 0.2rem 0.5rem; border-radius: 4px;
+  background: rgba(251,191,36,0.1); color: #fbbf24; border: 1px solid rgba(251,191,36,0.2);
+}
+.person-bio { font-size: 0.85rem; color: #999; line-height: 1.6; text-align: left; }
+
+/* --- SAFETY --- */
+.safety-section { background: #111; }
+.safety-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+.emr-chart { position: relative; }
+.emr-bars { display: flex; align-items: flex-end; gap: 0.8rem; height: 200px; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.emr-bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 0.3rem; height: 100%; justify-content: flex-end; }
+.emr-bar {
+  width: 100%; border-radius: 4px 4px 0 0;
+  transition: height 1.2s cubic-bezier(0.4,0,0.2,1);
+  position: relative; min-height: 0;
+}
+.emr-bar .emr-val {
+  position: absolute; top: -22px; left: 50%; transform: translateX(-50%);
+  font-size: 0.75rem; font-weight: 600; color: #fff; white-space: nowrap;
+}
+.emr-bar-year { font-size: 0.72rem; color: #888; margin-top: 0.5rem; }
+.industry-line {
+  position: absolute; left: 0; right: 0; border-top: 2px dashed rgba(255,100,100,0.4);
+  z-index: 2;
+}
+.industry-label { position: absolute; right: 0; top: -18px; font-size: 0.68rem; color: #f87171; }
+.safety-stats-list { display: flex; flex-direction: column; gap: 1rem; }
+.safety-stat-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.8rem 1rem; background: rgba(255,255,255,0.03);
+  border-radius: 8px; border-left: 3px solid #fbbf24;
+}
+.safety-stat-row .ssl { font-size: 0.9rem; color: #ccc; }
+.safety-stat-row .ssv { font-size: 1rem; font-weight: 700; color: #fbbf24; }
+.safety-programs {
+  margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 0.6rem;
+}
+.safety-tag {
+  font-size: 0.78rem; padding: 0.35rem 0.8rem; border-radius: 6px;
+  background: rgba(52,211,153,0.1); color: #34d399;
+  border: 1px solid rgba(52,211,153,0.2);
+}
+
+/* --- FINANCIAL --- */
+.financial-section { background: #0e0e0e; }
+.fin-layout { display: grid; grid-template-columns: 1.2fr 1fr; gap: 3rem; align-items: start; }
+.rev-chart { position: relative; }
+.rev-bars { display: flex; align-items: flex-end; gap: 0.6rem; height: 220px; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.rev-bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; }
+.rev-bar {
+  width: 100%; background: linear-gradient(to top, rgba(251,191,36,0.6), #fbbf24);
+  border-radius: 4px 4px 0 0; transition: height 1.2s cubic-bezier(0.4,0,0.2,1);
+  position: relative;
+}
+.rev-bar .rev-val {
+  position: absolute; top: -22px; left: 50%; transform: translateX(-50%);
+  font-size: 0.7rem; font-weight: 600; color: #fbbf24; white-space: nowrap;
+}
+.rev-bar-year { font-size: 0.72rem; color: #888; margin-top: 0.5rem; }
+.fin-details { display: flex; flex-direction: column; gap: 1rem; }
+.fin-item {
+  padding: 1.2rem; background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07); border-radius: 10px;
+}
+.fin-item .fi-label { font-size: 0.78rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.3rem; }
+.fin-item .fi-value { font-size: 1.3rem; font-weight: 700; color: #fff; }
+.fin-item .fi-sub { font-size: 0.82rem; color: #999; margin-top: 0.2rem; }
+
+/* --- EQUIPMENT --- */
+.equipment-section { background: #111; }
+.equip-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+.equip-fleet-stat {
+  display: flex; align-items: center; gap: 1rem; padding: 1rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.equip-fleet-stat .efs-icon { font-size: 1.5rem; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; background: rgba(251,191,36,0.08); border-radius: 10px; flex-shrink: 0; }
+.equip-fleet-stat .efs-num { font-size: 1.4rem; font-weight: 700; color: #fbbf24; }
+.equip-fleet-stat .efs-label { font-size: 0.85rem; color: #999; }
+.equip-list h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; color: #fff; }
+.equip-list ul { list-style: none; }
+.equip-list li {
+  padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 0.9rem; color: #bbb; display: flex; align-items: center; gap: 0.6rem;
+}
+.equip-list li::before { content: '\25B8'; color: #fbbf24; font-size: 0.7rem; }
+
+/* --- REFERENCES --- */
+.references-section { background: #0e0e0e; }
+.ref-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.8rem; }
+.ref-card {
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px; padding: 1.8rem;
+  border-top: 3px solid #fbbf24;
+}
+.ref-card h3 { font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 0.3rem; }
+.ref-org { color: #fbbf24; font-size: 0.9rem; margin-bottom: 0.8rem; }
+.ref-project { font-size: 0.85rem; color: #aaa; margin-bottom: 0.8rem; line-height: 1.6; }
+.ref-contact { font-size: 0.82rem; color: #777; font-style: italic; }
+
+/* --- CERTIFICATIONS --- */
+.certs-section { background: #111; }
+.certs-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.2rem;
+}
+.cert-badge {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px; padding: 1.5rem 1rem; text-align: center;
+  transition: transform 0.3s, border-color 0.3s;
+}
+.cert-badge:hover { transform: translateY(-3px); border-color: rgba(251,191,36,0.3); }
+.cert-icon { font-size: 2rem; margin-bottom: 0.6rem; }
+.cert-badge h4 { font-size: 0.9rem; font-weight: 600; color: #fff; margin-bottom: 0.2rem; }
+.cert-badge p { font-size: 0.75rem; color: #888; }
+
+/* --- FOOTER --- */
+.footer {
+  background: #0a0a0a; border-top: 1px solid rgba(255,255,255,0.05);
+  padding: 2.5rem 2rem; text-align: center;
+}
+.footer p { color: #666; font-size: 0.82rem; }
+.footer .accent { color: #fbbf24; }
+
+/* --- FADE IN --- */
+.fade-in {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* --- RESPONSIVE --- */
+@media (max-width: 900px) {
+  .safety-layout, .fin-layout, .equip-layout { grid-template-columns: 1fr; }
+  .proj-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex; flex-direction: column; position: absolute;
+    top: 60px; left: 0; right: 0; background: rgba(17,17,17,0.97);
+    padding: 1rem 2rem 1.5rem; gap: 0.8rem; border-bottom: 1px solid rgba(251,191,36,0.15);
+  }
+  .nav-toggle { display: block; }
+}
+@media (max-width: 600px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .section-inner { padding: 3.5rem 1.2rem; }
+  .hero-content h1 { font-size: 1.8rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="top-nav" id="topNav">
+  <div class="nav-brand">MYR GROUP <span>/ CSI Electrical</span></div>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">&#9776;</button>
+  <div class="nav-links" id="navLinks">
+    <a href="#profile">Profile</a>
+    <a href="#organization">Organization</a>
+    <a href="#capabilities">Capabilities</a>
+    <a href="#projects">Projects</a>
+    <a href="#personnel">Personnel</a>
+    <a href="#safety">Safety</a>
+    <a href="#financial">Financial</a>
+    <a href="#equipment">Equipment</a>
+    <a href="#references">References</a>
+    <a href="#certifications">Certifications</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Prequalification Submittal &mdash; 2026&ndash;2028</div>
+    <h1>Statement of Qualifications<br><span>Renewable Energy Electrical Construction</span></h1>
+    <div class="hero-divider"></div>
+    <div class="hero-meta">
+      <strong>MYR Group Inc.</strong> / CSI Electrical Contractors<br>
+      Submitted to <strong>Pacific Northwest Energy Authority (PNEA)</strong><br>
+      Solar &bull; Wind &bull; Battery Energy Storage Systems
+    </div>
+    <a href="#profile" class="hero-scroll">Explore Our Qualifications<span class="arrow">&#8595;</span></a>
+  </div>
+</section>
+
+<!-- COMPANY PROFILE -->
+<section class="profile-section" id="profile">
+  <div class="section-inner">
+    <div class="fade-in">
+      <div class="section-title">Company Profile</div>
+      <div class="section-subtitle">A National Leader in Electrical Construction</div>
+    </div>
+    <div class="fade-in">
+      <p class="profile-narrative">
+        MYR Group Inc. (NASDAQ: MYRG) is one of the largest electrical construction firms in North America, providing a full spectrum of electrical construction services to clients across the commercial, industrial, and utility sectors. Through our subsidiary CSI Electrical Contractors, we deliver comprehensive renewable energy construction solutions including utility-scale solar, wind collector systems, battery energy storage, and high-voltage substation and interconnection work. Headquartered in the Western United States, CSI Electrical has established itself as a premier contractor for some of the most complex and high-profile renewable energy projects in the nation, with a particular emphasis on projects throughout the Pacific Northwest, Southwest, and Mountain West regions.
+      </p>
+    </div>
+    <div class="stats-grid fade-in">
+      <div class="stat-card">
+        <div class="stat-number"><span class="prefix">$</span><span class="counter" data-target="3.6" data-decimals="1">0</span><span class="suffix">B</span></div>
+        <div class="stat-label">Annual Revenue</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number"><span class="counter" data-target="8500" data-decimals="0">0</span><span class="suffix">+</span></div>
+        <div class="stat-label">Employees</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number"><span class="counter" data-target="130" data-decimals="0">0</span><span class="suffix">+</span></div>
+        <div class="stat-label">Years in Business</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number"><span class="counter" data-target="13" data-decimals="0">0</span></div>
+        <div class="stat-label">Subsidiaries</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number"><span class="counter" data-target="40" data-decimals="0">0</span><span class="suffix">+</span></div>
+        <div class="stat-label">States Served</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number"><span class="counter" data-target="0.71" data-decimals="2">0</span></div>
+        <div class="stat-label">EMR Rating</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORGANIZATIONAL STRUCTURE -->
+<section class="org-section" id="organization">
+  <div class="section-inner">
+    <div class="fade-in">
+      <div class="section-title">Organizational Structure</div>
+      <div class="section-subtitle">Clear Accountability from Corporate Leadership to Field Execution</div>
+    </div>
+    <div class="org-chart fade-in">
+      <div class="org-node">
+        <div class="org-name">MYR Group Inc.</div>
+        <div class="org-role">Parent Company &mdash; NASDAQ: MYRG</div>
+      </div>
+      <div class="org-connector"></div>
+      <div class="org-node">
+        <div class="org-name">CSI Electrical Contractors</div>
+        <div class="org-role">Subsidiary &mdash; Renewable Energy Division</div>
+      </div>
+      <div class="org-connector"></div>
+      <div class="org-hline"></div>
+      <div class="org-branch-row">
+        <div class="org-branch-item">
+          <div class="org-branch-connector"></div>
+          <div class="org-branch-node">
+            <div class="org-name">Project Management</div>
+            <div class="org-role">Planning, Scheduling, Cost Control</div>
+          </div>
+        </div>
+        <div class="org-branch-item">
+          <div class="org-branch-connector"></div>
+          <div class="org-branch-node">
+            <div class="org-name">Engineering</div>
+            <div class="org-role">Design, Estimation, Value Engineering</div>
+          </div>
+        </div>
+        <div class="org-branch-item">
+          <div class="org-branch-connector"></div>
+          <div class="org-branch-node">
+            <div class="org-name">Field Operations</div>
+            <div class="org-role">Construction, Installation, Testing</div>
+          </div>
+        </div>
+        <div class="org-branch-item">
+          <div class="org-branch-connector"></div>
+          <div class="org-branch-node">
+            <div class="org-name">Safety</div>
+            <div class="org-role">HSE Programs, Compliance, Training</div>
+          </div>
+        </div>
+        <div class="org-branch-item">
+          <div class="org-branch-connector"></div>
+          <div class="org-branch-node">
+            <div class="org-name">Quality</div>
+            <div class="org-role">QA/QC, Inspections, Documentation</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CORE CAPABILITIES -->
+<section class="capabilities-section" id="capabilities">
+  <div class="section-inner">
+    <div class="fade-in">
+      <div class="section-title">Core Capabilities</div>
+      <div class="section-subtitle">Full-Spectrum Renewable Energy Electrical Construction</div>
+    </div>
+    <div class="cap-grid fade-in">
+      <div class="cap-card">
+        <div class="cap-icon">&#9728;</div>
+        <h3>Solar Farm Construction</h3>
+        <p>Utility-scale photovoltaic installation including tracker systems, fixed-tilt arrays, DC wiring, combiner boxes, inverter pads, and AC collection systems for projects ranging from 50 MW to 500+ MW.</p>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon">&#127744;</div>
+        <h3>Wind Farm Collector Systems</h3>
+        <p>Underground and overhead medium-voltage collector systems, turbine pad electrical infrastructure, step-up transformers, and meteorological tower wiring for wind energy facilities up to 300+ MW.</p>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon">&#9889;</div>
+        <h3>Battery Energy Storage (BESS)</h3>
+        <p>Complete electrical balance-of-plant for lithium-ion and emerging battery technologies, including DC power systems, inverter installation, HVAC electrical, fire suppression wiring, and grid interconnection.</p>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon">&#9878;</div>
+        <h3>Substation Construction</h3>
+        <p>Greenfield and brownfield substation construction from 34.5 kV to 500 kV including foundations, steel erection, bus work, equipment setting, grounding grids, control buildings, and relay protection systems.</p>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon">&#128268;</div>
+        <h3>High-Voltage Interconnection</h3>
+        <p>Transmission-level interconnection services including gen-tie lines, switching stations, and point-of-interconnection infrastructure to integrate renewable generation assets to the bulk power grid.</p>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon">&#128161;</div>
+        <h3>Medium-Voltage Distribution</h3>
+        <p>Design-build and design-assist medium-voltage electrical distribution for renewable energy facilities, including pad-mounted switchgear, underground duct banks, and overhead distribution lines up to 34.5 kV.</p>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon">&#128421;</div>
+        <h3>SCADA &amp; Controls</h3>
+        <p>Supervisory control and data acquisition system installation, fiber optic communication networks, RTU programming, DAS integration, meteorological monitoring, and real-time plant performance systems.</p>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon">&#9989;</div>
+        <h3>Commissioning &amp; Testing</h3>
+        <p>Comprehensive commissioning services including relay testing, insulation resistance testing, hi-pot testing, transformer oil analysis, power quality analysis, and coordinated system energization procedures.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT PORTFOLIO -->
+<section class="projects-section" id="projects">
+  <div class="section-inner">
+    <div class="fade-in">
+      <div class="section-title">Project Portfolio</div>
+      <div class="section-subtitle">Selected Renewable Energy Projects &mdash; Western United States</div>
+    </div>
+    <div class="proj-grid fade-in">
+
+      <div class="proj-card">
+        <div class="proj-header">
+          <div class="proj-type solar">Solar</div>
+          <h3>Sagebrush Flats Solar Energy Center</h3>
+          <div class="proj-location">Klickitat County, Washington</div>
+        </div>
+        <div class="proj-body">
+          <p>Complete electrical balance-of-plant for a utility-scale solar facility featuring single-axis tracker arrays. Scope included AC/DC collection system, inverter pads, 34.5 kV overhead collector lines, onsite 230 kV substation, and gen-tie interconnection to the regional grid.</p>
+          <div class="proj-stats">
+            <div class="proj-stat"><div class="val">350 MW</div><div class="lbl">Capacity</div></div>
+            <div class="proj-stat"><div class="val">2025</div><div class="lbl">Completed</div></div>
+            <div class="proj-stat"><div class="val">IPP</div><div class="lbl">Client Type</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-header">
+          <div class="proj-type wind">Wind</div>
+          <h3>Cascade Ridge Wind Farm</h3>
+          <div class="proj-location">Sherman County, Oregon</div>
+        </div>
+        <div class="proj-body">
+          <p>Underground 34.5 kV collector system connecting 85 wind turbine generators, including turbine transformer wiring, pad-mounted switchgear, fiber optic SCADA network, and a new 230 kV collector substation with dual transformer banks.</p>
+          <div class="proj-stats">
+            <div class="proj-stat"><div class="val">280 MW</div><div class="lbl">Capacity</div></div>
+            <div class="proj-stat"><div class="val">2024</div><div class="lbl">Completed</div></div>
+            <div class="proj-stat"><div class="val">Utility</div><div class="lbl">Client Type</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-header">
+          <div class="proj-type bess">BESS</div>
+          <h3>Silver Creek Energy Storage Facility</h3>
+          <div class="proj-location">Ada County, Idaho</div>
+        </div>
+        <div class="proj-body">
+          <p>Electrical construction for a 200 MW / 800 MWh lithium-ion battery energy storage system co-located with an existing solar facility. Included inverter installation, medium-voltage switchgear, HVAC power systems, fire detection wiring, and 230 kV interconnection upgrades.</p>
+          <div class="proj-stats">
+            <div class="proj-stat"><div class="val">200 MW</div><div class="lbl">Capacity</div></div>
+            <div class="proj-stat"><div class="val">2025</div><div class="lbl">Completed</div></div>
+            <div class="proj-stat"><div class="val">Developer</div><div class="lbl">Client Type</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-header">
+          <div class="proj-type solar">Solar</div>
+          <h3>Antelope Mesa Solar Project</h3>
+          <div class="proj-location">Wasco County, Oregon</div>
+        </div>
+        <div class="proj-body">
+          <p>Full electrical scope for a 200 MW bifacial solar facility on agricultural land. Installed 1,200+ string inverters, 42 miles of underground MV cable, SCADA/DAS systems, and a new 115 kV point-of-interconnection substation with OPGW communication links.</p>
+          <div class="proj-stats">
+            <div class="proj-stat"><div class="val">200 MW</div><div class="lbl">Capacity</div></div>
+            <div class="proj-stat"><div class="val">2024</div><div class="lbl">Completed</div></div>
+            <div class="proj-stat"><div class="val">IPP</div><div class="lbl">Client Type</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-header">
+          <div class="proj-type wind">Wind</div>
+          <h3>Rattlesnake Hills Wind Energy Center</h3>
+          <div class="proj-location">Benton County, Washington</div>
+        </div>
+        <div class="proj-body">
+          <p>Electrical infrastructure for a 150 MW wind energy facility including 55 turbine pad electrical installations, 34.5 kV underground collector system, permanent meteorological towers, O&amp;M building electrical, and integration with existing 230 kV transmission switchyard.</p>
+          <div class="proj-stats">
+            <div class="proj-stat"><div class="val">150 MW</div><div class="lbl">Capacity</div></div>
+            <div class="proj-stat"><div class="val">2023</div><div class="lbl">Completed</div></div>
+            <div class="proj-stat"><div class="val">Utility</div><div class="lbl">Client Type</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-header">
+          <div class="proj-type bess">BESS</div>
+          <h3>Columbia Gateway Storage Project</h3>
+          <div class="proj-location">Umatilla County, Oregon</div>
+        </div>
+        <div class="proj-body">
+          <p>Standalone 150 MW / 600 MWh grid-scale battery storage facility providing capacity and ancillary services. Electrical scope encompassed complete BOP including 120 battery enclosures, power conversion systems, 34.5/230 kV step-up substation, and utility metering infrastructure.</p>
+          <div class="proj-stats">
+            <div class="proj-stat"><div class="val">150 MW</div><div class="lbl">Capacity</div></div>
+            <div class="proj-stat"><div class="val">2026</div><div class="lbl">In Progress</div></div>
+            <div class="proj-stat"><div class="val">Developer</div><div class="lbl">Client Type</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- KEY PERSONNEL -->
+<section class="personnel-section" id="personnel">
+  <div class="section-inner">
+    <div class="fade-in">
+      <div class="section-title">Key Personnel</div>
+      <div class="section-subtitle">Experienced Leadership Driving Project Success</div>
+    </div>
+    <div class="personnel-grid fade-in">
+
+      <div class="person-card">
+        <div class="person-avatar" style="background: linear-gradient(135deg, #fbbf24, #f59e0b);">RM</div>
+        <h3>Robert Maynard</h3>
+        <div class="person-title">Senior Project Director</div>
+        <div class="person-meta">28 Years Experience</div>
+        <div class="person-certs">
+          <span class="person-cert">PMP</span>
+          <span class="person-cert">PE (OR, WA)</span>
+          <span class="person-cert">OSHA 30</span>
+        </div>
+        <p class="person-bio">Oversees CSI Electrical's renewable energy portfolio across the Pacific Northwest. Has directed more than $1.2B in solar, wind, and BESS projects. Former engineering manager with deep technical expertise in high-voltage systems and utility interconnection requirements.</p>
+      </div>
+
+      <div class="person-card">
+        <div class="person-avatar" style="background: linear-gradient(135deg, #38bdf8, #0ea5e9);">KL</div>
+        <h3>Karen Liu</h3>
+        <div class="person-title">Project Manager &mdash; Renewable Energy</div>
+        <div class="person-meta">19 Years Experience</div>
+        <div class="person-certs">
+          <span class="person-cert">PMP</span>
+          <span class="person-cert">LEED AP</span>
+          <span class="person-cert">OSHA 30</span>
+        </div>
+        <p class="person-bio">Manages day-to-day execution of utility-scale renewable projects from preconstruction through commissioning. Led the Sagebrush Flats 350 MW solar project to on-time completion. Specializes in complex multi-trade coordination and owner interface management.</p>
+      </div>
+
+      <div class="person-card">
+        <div class="person-avatar" style="background: linear-gradient(135deg, #34d399, #10b981);">JT</div>
+        <h3>James Taggart</h3>
+        <div class="person-title">General Superintendent</div>
+        <div class="person-meta">24 Years Experience</div>
+        <div class="person-certs">
+          <span class="person-cert">Master Electrician</span>
+          <span class="person-cert">OSHA 500</span>
+          <span class="person-cert">NFPA 70E</span>
+        </div>
+        <p class="person-bio">Directs all field operations for renewable energy construction across the region. IBEW journeyman wireman who advanced through the ranks. Manages craft workforce deployment, productivity tracking, and field quality programs. Instrumental in achieving zero lost-time incidents across three consecutive projects.</p>
+      </div>
+
+      <div class="person-card">
+        <div class="person-avatar" style="background: linear-gradient(135deg, #f472b6, #ec4899);">SP</div>
+        <h3>Sarah Petersen</h3>
+        <div class="person-title">Director of Safety</div>
+        <div class="person-meta">16 Years Experience</div>
+        <div class="person-certs">
+          <span class="person-cert">CSP</span>
+          <span class="person-cert">CHST</span>
+          <span class="person-cert">OSHA 510</span>
+        </div>
+        <p class="person-bio">Leads CSI Electrical's safety program across all renewable energy operations. Developed the company's Renewable Energy Safety Playbook addressing unique hazards in solar, wind, and BESS construction. Track record of maintaining EMR well below industry average for five consecutive years.</p>
+      </div>
+
+      <div class="person-card">
+        <div class="person-avatar" style="background: linear-gradient(135deg, #a78bfa, #8b5cf6);">DW</div>
+        <h3>David Walsh</h3>
+        <div class="person-title">Chief Estimator &mdash; Renewables</div>
+        <div class="person-meta">21 Years Experience</div>
+        <div class="person-certs">
+          <span class="person-cert">CPE</span>
+          <span class="person-cert">PE (WA)</span>
+          <span class="person-cert">OSHA 30</span>
+        </div>
+        <p class="person-bio">Responsible for preconstruction, estimating, and value engineering for all renewable energy pursuits. Expert in solar BOP cost modeling, wind collector system design optimization, and BESS constructability reviews. Has estimated more than $2B in awarded renewable energy contracts.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SAFETY & QUALITY -->
+<section class="safety-section" id="safety">
+  <div class="section-inner">
+    <div class="fade-in">
+      <div class="section-title">Safety &amp; Quality</div>
+      <div class="section-subtitle">Industry-Leading Safety Performance &amp; Rigorous Quality Programs</div>
+    </div>
+    <div class="safety-layout fade-in">
+      <div>
+        <h3 style="font-size:1rem;color:#fff;margin-bottom:1rem;">Experience Modification Rate (EMR) History</h3>
+        <div class="emr-chart">
+          <div class="industry-line" style="bottom: calc(200px * 1.0 / 1.2);" id="industryLine">
+            <span class="industry-label">Industry Average (1.0)</span>
+          </div>
+          <div class="emr-bars" id="emrBars">
+            <div class="emr-bar-wrap"><div class="emr-bar" data-height="65" style="height:0;background:linear-gradient(to top,rgba(251,191,36,0.5),#fbbf24);"><span class="emr-val">0.78</span></div><div class="emr-bar-year">2021</div></div>
+            <div class="emr-bar-wrap"><div class="emr-bar" data-height="62" style="height:0;background:linear-gradient(to top,rgba(251,191,36,0.5),#fbbf24);"><span class="emr-val">0.75</span></div><div class="emr-bar-year">2022</div></div>
+            <div class="emr-bar-wrap"><div class="emr-bar" data-height="60" style="height:0;background:linear-gradient(to top,rgba(251,191,36,0.5),#fbbf24);"><span class="emr-val">0.73</span></div><div class="emr-bar-year">2023</div></div>
+            <div class="emr-bar-wrap"><div class="emr-bar" data-height="58" style="height:0;background:linear-gradient(to top,rgba(251,191,36,0.5),#fbbf24);"><span class="emr-val">0.72</span></div><div class="emr-bar-year">2024</div></div>
+            <div class="emr-bar-wrap"><div class="emr-bar" data-height="56" style="height:0;background:linear-gradient(to top,rgba(52,211,153,0.5),#34d399);"><span class="emr-val">0.71</span></div><div class="emr-bar-year">2025</div></div>
+          </div>
+        </div>
+        <div class="safety-programs" style="margin-top:1.5rem;">
+          <span class="safety-tag">OSHA VPP Star</span>
+          <span class="safety-tag">Zero Incident Culture</span>
+          <span class="safety-tag">Daily JSA/JHA</span>
+          <span class="safety-tag">Behavior-Based Safety</span>
+          <span class="safety-tag">Stop Work Authority</span>
+          <span class="safety-tag">Drug-Free Workplace</span>
+          <span class="safety-tag">Weekly Safety Audits</span>
+          <span class="safety-tag">NFPA 70E Arc Flash</span>
+          <span class="safety-tag">Fall Protection</span>
+          <span class="safety-tag">Confined Space</span>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-size:1rem;color:#fff;margin-bottom:1rem;">Safety Performance Metrics</h3>
+        <div class="safety-stats-list">
+          <div class="safety-stat-row"><span class="ssl">Total Recordable Incident Rate (TRIR)</span><span class="ssv">0.42</span></div>
+          <div class="safety-stat-row"><span class="ssl">Days Away/Restricted/Transfer (DART)</span><span class="ssv">0.18</span></div>
+          <div class="safety-stat-row"><span class="ssl">Lost Time Incident Rate (LTIR)</span><span class="ssv">0.05</span></div>
+          <div class="safety-stat-row"><span class="ssl">Experience Modification Rate (EMR)</span><span class="ssv">0.71</span></div>
+          <div class="safety-stat-row"><span class="ssl">Hours Worked Without Lost Time</span><span class="ssv">2.8M+</span></div>
+          <div class="safety-stat-row"><span class="ssl">ISNetworld RAVS Score</span><span class="ssv">A</span></div>
+        </div>
+        <h3 style="font-size:1rem;color:#fff;margin:1.5rem 0 0.8rem;">Quality Certifications</h3>
+        <div class="safety-stats-list">
+          <div class="safety-stat-row"><span class="ssl">ISO 9001:2015</span><span class="ssv">Certified</span></div>
+          <div class="safety-stat-row"><span class="ssl">ISO 45001:2018</span><span class="ssv">Certified</span></div>
+          <div class="safety-stat-row"><span class="ssl">ISO 14001:2015</span><span class="ssv">Certified</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINANCIAL STRENGTH -->
+<section class="financial-section" id="financial">
+  <div class="section-inner">
+    <div class="fade-in">
+      <div class="section-title">Financial Strength</div>
+      <div class="section-subtitle">Publicly Traded with Proven Fiscal Stability</div>
+    </div>
+    <div class="fin-layout fade-in">
+      <div>
+        <h3 style="font-size:1rem;color:#fff;margin-bottom:1rem;">Revenue Growth ($ Billions)</h3>
+        <div class="rev-chart">
+          <div class="rev-bars" id="revBars">
+            <div class="rev-bar-wrap"><div class="rev-bar" data-height="52" style="height:0;"><span class="rev-val">$2.3B</span></div><div class="rev-bar-year">2021</div></div>
+            <div class="rev-bar-wrap"><div class="rev-bar" data-height="64" style="height:0;"><span class="rev-val">$2.8B</span></div><div class="rev-bar-year">2022</div></div>
+            <div class="rev-bar-wrap"><div class="rev-bar" data-height="74" style="height:0;"><span class="rev-val">$3.1B</span></div><div class="rev-bar-year">2023</div></div>
+            <div class="rev-bar-wrap"><div class="rev-bar" data-height="82" style="height:0;"><span class="rev-val">$3.4B</span></div><div class="rev-bar-year">2024</div></div>
+            <div class="rev-bar-wrap"><div class="rev-bar" data-height="90" style="height:0;"><span class="rev-val">$3.6B</span></div><div class="rev-bar-year">2025</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="fin-details">
+        <div class="fin-item">
+          <div class="fi-label">Aggregate Bonding Capacity</div>
+          <div class="fi-value">$500M+</div>
+          <div class="fi-sub">Single project limit: $250M</div>
+        </div>
+        <div class="fin-item">
+          <div class="fi-label">General Liability Insurance</div>
+          <div class="fi-value">$200M</div>
+          <div class="fi-sub">Per occurrence / aggregate coverage</div>
+        </div>
+        <div class="fin-item">
+          <div class="fi-label">Stock Exchange</div>
+          <div class="fi-value">NASDAQ: MYRG</div>
+          <div class="fi-sub">Publicly traded since 2008</div>
+        </div>
+        <div class="fin-item">
+          <div class="fi-label">Dun &amp; Bradstreet Rating</div>
+          <div class="fi-value">4A1</div>
+          <div class="fi-sub">Highest composite credit appraisal</div>
+        </div>
+        <div class="fin-item">
+          <div class="fi-label">Workers' Compensation</div>
+          <div class="fi-value">Statutory Limits</div>
+          <div class="fi-sub">All states of operation</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPMENT & RESOURCES -->
+<section class="equipment-section" id="equipment">
+  <div class="section-inner">
+    <div class="fade-in">
+      <div class="section-title">Equipment &amp; Resources</div>
+      <div class="section-subtitle">Owned Fleet &amp; Specialized Capabilities for Renewable Energy Construction</div>
+    </div>
+    <div class="equip-layout fade-in">
+      <div>
+        <div class="equip-fleet-stat">
+          <div class="efs-icon">&#128666;</div>
+          <div><div class="efs-num">1,200+</div><div class="efs-label">Fleet Vehicles &amp; Rolling Stock</div></div>
+        </div>
+        <div class="equip-fleet-stat">
+          <div class="efs-icon">&#9881;</div>
+          <div><div class="efs-num">85+</div><div class="efs-label">Cranes (15&ndash;300 Ton Capacity)</div></div>
+        </div>
+        <div class="equip-fleet-stat">
+          <div class="efs-icon">&#128268;</div>
+          <div><div class="efs-num">60+</div><div class="efs-label">Cable Pulling Systems</div></div>
+        </div>
+        <div class="equip-fleet-stat">
+          <div class="efs-icon">&#127959;</div>
+          <div><div class="efs-num">40+</div><div class="efs-label">Excavators &amp; Trenchers</div></div>
+        </div>
+        <div class="equip-fleet-stat">
+          <div class="efs-icon">&#128267;</div>
+          <div><div class="efs-num">30+</div><div class="efs-label">Pile Driving Rigs</div></div>
+        </div>
+      </div>
+      <div class="equip-list">
+        <h3>Specialized Renewable Energy Equipment</h3>
+        <ul>
+          <li>Hydraulic pile drivers for solar tracker and fixed-tilt foundations</li>
+          <li>Vermeer RTX1250 and Ditch Witch directional boring machines</li>
+          <li>High-voltage cable pulling trailers with tension monitoring</li>
+          <li>Transformer handling and rigging equipment (up to 200 tons)</li>
+          <li>Bucket trucks and aerial lifts (40&ndash;125 ft working height)</li>
+          <li>Underground cable fault location and testing equipment</li>
+          <li>Megger insulation resistance and hi-pot testing systems</li>
+          <li>Doble relay test sets for protective relay commissioning</li>
+          <li>Fiber optic splicing and OTDR testing equipment</li>
+          <li>GPS-guided grading and trenching systems</li>
+          <li>Mobile substations for temporary construction power</li>
+          <li>Thermal imaging cameras for connection verification</li>
+          <li>Torque-calibrated bolting equipment for bus connections</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REFERENCES -->
+<section class="references-section" id="references">
+  <div class="section-inner">
+    <div class="fade-in">
+      <div class="section-title">Client References</div>
+      <div class="section-subtitle">Contacts Available Upon Request &mdash; Redacted for Portfolio Demonstration</div>
+    </div>
+    <div class="ref-grid fade-in">
+
+      <div class="ref-card">
+        <h3>Michael Andersen</h3>
+        <div class="ref-org">Clearwater Energy Partners &mdash; Director of Construction</div>
+        <p class="ref-project">Provided oversight of CSI Electrical's work on the Sagebrush Flats 350 MW Solar Energy Center in Washington. Scope included full electrical BOP, substation construction, and grid interconnection. Project completed on schedule and within budget.</p>
+        <div class="ref-contact">Phone: [Redacted] &nbsp;|&nbsp; Email: [Redacted]</div>
+      </div>
+
+      <div class="ref-card">
+        <h3>Jennifer Nakamura</h3>
+        <div class="ref-org">Ridgeline Power Corporation &mdash; VP of Engineering</div>
+        <p class="ref-project">Managed Ridgeline's relationship with CSI Electrical across two wind farm collector system projects totaling 430 MW in Oregon. Recognized CSI for outstanding safety performance, crew quality, and proactive schedule management throughout both projects.</p>
+        <div class="ref-contact">Phone: [Redacted] &nbsp;|&nbsp; Email: [Redacted]</div>
+      </div>
+
+      <div class="ref-card">
+        <h3>Thomas Whitfield</h3>
+        <div class="ref-org">Basin Range Storage Development &mdash; Project Director</div>
+        <p class="ref-project">Oversaw CSI Electrical's execution of the Silver Creek 200 MW / 800 MWh BESS facility in Idaho. Commended the team for technical expertise in battery storage electrical systems, attention to quality, and ability to resolve constructability challenges in the field.</p>
+        <div class="ref-contact">Phone: [Redacted] &nbsp;|&nbsp; Email: [Redacted]</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS & MEMBERSHIPS -->
+<section class="certs-section" id="certifications">
+  <div class="section-inner">
+    <div class="fade-in">
+      <div class="section-title">Certifications &amp; Memberships</div>
+      <div class="section-subtitle">Industry Affiliations and Professional Standards</div>
+    </div>
+    <div class="certs-grid fade-in">
+      <div class="cert-badge">
+        <div class="cert-icon">&#9733;</div>
+        <h4>NECA</h4>
+        <p>National Electrical Contractors Association</p>
+      </div>
+      <div class="cert-badge">
+        <div class="cert-icon">&#9889;</div>
+        <h4>IBEW</h4>
+        <p>International Brotherhood of Electrical Workers</p>
+      </div>
+      <div class="cert-badge">
+        <div class="cert-icon">&#128737;</div>
+        <h4>OSHA VPP Star</h4>
+        <p>Voluntary Protection Programs &mdash; Star Status</p>
+      </div>
+      <div class="cert-badge">
+        <div class="cert-icon">&#128271;</div>
+        <h4>ISNetworld</h4>
+        <p>RAVS Verified &mdash; Grade A Compliance</p>
+      </div>
+      <div class="cert-badge">
+        <div class="cert-icon">&#9878;</div>
+        <h4>ISO 9001:2015</h4>
+        <p>Quality Management System Certified</p>
+      </div>
+      <div class="cert-badge">
+        <div class="cert-icon">&#127807;</div>
+        <h4>ISO 14001:2015</h4>
+        <p>Environmental Management System Certified</p>
+      </div>
+      <div class="cert-badge">
+        <div class="cert-icon">&#128170;</div>
+        <h4>ISO 45001:2018</h4>
+        <p>Occupational Health &amp; Safety Certified</p>
+      </div>
+      <div class="cert-badge">
+        <div class="cert-icon">&#9888;</div>
+        <h4>NFPA Member</h4>
+        <p>National Fire Protection Association</p>
+      </div>
+      <div class="cert-badge">
+        <div class="cert-icon">&#127961;</div>
+        <h4>ABC / AGC</h4>
+        <p>Associated Builders &amp; General Contractors</p>
+      </div>
+      <div class="cert-badge">
+        <div class="cert-icon">&#9728;</div>
+        <h4>SEIA</h4>
+        <p>Solar Energy Industries Association</p>
+      </div>
+      <div class="cert-badge">
+        <div class="cert-icon">&#127744;</div>
+        <h4>ACP</h4>
+        <p>American Clean Power Association</p>
+      </div>
+      <div class="cert-badge">
+        <div class="cert-icon">&#128200;</div>
+        <h4>NASDAQ Listed</h4>
+        <p>Publicly Traded &mdash; MYRG</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p><span class="accent">MYR Group Inc.</span> / CSI Electrical Contractors &mdash; Statement of Qualifications</p>
+  <p style="margin-top:0.4rem;">Submitted to Pacific Northwest Energy Authority (PNEA) &mdash; Prequalification Period 2026&ndash;2028</p>
+  <p style="margin-top:0.8rem;font-size:0.72rem;color:#555;">This is a mock document created for portfolio demonstration purposes only. All project details, personnel, and references are fictional.</p>
+</footer>
+
+<script>
+// --- NAV SCROLL ---
+const topNav = document.getElementById('topNav');
+window.addEventListener('scroll', () => {
+  topNav.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// --- NAV TOGGLE ---
+document.getElementById('navToggle').addEventListener('click', () => {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+});
+
+// --- FADE IN ON SCROLL ---
+const faders = document.querySelectorAll('.fade-in');
+const fadeObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); fadeObs.unobserve(e.target); } });
+}, { threshold: 0.15 });
+faders.forEach(f => fadeObs.observe(f));
+
+// --- ANIMATED COUNTERS ---
+const counters = document.querySelectorAll('.counter');
+const counterObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const el = entry.target;
+    const target = parseFloat(el.dataset.target);
+    const decimals = parseInt(el.dataset.decimals) || 0;
+    const duration = 2000;
+    const startTime = performance.now();
+    function update(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = target * eased;
+      if (decimals === 0 && target >= 100) {
+        el.textContent = Math.round(current).toLocaleString();
+      } else {
+        el.textContent = current.toFixed(decimals);
+      }
+      if (progress < 1) requestAnimationFrame(update);
+      else {
+        if (decimals === 0 && target >= 100) el.textContent = Math.round(target).toLocaleString();
+        else el.textContent = target.toFixed(decimals);
+      }
+    }
+    requestAnimationFrame(update);
+    counterObs.unobserve(el);
+  });
+}, { threshold: 0.5 });
+counters.forEach(c => counterObs.observe(c));
+
+// --- BAR CHART ANIMATIONS ---
+function animateBars(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.querySelectorAll('[data-height]').forEach((bar, i) => {
+        setTimeout(() => { bar.style.height = bar.dataset.height + '%'; }, i * 120);
+      });
+      obs.unobserve(entry.target);
+    });
+  }, { threshold: 0.3 });
+  obs.observe(container);
+}
+animateBars('emrBars');
+animateBars('revBars');
+
+// --- POSITION INDUSTRY LINE ---
+(function() {
+  const line = document.getElementById('industryLine');
+  if (line) {
+    // EMR 1.0 on a scale where max display is ~1.2 => 1.0/1.2 = 83.3% from bottom
+    line.style.bottom = '83.3%';
+    line.style.position = 'absolute';
+    line.style.left = '0';
+    line.style.right = '0';
+  }
+  const chart = document.querySelector('.emr-chart');
+  if (chart) chart.style.position = 'relative';
+})();
+</script>
+
+</body>
+</html>

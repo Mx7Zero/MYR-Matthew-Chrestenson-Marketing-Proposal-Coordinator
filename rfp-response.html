@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RFP Response — Cedar Ridge 230kV Transmission &amp; Substation | MYR Group / Sturgeon Electric</title>
+<style>
+  /* ===== RESET & BASE ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body {
+    background: #111;
+    color: #f0f0f0;
+    font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+  ::selection { background: #fde68a; color: #111; }
+  img { max-width: 100%; display: block; }
+
+  /* ===== TYPOGRAPHY ===== */
+  h1, h2, h3, h4, h5 { font-weight: 700; line-height: 1.2; }
+  h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); letter-spacing: -0.03em; }
+  h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+  h3 { font-size: 1.25rem; margin-bottom: 0.75rem; }
+  p { margin-bottom: 1rem; color: #ccc; }
+  strong { color: #f0f0f0; }
+
+  .accent { color: #fde68a; }
+  .accent-bg { background: #fde68a; color: #111; }
+
+  /* ===== LAYOUT ===== */
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+  .section {
+    padding: 6rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .section.visible { opacity: 1; transform: translateY(0); }
+
+  /* ===== NAV ===== */
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(17,17,17,0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: transform 0.35s ease;
+  }
+  .nav.hidden { transform: translateY(-100%); }
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    height: 60px;
+  }
+  .nav-logo {
+    font-weight: 800;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #fde68a;
+    white-space: nowrap;
+  }
+  .nav-links {
+    display: flex;
+    gap: 0.25rem;
+    list-style: none;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links a {
+    color: #999;
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.65rem;
+    border-radius: 4px;
+    transition: color 0.2s, background 0.2s;
+    white-space: nowrap;
+  }
+  .nav-links a:hover,
+  .nav-links a.active { color: #fde68a; background: rgba(253,230,138,0.08); }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 8rem 2rem 6rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(253,230,138,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 50% at 20% 80%, rgba(253,230,138,0.03) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+  .hero-content { position: relative; max-width: 900px; }
+  .hero-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #fde68a;
+    border: 1px solid rgba(253,230,138,0.3);
+    padding: 0.45rem 1.1rem;
+    border-radius: 100px;
+    margin-bottom: 2rem;
+  }
+  .hero h1 { margin-bottom: 1.5rem; }
+  .hero h1 .line { display: block; }
+  .hero h1 .line.dim { color: #888; }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    margin-top: 2.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .hero-meta-item { }
+  .hero-meta-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #666;
+    margin-bottom: 0.3rem;
+  }
+  .hero-meta-value { font-size: 1rem; font-weight: 600; color: #f0f0f0; }
+
+  /* ===== STAT STRIP ===== */
+  .stat-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 3rem 0;
+  }
+  .stat-item {
+    background: #161616;
+    padding: 2rem 1.5rem;
+    text-align: center;
+  }
+  .stat-number {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #fde68a;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .stat-label { font-size: 0.8rem; color: #888; text-transform: uppercase; letter-spacing: 0.06em; }
+
+  /* ===== TWO-COL ===== */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin: 2rem 0;
+  }
+  @media (max-width: 768px) { .two-col { grid-template-columns: 1fr; gap: 2rem; } }
+
+  /* ===== CARDS ===== */
+  .card {
+    background: #161616;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 8px;
+    padding: 2rem;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .card:hover { border-color: rgba(253,230,138,0.2); transform: translateY(-2px); }
+  .card-tag {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #fde68a;
+    background: rgba(253,230,138,0.1);
+    padding: 0.25rem 0.7rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+  }
+  .card-value {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #f0f0f0;
+    margin-bottom: 0.25rem;
+  }
+
+  /* ===== PERSONNEL ===== */
+  .person-card {
+    background: #161616;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 8px;
+    padding: 2rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    transition: border-color 0.3s;
+  }
+  .person-card:hover { border-color: rgba(253,230,138,0.2); }
+  .person-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #fde68a 0%, #f59e0b 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #111;
+    flex-shrink: 0;
+  }
+  .person-info { flex: 1; }
+  .person-name { font-size: 1.1rem; font-weight: 700; color: #f0f0f0; margin-bottom: 0.15rem; }
+  .person-title { font-size: 0.85rem; color: #fde68a; margin-bottom: 0.5rem; }
+  .person-details { font-size: 0.85rem; color: #999; }
+  .person-certs { margin-top: 0.5rem; display: flex; gap: 0.4rem; flex-wrap: wrap; }
+  .cert-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: rgba(253,230,138,0.1);
+    color: #fde68a;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+  }
+
+  /* ===== TIMELINE ===== */
+  .timeline { position: relative; margin: 3rem 0; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(253,230,138,0.2);
+  }
+  .timeline-phase {
+    position: relative;
+    padding-left: 2.5rem;
+    padding-bottom: 3rem;
+  }
+  .timeline-phase:last-child { padding-bottom: 0; }
+  .timeline-dot {
+    position: absolute;
+    left: -6px;
+    top: 4px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #fde68a;
+    border: 3px solid #111;
+  }
+  .timeline-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .timeline-title { font-size: 1.15rem; font-weight: 700; color: #f0f0f0; }
+  .timeline-dates { font-size: 0.8rem; color: #fde68a; font-weight: 600; }
+
+  /* ===== GANTT ===== */
+  .gantt { margin: 2rem 0; overflow-x: auto; }
+  .gantt-chart { min-width: 700px; }
+  .gantt-header {
+    display: grid;
+    grid-template-columns: 200px repeat(18, 1fr);
+    gap: 0;
+    margin-bottom: 0.5rem;
+  }
+  .gantt-header span {
+    font-size: 0.65rem;
+    color: #666;
+    text-align: center;
+    padding: 0.3rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .gantt-header span:first-child { text-align: left; }
+  .gantt-row {
+    display: grid;
+    grid-template-columns: 200px repeat(18, 1fr);
+    align-items: center;
+    margin-bottom: 4px;
+    min-height: 32px;
+  }
+  .gantt-label { font-size: 0.78rem; color: #ccc; font-weight: 500; padding-right: 1rem; }
+  .gantt-bar {
+    height: 24px;
+    border-radius: 4px;
+    position: relative;
+  }
+  .gantt-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #fde68a, #f59e0b);
+    opacity: 0.85;
+  }
+  .gantt-bar-alt .gantt-bar-fill {
+    background: linear-gradient(90deg, #fbbf24, #d97706);
+    opacity: 0.6;
+  }
+
+  /* ===== TABLE ===== */
+  .price-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+  }
+  .price-table th, .price-table td {
+    padding: 1rem 1.25rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .price-table th {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #888;
+    font-weight: 600;
+  }
+  .price-table td { font-size: 0.95rem; color: #ccc; }
+  .price-table td:last-child { text-align: right; font-weight: 700; color: #f0f0f0; font-variant-numeric: tabular-nums; }
+  .price-table th:last-child { text-align: right; }
+  .price-table tr:hover td { background: rgba(253,230,138,0.03); }
+  .price-table .total-row td {
+    border-top: 2px solid #fde68a;
+    border-bottom: none;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #fde68a;
+    padding-top: 1.25rem;
+  }
+
+  /* ===== CTA / CLOSING ===== */
+  .closing-section {
+    text-align: center;
+    padding: 8rem 2rem;
+  }
+  .closing-section h2 {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    margin-bottom: 2rem;
+  }
+  .differentiator-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin: 3rem 0;
+    text-align: left;
+  }
+  .diff-item {
+    background: #161616;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 8px;
+    padding: 2rem;
+  }
+  .diff-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(253,230,138,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    color: #fde68a;
+    font-weight: 800;
+  }
+
+  /* ===== SECTION LABEL ===== */
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #fde68a;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(253,230,138,0.15);
+  }
+
+  /* ===== LISTS ===== */
+  .check-list { list-style: none; padding: 0; }
+  .check-list li {
+    padding: 0.5rem 0 0.5rem 1.75rem;
+    position: relative;
+    color: #ccc;
+    font-size: 0.95rem;
+  }
+  .check-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.75rem;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    background: #fde68a;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    padding: 3rem 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #555;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer a { color: #fde68a; text-decoration: none; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hero { padding: 6rem 1.5rem 4rem; }
+    .hero-meta { gap: 1.5rem; }
+    .section { padding: 4rem 0; }
+    .container { padding: 0 1.25rem; }
+    .person-card { flex-direction: column; }
+    .stat-strip { grid-template-columns: 1fr 1fr; }
+    .gantt-chart { min-width: 600px; }
+  }
+
+  /* ===== PROGRESS BAR ===== */
+  .reading-progress {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    height: 2px;
+    background: #fde68a;
+    z-index: 999;
+    width: 0%;
+    transition: width 0.1s linear;
+  }
+
+  /* ===== PHASE TAG ===== */
+  .phase-tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 3px;
+    margin-right: 0.5rem;
+  }
+  .phase-1 { background: rgba(253,230,138,0.15); color: #fde68a; }
+  .phase-2 { background: rgba(251,191,36,0.15); color: #fbbf24; }
+  .phase-3 { background: rgba(245,158,11,0.15); color: #f59e0b; }
+
+  /* ===== BLOCKQUOTE ===== */
+  .highlight-box {
+    border-left: 3px solid #fde68a;
+    background: rgba(253,230,138,0.04);
+    padding: 1.5rem 2rem;
+    border-radius: 0 8px 8px 0;
+    margin: 2rem 0;
+  }
+  .highlight-box p { color: #ddd; margin-bottom: 0; }
+
+  /* ===== SUBSECTION DIVIDER ===== */
+  .sub-divider {
+    width: 40px;
+    height: 3px;
+    background: #fde68a;
+    border-radius: 2px;
+    margin: 2rem 0;
+  }
+
+  /* ===== EQUIPMENT LIST ===== */
+  .equip-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+  }
+  .equip-item {
+    background: #1a1a1a;
+    border: 1px solid rgba(255,255,255,0.04);
+    border-radius: 6px;
+    padding: 0.85rem 1rem;
+    font-size: 0.85rem;
+    color: #bbb;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .equip-dot {
+    width: 6px;
+    height: 6px;
+    background: #fde68a;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">MYR Group &mdash; Sturgeon Electric</div>
+    <ul class="nav-links">
+      <li><a href="#executive-summary">Summary</a></li>
+      <li><a href="#company">Company</a></li>
+      <li><a href="#understanding">Scope</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#personnel">Team</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#safety">Safety</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#why-myr">Why MYR</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="reading-progress" id="reading-progress"></div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Request for Proposal Response</div>
+    <h1>
+      <span class="line">Cedar Ridge 230kV</span>
+      <span class="line">Transmission &amp;</span>
+      <span class="line dim">Substation Expansion</span>
+    </h1>
+    <p style="font-size:1.15rem; color:#999; max-width:600px; margin-top:0.5rem;">
+      A comprehensive proposal for the design-assist construction of 22 miles of high-voltage transmission line and new substation facilities in Mesa County, Colorado.
+    </p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Submitted By</div>
+        <div class="hero-meta-value">MYR Group / Sturgeon Electric</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Submitted To</div>
+        <div class="hero-meta-value">Western Regional Electric Cooperative</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Date</div>
+        <div class="hero-meta-value">March 17, 2026</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Project Value</div>
+        <div class="hero-meta-value" style="color:#fde68a;">$48.5 Million</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXECUTIVE SUMMARY -->
+<section class="section" id="executive-summary">
+  <div class="container">
+    <div class="section-label">01 &mdash; Executive Summary</div>
+    <h2>The Right Partner for <span class="accent">Critical Infrastructure</span></h2>
+
+    <p style="font-size:1.1rem; color:#ddd;">
+      MYR Group Inc., through its subsidiary Sturgeon Electric Company, Inc., is pleased to submit this proposal in response to Western Regional Electric Cooperative's Request for Proposal for the Cedar Ridge 230kV Transmission Line and Substation Expansion project. With over 130 years of experience delivering critical electrical infrastructure across the United States, MYR Group brings unmatched technical capability, financial strength, and regional expertise to this transformative project for WREC and the communities it serves throughout Mesa County.
+    </p>
+
+    <p>
+      As a Fortune 1000 specialty contractor generating $3.6 billion in annual revenue and employing more than 8,500 skilled professionals nationwide, MYR Group possesses the organizational depth to mobilize the resources, equipment, and workforce necessary to deliver the Cedar Ridge project safely, on schedule, and within budget. Our Transmission &amp; Distribution segment has successfully completed over $14 billion in high-voltage transmission, substation, and distribution projects over the past decade alone, including numerous 230kV and 345kV transmission line builds across the challenging terrain of the Rocky Mountain West. We understand the unique demands of constructing in Colorado's high-desert mesa environments, and our crews have direct experience navigating the permitting, environmental, and logistical complexities that define projects in this region.
+    </p>
+
+    <p>
+      Sturgeon Electric, headquartered in Henderson, Colorado, provides WREC with a distinct advantage: a locally based partner with intimate knowledge of Colorado's regulatory landscape, labor markets, and supply chains. Our Experience Modification Rate (EMR) of 0.71 places us well below the industry average of 1.0, reflecting a genuine commitment to zero-incident safety performance that extends from our executive leadership to every crew member on the right-of-way. We are confident that this proposal demonstrates not only our technical qualifications but also our deep understanding of WREC's operational objectives for the Cedar Ridge corridor. We look forward to the opportunity to build this vital piece of infrastructure alongside your team.
+    </p>
+
+    <div class="stat-strip">
+      <div class="stat-item">
+        <div class="stat-number">$3.6B</div>
+        <div class="stat-label">Annual Revenue</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">8,500+</div>
+        <div class="stat-label">Employees</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">130+</div>
+        <div class="stat-label">Years in Business</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">0.71</div>
+        <div class="stat-label">EMR Rating</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPANY OVERVIEW -->
+<section class="section" id="company">
+  <div class="container">
+    <div class="section-label">02 &mdash; Company Overview</div>
+    <h2>Built on a Legacy of <span class="accent">Electrical Excellence</span></h2>
+
+    <div class="two-col">
+      <div>
+        <p>
+          MYR Group Inc. (NASDAQ: MYRG) was founded in 1891 and has grown into one of the largest electrical construction firms in the United States. The company operates through two primary business segments: Transmission &amp; Distribution (T&amp;D) and Commercial &amp; Industrial (C&amp;I), supported by a family of 13 specialized subsidiaries that collectively serve clients across all 50 states and into Canada. Our T&amp;D segment provides a comprehensive range of services including the construction, maintenance, and repair of high-voltage transmission lines, substations, distribution networks, and renewable energy interconnections.
+        </p>
+        <p>
+          Headquartered in Rolling Meadows, Illinois, MYR Group is publicly traded and maintains the financial stability, bonding capacity, and insurance coverage required to take on projects of significant scale. Our current single-project bonding capacity exceeds $500 million, and our aggregate capacity exceeds $2.5 billion, ensuring that WREC's Cedar Ridge project would be fully supported from a surety perspective. We maintain an A.M. Best-rated insurance program and carry all coverage types required by the RFP, including professional liability, pollution liability, and excess umbrella coverage.
+        </p>
+        <p>
+          MYR Group's organizational structure is designed for responsive, regionally focused service delivery. Each subsidiary operates with significant autonomy while leveraging the parent company's procurement power, safety infrastructure, and technical resources. This model allows us to pair the agility and client intimacy of a regional contractor with the depth and resilience of a national organization.
+        </p>
+      </div>
+      <div>
+        <h3 class="accent">Sturgeon Electric Company, Inc.</h3>
+        <p>
+          Sturgeon Electric, the MYR Group subsidiary proposed as the primary contracting entity for this project, has operated from its headquarters in Henderson, Colorado since 1946. With over 2,200 employees and a service territory spanning the Mountain West and Great Plains regions, Sturgeon is one of the most experienced T&amp;D contractors in the Rocky Mountain corridor. The company maintains fully equipped yards and staging facilities in Henderson, Pueblo, and Grand Junction, Colorado, as well as satellite locations in Cheyenne, Wyoming and Albuquerque, New Mexico.
+        </p>
+        <p>
+          Sturgeon's Grand Junction facility, located approximately 45 miles from the Cedar Ridge project site, provides immediate access to equipment, materials laydown, and workforce mobilization. This proximity translates to reduced mobilization costs, faster emergency response capability, and seamless integration with local subcontractors and suppliers who have established relationships with our team. Sturgeon Electric has completed over $2.8 billion in T&amp;D projects across the Western United States in the past decade, including multiple high-voltage transmission lines in the mesa and canyon terrain characteristic of western Colorado.
+        </p>
+
+        <div class="highlight-box">
+          <p><strong>Key Advantage:</strong> Sturgeon Electric's Grand Junction, CO facility is located just 45 miles from the proposed project corridor, enabling rapid mobilization and cost-efficient logistics for the duration of the 18-month construction schedule.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:2rem;">MYR Group Subsidiary Network</h3>
+    <div class="equip-grid">
+      <div class="equip-item"><span class="equip-dot"></span>Sturgeon Electric (CO)</div>
+      <div class="equip-item"><span class="equip-dot"></span>The L.E. Myers Co. (IL)</div>
+      <div class="equip-item"><span class="equip-dot"></span>Harlan Electric (MI)</div>
+      <div class="equip-item"><span class="equip-dot"></span>Great Southwestern Const. (TX)</div>
+      <div class="equip-item"><span class="equip-dot"></span>Western Pacific Enterprises (BC)</div>
+      <div class="equip-item"><span class="equip-dot"></span>E.S. Boulos Company (ME)</div>
+      <div class="equip-item"><span class="equip-dot"></span>MYR Transmission Services</div>
+      <div class="equip-item"><span class="equip-dot"></span>CSI Electrical Contractors (CA)</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT UNDERSTANDING -->
+<section class="section" id="understanding">
+  <div class="container">
+    <div class="section-label">03 &mdash; Project Understanding</div>
+    <h2>Comprehensive Understanding of <span class="accent">WREC's Vision</span></h2>
+
+    <p style="font-size:1.05rem; color:#ddd;">
+      The Cedar Ridge 230kV Transmission Line and Substation Expansion project represents a critical investment in the long-term reliability and capacity of WREC's transmission network. We understand that this project is driven by growing load demands in the eastern Mesa County service territory, the need to reduce transmission congestion along the existing 115kV corridor, and WREC's strategic objective to provide a second high-voltage feed into the region to enhance N-1 contingency performance in compliance with NERC TPL reliability standards.
+    </p>
+
+    <div class="sub-divider"></div>
+
+    <div class="two-col">
+      <div>
+        <h3>Transmission Line Scope</h3>
+        <p>
+          The project scope encompasses the construction of approximately 22 miles of new 230kV single-circuit transmission line extending from the proposed Cedar Ridge Substation site to the existing Plateau Substation northwest of Palisade. The route traverses a mix of BLM-administered public land and private agricultural parcels across terrain that ranges from relatively flat irrigated bottomland along the Colorado River corridor to elevated mesa terrain with rocky substrate, arroyos, and moderate slopes. Based on the route alignment provided in the RFP and our review of publicly available geospatial data, we anticipate the line will require approximately 135 to 145 steel lattice and tubular steel monopole structures, with an average span of approximately 800 to 1,000 feet depending on terrain constraints.
+        </p>
+        <p>
+          We have identified several key routing considerations that will influence structure placement and construction methodology. The crossing of the Colorado River near mile marker 8.5 will require extended spans utilizing heavy-angle lattice towers with engineered foundations designed for the alluvial soils present in the floodplain. Additionally, the segment between miles 14 and 18, which traverses the Jurassic shale formations on the upper mesa, will likely require drilled shaft foundations with depths of 25 to 40 feet to achieve adequate bearing capacity in the weathered Mancos Shale present in this geology. Our geotechnical subcontractor, CTL Thompson, has extensive experience characterizing these formations throughout the Grand Valley and will perform a full subsurface investigation during the pre-construction phase.
+        </p>
+      </div>
+      <div>
+        <h3>Substation Scope</h3>
+        <p>
+          The new Cedar Ridge Substation will be constructed as a 230/115/69kV facility on an approximately 8-acre site identified in the RFP documentation. The substation scope includes a 230kV breaker-and-a-half bus configuration, two 230/115kV 200MVA power transformers, a 115/69kV 75MVA autotransformer, associated circuit breakers, disconnect switches, instrument transformers, surge arresters, control house, and a full SCADA/EMS integration package compatible with WREC's existing OSI Monarch platform. The breaker-and-a-half bus arrangement provides the operational flexibility and reliability that WREC requires for a facility that will serve as a critical node in the regional transmission network.
+        </p>
+        <p>
+          The interconnection scope at the existing Plateau Substation includes the installation of a new 230kV line terminal bay, modifications to the existing bus configuration to accommodate the incoming Cedar Ridge circuit, relay and protection upgrades to integrate the new line into the existing SEL-421 and SEL-411L relay scheme, and associated civil work including new foundations, cable trench extensions, and grounding grid expansion. We understand that the Plateau Substation modifications must be performed during scheduled outage windows, and our team has extensive experience planning and executing hot cutover sequences to minimize system impact.
+        </p>
+
+        <div class="highlight-box" style="margin-top:1.5rem;">
+          <p><strong>NERC Compliance:</strong> All design and construction activities will comply with NERC FAC-001, FAC-002, and TPL-001 through TPL-004 reliability standards, as well as applicable WECC regional standards for the Rocky Mountain region.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:2rem;">Key Project Parameters</h3>
+    <div class="stat-strip">
+      <div class="stat-item">
+        <div class="stat-number">22</div>
+        <div class="stat-label">Miles of 230kV Line</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">~140</div>
+        <div class="stat-label">Structures</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">3</div>
+        <div class="stat-label">Voltage Classes</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">18</div>
+        <div class="stat-label">Month Schedule</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNICAL APPROACH -->
+<section class="section" id="approach">
+  <div class="container">
+    <div class="section-label">04 &mdash; Technical Approach</div>
+    <h2>A Proven Methodology for <span class="accent">Complex Transmission</span></h2>
+
+    <p style="font-size:1.05rem; color:#ddd;">
+      Our construction methodology for the Cedar Ridge project is organized into three overlapping phases designed to optimize resource utilization, minimize environmental disturbance, and deliver the project within the 18-month construction window. Each phase incorporates rigorous quality control checkpoints, environmental compliance monitoring, and safety reviews to ensure that the finished product meets or exceeds WREC's technical specifications and all applicable codes and standards.
+    </p>
+
+    <div class="sub-divider"></div>
+
+    <!-- PHASE 1 -->
+    <div style="margin-bottom:3rem;">
+      <h3><span class="phase-tag phase-1">Phase 1</span> Pre-Construction &amp; Site Preparation <span style="color:#888; font-weight:400; font-size:0.9rem;">&mdash; Months 1&ndash;4</span></h3>
+      <div class="two-col" style="margin-top:1rem;">
+        <div>
+          <p>
+            Phase 1 begins with a comprehensive pre-construction effort including final geotechnical investigation, topographic survey verification, and detailed construction engineering. Our engineering team will work collaboratively with WREC's design engineer-of-record to finalize structure loading calculations, foundation designs, and conductor sag-tension analyses using PLS-CADD and PLS-POLE/TOWER software. We will develop a complete set of construction-level drawings, including plan and profile sheets, structure assembly details, foundation designs, and grounding plans, all reviewed and stamped by our Colorado-licensed Professional Engineer.
+          </p>
+          <p>
+            Concurrent with the engineering effort, our field teams will initiate access road construction and improvement along the 22-mile corridor. Mesa County's terrain presents access challenges that require careful planning. We anticipate constructing approximately 12 miles of new temporary access roads and improving an additional 8 miles of existing ranch roads and BLM two-tracks to support construction equipment access. All access road work will comply with the BLM Right-of-Way stipulations and the project's Stormwater Pollution Prevention Plan (SWPPP). Temporary erosion control measures, including silt fencing, wattles, and stabilized construction entrances, will be installed prior to any ground disturbance.
+          </p>
+        </div>
+        <div>
+          <p>
+            Material procurement represents a critical-path activity that will commence immediately upon notice to proceed. Current lead times for 230kV-class steel lattice towers range from 20 to 28 weeks depending on complexity, and high-voltage conductor (we anticipate 1590 kcmil ACSS/TW Lapwing based on the RFP specifications) carries a typical lead time of 16 to 22 weeks. Our procurement team will leverage MYR Group's national purchasing agreements with key suppliers including Valmont Industries (structures), Southwire Company (conductor), and Hubbell Power Systems (hardware and insulators) to secure favorable pricing and priority production slots. All materials will be staged at Sturgeon Electric's Grand Junction yard and transported to designated structure sites via the improved access road network.
+          </p>
+          <p>
+            Environmental pre-construction activities will include a final biological survey to confirm the absence of threatened or endangered species within the construction corridor, cultural resource monitoring during ground disturbance activities per the project's Programmatic Agreement, and coordination with the Colorado Department of Public Health and Environment for any required air quality permits associated with fugitive dust generation during road construction.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 2 -->
+    <div style="margin-bottom:3rem;">
+      <h3><span class="phase-tag phase-2">Phase 2</span> Foundations, Structures &amp; Substation Construction <span style="color:#888; font-weight:400; font-size:0.9rem;">&mdash; Months 3&ndash;14</span></h3>
+      <div class="two-col" style="margin-top:1rem;">
+        <div>
+          <p>
+            Foundation installation will proceed from both ends of the line simultaneously, utilizing two dedicated foundation crews. Each crew will consist of a truck-mounted drill rig (Watson 3500 or equivalent), a support crane (Link-Belt 100-ton hydraulic), concrete transit mixers, rebar setting crews, and quality control inspectors. Drilled shaft foundations in the mesa terrain will be designed for the Mancos Shale bearing conditions identified during the Phase 1 geotechnical investigation, with anticipated shaft diameters of 48 to 72 inches and depths of 25 to 40 feet. In the river bottomland and irrigated agricultural areas where the water table is shallow, we will employ temporary casing and tremie concrete placement methods to ensure foundation integrity.
+          </p>
+          <p>
+            Steel structure erection will follow approximately four to six weeks behind the foundation crews to allow for concrete curing and foundation acceptance testing. Our erection plan utilizes two lattice tower assembly and erection crews and one monopole erection crew. Lattice towers will be pre-assembled on the ground at each structure location using gin pole and mobile crane erection methods. Monopole structures will be erected using 200-ton class hydraulic cranes staged on improved pads adjacent to each structure location. All structural bolt torquing will be performed and verified in accordance with AISC standards, and each structure will undergo a post-erection survey to confirm plumbness and alignment within specified tolerances.
+          </p>
+        </div>
+        <div>
+          <p>
+            Substation construction at the Cedar Ridge site will proceed concurrently with transmission line construction. The substation work sequence begins with site grading, drainage installation, and perimeter fencing, followed by below-grade work including cable trench, ground grid installation (using bare copper conductor in a grid pattern with ground rods driven to 25-foot depth), and equipment foundations. We will install a total of approximately 85 drilled pier foundations for major equipment, bus supports, and line dead-end structures. Foundation concrete will be batch-mixed on-site using a portable batch plant to ensure consistent quality and rapid placement.
+          </p>
+          <p>
+            Above-grade substation construction includes the erection of the bus support structures, installation of the breaker-and-a-half bus configuration, setting of the two 200MVA power transformers (each weighing approximately 350,000 pounds and requiring specialized heavy-haul transport from the manufacturer), circuit breaker installation, disconnect switch installation, and instrument transformer mounting. Our electrical crews will perform all bus connection work, insulator installation, and equipment termination. The control house will be a pre-fabricated, climate-controlled building furnished with relay panels, SCADA interface cabinets, battery systems, and station service equipment, delivered and set in place by crane during month 10.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 3 -->
+    <div style="margin-bottom:2rem;">
+      <h3><span class="phase-tag phase-3">Phase 3</span> Wire Stringing, Commissioning &amp; Energization <span style="color:#888; font-weight:400; font-size:0.9rem;">&mdash; Months 12&ndash;18</span></h3>
+      <div class="two-col" style="margin-top:1rem;">
+        <div>
+          <p>
+            Conductor stringing operations represent the most visible and technically demanding phase of transmission line construction. Our stringing plan employs a single, fully equipped pulling and tensioning crew utilizing a 90,000-pound capacity hydraulic puller (TSE International Model 3090) and a multi-drum hydraulic tensioner (TSE Model 3060) to maintain controlled tension throughout the stringing process. The 1590 kcmil ACSS/TW conductor will be strung in a controlled-tension, sequential stringing operation moving from the Cedar Ridge Substation northward to the Plateau Substation. Each stringing setup will encompass approximately 3 to 5 miles of line depending on terrain and angle point locations.
+          </p>
+          <p>
+            Special stringing procedures will be employed for the Colorado River crossing, Interstate 70 crossing (if applicable), and any railroad or existing power line crossings. These crossings require the installation of temporary guard structures and aerial marker balls, traffic control plans, and coordination with the relevant authorities (CDOT, UPRR, or other utilities). Our crews have performed hundreds of critical crossings throughout Colorado and maintain all required permits and certifications for interstate highway and railroad crossing work.
+          </p>
+        </div>
+        <div>
+          <p>
+            Following conductor installation, the overhead ground wire (OPGW) will be strung to provide both lightning shielding and fiber optic communications capability along the corridor. Optical time-domain reflectometer (OTDR) testing will be performed on each fiber strand to verify splice quality and end-to-end attenuation, with test results documented and delivered to WREC in the final project closeout package.
+          </p>
+          <p>
+            System commissioning and energization activities begin in month 16 with point-to-point wiring verification, relay testing, and SCADA integration testing at both the Cedar Ridge and Plateau substations. Our commissioning team, led by a dedicated Commissioning Manager, will execute a comprehensive test plan that includes primary injection testing of all current and voltage transformers, relay functional testing per manufacturer specifications, breaker timing tests, transformer oil analysis and turns-ratio testing, ground grid resistance testing, and a full end-to-end trip test of all protective relay schemes. Upon successful completion of all commissioning tests, we will coordinate with WREC and the applicable Reliability Coordinator to schedule energization during an approved switching sequence.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Major Equipment &amp; Resources</h3>
+    <div class="equip-grid">
+      <div class="equip-item"><span class="equip-dot"></span>Watson 3500 Drill Rigs (2)</div>
+      <div class="equip-item"><span class="equip-dot"></span>Link-Belt 100-Ton Cranes (2)</div>
+      <div class="equip-item"><span class="equip-dot"></span>Liebherr LTM 1200 Crane</div>
+      <div class="equip-item"><span class="equip-dot"></span>TSE 3090 Hydraulic Puller</div>
+      <div class="equip-item"><span class="equip-dot"></span>TSE 3060 Multi-Drum Tensioner</div>
+      <div class="equip-item"><span class="equip-dot"></span>CAT D6 Dozers (3)</div>
+      <div class="equip-item"><span class="equip-dot"></span>CAT 330 Excavators (2)</div>
+      <div class="equip-item"><span class="equip-dot"></span>Kenworth T800 Haul Trucks (6)</div>
+      <div class="equip-item"><span class="equip-dot"></span>Portable Concrete Batch Plant</div>
+      <div class="equip-item"><span class="equip-dot"></span>Altec Digger Derricks (4)</div>
+      <div class="equip-item"><span class="equip-dot"></span>Water Trucks (3)</div>
+      <div class="equip-item"><span class="equip-dot"></span>Service &amp; Fuel Trucks (8)</div>
+    </div>
+  </div>
+</section>
+
+<!-- KEY PERSONNEL -->
+<section class="section" id="personnel">
+  <div class="container">
+    <div class="section-label">05 &mdash; Key Personnel</div>
+    <h2>An Experienced Team <span class="accent">Built for This Project</span></h2>
+
+    <p>
+      MYR Group / Sturgeon Electric will assign a dedicated, senior-level project team to the Cedar Ridge project from pre-construction through final closeout. Each of the key personnel identified below has been selected for their direct experience managing high-voltage transmission and substation construction projects in the Rocky Mountain region. All team members will be co-located at the project field office established near the Cedar Ridge substation site for the duration of construction.
+    </p>
+
+    <div style="display:grid; gap:1.25rem; margin-top:2rem;">
+
+      <!-- Person 1 -->
+      <div class="person-card">
+        <div class="person-avatar">RV</div>
+        <div class="person-info">
+          <div class="person-name">Robert Vasquez</div>
+          <div class="person-title">Project Director</div>
+          <div class="person-details">
+            28 years of experience in high-voltage transmission and substation construction. Robert has served as Project Director on over $1.2 billion in T&amp;D projects throughout the Western United States, including the 230kV Grand Mesa-to-Rifle transmission line rebuild for Xcel Energy and the 345kV Pawnee-Daniels Park line for Tri-State G&amp;T. He will provide executive oversight, client relationship management, and strategic resource allocation for the Cedar Ridge project. Robert holds a B.S. in Construction Management from Colorado State University.
+          </div>
+          <div class="person-certs">
+            <span class="cert-badge">PE (CO)</span>
+            <span class="cert-badge">PMP</span>
+            <span class="cert-badge">OSHA 500</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Person 2 -->
+      <div class="person-card">
+        <div class="person-avatar">KT</div>
+        <div class="person-info">
+          <div class="person-name">Karen Thornton</div>
+          <div class="person-title">Project Manager</div>
+          <div class="person-details">
+            19 years of experience managing electrical infrastructure projects ranging from $8M to $85M in value. Karen will serve as the day-to-day project manager responsible for schedule management, cost control, subcontractor coordination, and quality assurance. She has managed five 230kV-class transmission projects in Colorado and Wyoming over the past eight years, including the $62M Ault-to-Cheyenne 230kV project for Western Area Power Administration. Karen is known for her proactive approach to schedule risk management and her commitment to collaborative client relationships.
+          </div>
+          <div class="person-certs">
+            <span class="cert-badge">PMP</span>
+            <span class="cert-badge">LEED AP</span>
+            <span class="cert-badge">OSHA 30</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Person 3 -->
+      <div class="person-card">
+        <div class="person-avatar">MD</div>
+        <div class="person-info">
+          <div class="person-name">Marcus Delgado</div>
+          <div class="person-title">Construction Superintendent</div>
+          <div class="person-details">
+            24 years of field experience in transmission line and substation construction, including 16 years in general foreman and superintendent roles. Marcus will direct all field construction activities, manage crew deployment across the 22-mile corridor, and ensure adherence to the project schedule and quality standards. He has supervised the construction of over 400 miles of high-voltage transmission line in the Mountain West region, and his deep familiarity with western Colorado terrain and working conditions is a significant asset. Marcus holds NCCER certifications in Heavy Highway Construction and Ironworking.
+          </div>
+          <div class="person-certs">
+            <span class="cert-badge">NCCER Master</span>
+            <span class="cert-badge">OSHA 500</span>
+            <span class="cert-badge">CPR/First Aid</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Person 4 -->
+      <div class="person-card">
+        <div class="person-avatar">SN</div>
+        <div class="person-info">
+          <div class="person-name">Sarah Nakamura</div>
+          <div class="person-title">Lead Project Engineer</div>
+          <div class="person-details">
+            12 years of experience in transmission line design and construction engineering. Sarah will manage all engineering deliverables including construction-level drawings, foundation design calculations, equipment specifications, and as-built documentation. She is proficient in PLS-CADD, PLS-POLE, LPILE, and AutoCAD Civil 3D, and has engineered over 180 miles of 115kV to 345kV transmission line in Colorado, Utah, and Wyoming. Sarah received her M.S. in Structural Engineering from the University of Colorado Boulder and is a registered Professional Engineer in Colorado and Wyoming.
+          </div>
+          <div class="person-certs">
+            <span class="cert-badge">PE (CO, WY)</span>
+            <span class="cert-badge">SE (CO)</span>
+            <span class="cert-badge">PLS-CADD Cert.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Person 5 -->
+      <div class="person-card">
+        <div class="person-avatar">JC</div>
+        <div class="person-info">
+          <div class="person-name">James Caldwell</div>
+          <div class="person-title">Safety Director</div>
+          <div class="person-details">
+            21 years of experience in construction safety management, including 14 years dedicated exclusively to high-voltage electrical construction. James will be stationed full-time on the Cedar Ridge project site and will be responsible for daily safety briefings, weekly site safety audits, incident investigation, regulatory compliance monitoring, and overall safety culture leadership. Under his direction, Sturgeon Electric's T&amp;D division has maintained a Total Recordable Incident Rate (TRIR) of 0.82 and a Days Away, Restricted, or Transferred (DART) rate of 0.34 over the past three years. James holds a B.S. in Occupational Safety from the University of Central Missouri and is a Certified Safety Professional.
+          </div>
+          <div class="person-certs">
+            <span class="cert-badge">CSP</span>
+            <span class="cert-badge">CHST</span>
+            <span class="cert-badge">OSHA 510/500</span>
+            <span class="cert-badge">NFPA 70E</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- RELEVANT EXPERIENCE -->
+<section class="section" id="experience">
+  <div class="container">
+    <div class="section-label">06 &mdash; Relevant Experience</div>
+    <h2>Proven Performance on <span class="accent">Similar Projects</span></h2>
+
+    <p>
+      MYR Group and Sturgeon Electric have an extensive portfolio of high-voltage transmission and substation projects throughout the Western United States. The following selected projects demonstrate our team's capability to deliver work of comparable scope, complexity, and value to the Cedar Ridge project. Client references are available upon request for each project listed below.
+    </p>
+
+    <div class="two-col" style="margin-top:2rem;">
+
+      <!-- Project 1 -->
+      <div class="card">
+        <div class="card-tag">230kV Transmission</div>
+        <div class="card-value">$62.4M</div>
+        <h3 style="color:#f0f0f0;">Ault-to-Cheyenne 230kV Transmission Line</h3>
+        <p><strong>Client:</strong> Western Area Power Administration (WAPA)<br>
+        <strong>Location:</strong> Weld County, CO to Laramie County, WY<br>
+        <strong>Completed:</strong> September 2024</p>
+        <p>
+          Construction of 34 miles of new 230kV double-circuit transmission line from the Ault Substation in northern Colorado to the Archer Substation near Cheyenne, Wyoming. The project included 187 weathering steel lattice towers, drilled shaft foundations in expansive clay soils, two railroad crossings, and one interstate highway crossing. Completed four weeks ahead of schedule with zero lost-time incidents across 485,000 work hours.
+        </p>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="card">
+        <div class="card-tag">Substation &amp; Transmission</div>
+        <div class="card-value">$41.8M</div>
+        <h3 style="color:#f0f0f0;">Montrose 230/115kV Substation &amp; Line Extension</h3>
+        <p><strong>Client:</strong> Tri-State Generation &amp; Transmission<br>
+        <strong>Location:</strong> Montrose County, CO<br>
+        <strong>Completed:</strong> March 2023</p>
+        <p>
+          Complete design-build of a new 230/115kV switching station with breaker-and-a-half bus configuration, two 150MVA power transformers, and 8.5 miles of 230kV transmission line extension. The project required construction through BLM-administered land with extensive cultural resource monitoring and raptor nesting buffer compliance. Included full SCADA integration with Tri-State's existing energy management system. Delivered on budget with a TRIR of 0.0.
+        </p>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="card">
+        <div class="card-tag">345kV Transmission</div>
+        <div class="card-value">$89.2M</div>
+        <h3 style="color:#f0f0f0;">Pawnee-Daniels Park 345kV Rebuild</h3>
+        <p><strong>Client:</strong> Xcel Energy / Public Service Company of Colorado<br>
+        <strong>Location:</strong> Morgan, Adams &amp; Douglas Counties, CO<br>
+        <strong>Completed:</strong> November 2022</p>
+        <p>
+          Rebuild and reconductoring of 48 miles of 345kV transmission line, including removal of existing structures and installation of 264 new galvanized steel lattice towers with ACSS/TW conductor to increase thermal capacity by 40%. The project traversed intensively farmed agricultural land requiring extensive landowner coordination, crop damage mitigation, and seasonal construction restrictions. Completed within a compressed 14-month schedule driven by system reliability requirements.
+        </p>
+      </div>
+
+      <!-- Project 4 -->
+      <div class="card">
+        <div class="card-tag">Substation Expansion</div>
+        <div class="card-value">$28.6M</div>
+        <h3 style="color:#f0f0f0;">Rifle-Silt 230kV Substation Expansion</h3>
+        <p><strong>Client:</strong> Holy Cross Energy<br>
+        <strong>Location:</strong> Garfield County, CO<br>
+        <strong>Completed:</strong> June 2025</p>
+        <p>
+          Expansion of the existing Rifle Substation to accommodate two new 230kV line terminal bays, installation of a new 230/69kV 100MVA transformer bank, and construction of 3.2 miles of 230kV transmission line to interconnect with the regional grid. Work was performed within an energized substation requiring detailed switching and clearance procedures. Included complete relay protection upgrade from electromechanical to microprocessor-based (SEL-421) relays and integration with the existing SCADA system. Project achieved zero OSHA recordable incidents.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SAFETY -->
+<section class="section" id="safety">
+  <div class="container">
+    <div class="section-label">07 &mdash; Safety Program</div>
+    <h2>Zero-Incident Culture <span class="accent">by Design</span></h2>
+
+    <p style="font-size:1.05rem; color:#ddd;">
+      At MYR Group, safety is not a program bolted onto our operations &mdash; it is the foundation upon which every project is planned, staffed, and executed. Our corporate safety philosophy, branded internally as "Target Zero," establishes the expectation that every employee, every subcontractor, and every crew member will return home safely at the end of every work day. This is not an aspiration; it is a performance standard that is measured, managed, and reinforced at every level of the organization.
+    </p>
+
+    <div class="stat-strip" style="margin:2.5rem 0;">
+      <div class="stat-item">
+        <div class="stat-number">0.71</div>
+        <div class="stat-label">EMR Rating</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">0.82</div>
+        <div class="stat-label">TRIR (3-Year Avg)</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">0.34</div>
+        <div class="stat-label">DART Rate</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">2.1M+</div>
+        <div class="stat-label">Safe Work Hours (2025)</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <h3>Daily Safety Protocols</h3>
+        <p>
+          Every work day on the Cedar Ridge project will begin with a mandatory tailboard safety meeting led by the crew foreman and attended by all personnel working on that crew's specific task. The tailboard meeting covers the day's scope of work, identification of specific hazards associated with that day's activities, review of the applicable Job Safety Analysis (JSA), confirmation of required personal protective equipment, emergency action plan review, and an open discussion period where any crew member can raise concerns or suggest safer work methods. No work begins until every crew member has signed the tailboard form acknowledging their understanding of the day's hazards and controls.
+        </p>
+        <p>
+          In addition to daily tailboard meetings, our Safety Director, James Caldwell, will conduct weekly project-wide safety meetings every Monday morning that address trending safety topics, review any near-miss reports from the previous week, present toolbox talks on relevant seasonal hazards (heat stress, cold weather working, high-wind procedures), and recognize crews or individuals who have demonstrated exceptional safety leadership. These weekly meetings also serve as a forum for reviewing and updating the project-specific safety plan based on evolving site conditions.
+        </p>
+      </div>
+      <div>
+        <h3>Site-Specific Safety Plan</h3>
+        <p>
+          Prior to mobilization, our safety team will develop a comprehensive site-specific safety plan for the Cedar Ridge project that addresses the unique hazards associated with this corridor, including but not limited to: working at heights during structure erection and wire stringing; heavy equipment operation on mesa terrain with limited access and steep grades; exposure to Mancos Shale dust (which may contain naturally occurring asbestos in some formations, requiring air monitoring); electrical hazards during the Plateau Substation interconnection work; wildlife encounters including rattlesnakes common to the mesa terrain; and extreme weather conditions including high winds, lightning, and temperature extremes typical of western Colorado.
+        </p>
+
+        <h3 style="margin-top:1.5rem;">Key Safety Programs</h3>
+        <ul class="check-list">
+          <li>OSHA 10/30-Hour training for all site personnel</li>
+          <li>Dedicated full-time Safety Director on site</li>
+          <li>Daily Job Safety Analysis (JSA) for every task</li>
+          <li>Weekly project-wide safety stand-down meetings</li>
+          <li>Stop-work authority for every employee at every level</li>
+          <li>Mandatory drug and alcohol testing program</li>
+          <li>NFPA 70E arc flash protection program</li>
+          <li>Fall protection plan per OSHA 1926 Subpart M</li>
+          <li>Crane &amp; rigging safety per OSHA 1926 Subpart CC</li>
+          <li>Emergency action plan with site-specific evacuation routes</li>
+          <li>Monthly safety incentive and recognition program</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="highlight-box" style="margin-top:2rem;">
+      <p><strong>Commitment:</strong> MYR Group maintains OSHA Voluntary Protection Program (VPP) Star status at multiple operating locations. Our Target Zero philosophy has been recognized by the National Safety Council, and Sturgeon Electric has received the Associated Builders and Contractors STEP Diamond Award for five consecutive years.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section class="section" id="schedule">
+  <div class="container">
+    <div class="section-label">08 &mdash; Project Schedule</div>
+    <h2>18-Month Construction <span class="accent">Timeline</span></h2>
+
+    <p>
+      The following schedule presents our proposed 18-month construction timeline, organized by major work activity. This schedule assumes a Notice to Proceed date of April 1, 2026 and an energization target of September 2027. Key milestones, phase overlaps, and critical-path activities are indicated below. The schedule incorporates seasonal weather considerations for the Mesa County region, including reduced outdoor work productivity during the winter months of December through February and potential schedule impacts from spring runoff and monsoon season.
+    </p>
+
+    <div class="gantt" style="margin-top:2.5rem;">
+      <div class="gantt-chart">
+        <!-- Header -->
+        <div class="gantt-header">
+          <span></span>
+          <span>A</span><span>M</span><span>J</span><span>J</span><span>A</span><span>S</span>
+          <span>O</span><span>N</span><span>D</span><span>J</span><span>F</span><span>M</span>
+          <span>A</span><span>M</span><span>J</span><span>J</span><span>A</span><span>S</span>
+        </div>
+        <div style="font-size:0.65rem; color:#555; display:grid; grid-template-columns:200px repeat(18,1fr); margin-bottom:1rem;">
+          <span></span>
+          <span style="grid-column:2/8; text-align:center;">2026</span>
+          <span style="grid-column:8/14; text-align:center;"></span>
+          <span style="grid-column:14/20; text-align:center;">2027</span>
+        </div>
+
+        <!-- Engineering & Procurement -->
+        <div class="gantt-row">
+          <span class="gantt-label">Engineering &amp; Procurement</span>
+          <div style="grid-column:2/8;" class="gantt-bar"><div class="gantt-bar-fill"></div></div>
+        </div>
+        <!-- Access Roads -->
+        <div class="gantt-row">
+          <span class="gantt-label">Access Road Construction</span>
+          <div style="grid-column:2/6;" class="gantt-bar"><div class="gantt-bar-fill"></div></div>
+        </div>
+        <!-- Geotech -->
+        <div class="gantt-row">
+          <span class="gantt-label">Geotechnical Investigation</span>
+          <div style="grid-column:2/4;" class="gantt-bar gantt-bar-alt"><div class="gantt-bar-fill"></div></div>
+        </div>
+        <!-- Foundations TL -->
+        <div class="gantt-row">
+          <span class="gantt-label">Transmission Foundations</span>
+          <div style="grid-column:4/12;" class="gantt-bar"><div class="gantt-bar-fill"></div></div>
+        </div>
+        <!-- Structure Erection -->
+        <div class="gantt-row">
+          <span class="gantt-label">Structure Erection</span>
+          <div style="grid-column:5/14;" class="gantt-bar"><div class="gantt-bar-fill"></div></div>
+        </div>
+        <!-- Substation Civil -->
+        <div class="gantt-row">
+          <span class="gantt-label">Substation Civil/Foundations</span>
+          <div style="grid-column:4/10;" class="gantt-bar gantt-bar-alt"><div class="gantt-bar-fill"></div></div>
+        </div>
+        <!-- Substation Elec -->
+        <div class="gantt-row">
+          <span class="gantt-label">Substation Electrical</span>
+          <div style="grid-column:8/15;" class="gantt-bar gantt-bar-alt"><div class="gantt-bar-fill"></div></div>
+        </div>
+        <!-- Conductor -->
+        <div class="gantt-row">
+          <span class="gantt-label">Conductor Stringing</span>
+          <div style="grid-column:13/17;" class="gantt-bar"><div class="gantt-bar-fill"></div></div>
+        </div>
+        <!-- OPGW -->
+        <div class="gantt-row">
+          <span class="gantt-label">OPGW Installation</span>
+          <div style="grid-column:14/17;" class="gantt-bar gantt-bar-alt"><div class="gantt-bar-fill"></div></div>
+        </div>
+        <!-- Plateau Interconnect -->
+        <div class="gantt-row">
+          <span class="gantt-label">Plateau Interconnection</span>
+          <div style="grid-column:14/17;" class="gantt-bar"><div class="gantt-bar-fill"></div></div>
+        </div>
+        <!-- Testing -->
+        <div class="gantt-row">
+          <span class="gantt-label">Testing &amp; Commissioning</span>
+          <div style="grid-column:16/19;" class="gantt-bar"><div class="gantt-bar-fill"></div></div>
+        </div>
+        <!-- Restoration -->
+        <div class="gantt-row">
+          <span class="gantt-label">Site Restoration &amp; Closeout</span>
+          <div style="grid-column:17/19;" class="gantt-bar gantt-bar-alt"><div class="gantt-bar-fill"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-divider"></div>
+
+    <h3>Key Milestones</h3>
+    <div class="timeline" style="margin-top:1.5rem;">
+      <div class="timeline-phase">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <span class="timeline-title">Notice to Proceed</span>
+          <span class="timeline-dates">April 2026</span>
+        </div>
+        <p>Mobilize project team, establish field office, initiate engineering and procurement activities. Material purchase orders issued within 15 days of NTP.</p>
+      </div>
+      <div class="timeline-phase">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <span class="timeline-title">Foundation Construction Start</span>
+          <span class="timeline-dates">July 2026</span>
+        </div>
+        <p>Begin drilled shaft installation at both corridor termini with two foundation crews advancing toward center. Concurrent substation site grading and below-grade work.</p>
+      </div>
+      <div class="timeline-phase">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <span class="timeline-title">Structure Erection Complete</span>
+          <span class="timeline-dates">April 2027</span>
+        </div>
+        <p>All transmission line structures erected, bolted, and surveyed. Ready for conductor stringing operations. Substation above-grade electrical installation substantially complete.</p>
+      </div>
+      <div class="timeline-phase">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <span class="timeline-title">Conductor &amp; OPGW Stringing Complete</span>
+          <span class="timeline-dates">July 2027</span>
+        </div>
+        <p>All conductor and OPGW installed, clipped-in, and sagged to design tensions. Dead-end connections and jumpers complete at all angle and terminal structures.</p>
+      </div>
+      <div class="timeline-phase">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <span class="timeline-title">Energization &amp; Commercial Operation</span>
+          <span class="timeline-dates">September 2027</span>
+        </div>
+        <p>Successful completion of all commissioning tests. Line energized and placed into commercial operation. Final as-built documentation and closeout package delivered to WREC within 60 days.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-label">09 &mdash; Pricing Summary</div>
+    <h2>Transparent, Competitive <span class="accent">Pricing</span></h2>
+
+    <p>
+      The following pricing summary represents our lump-sum proposal for the complete scope of work described in WREC's Request for Proposal. This pricing is based on the construction documents, technical specifications, and site conditions information provided in the RFP package, supplemented by our independent review of publicly available geotechnical, topographic, and environmental data for the project corridor. All pricing is firm for 120 days from the date of this proposal and includes all labor, materials, equipment, subcontractors, overhead, profit, insurance, and bonding costs necessary to deliver the completed project. Unit pricing for potential change order work is provided in Appendix C (not included in this summary).
+    </p>
+
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>Line Item</th>
+          <th>Description</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1.0</td>
+          <td><strong>Mobilization &amp; Demobilization</strong><br><span style="color:#888; font-size:0.85rem;">Project field office, equipment transport, staging area prep, site security, temporary facilities</span></td>
+          <td>$2,180,000</td>
+        </tr>
+        <tr>
+          <td>2.0</td>
+          <td><strong>Pre-Construction Services</strong><br><span style="color:#888; font-size:0.85rem;">Geotechnical investigation, survey verification, construction engineering, permitting support</span></td>
+          <td>$1,450,000</td>
+        </tr>
+        <tr>
+          <td>3.0</td>
+          <td><strong>Access Roads &amp; Site Preparation</strong><br><span style="color:#888; font-size:0.85rem;">12 miles new access roads, 8 miles road improvement, erosion control, clearing &amp; grubbing</span></td>
+          <td>$3,275,000</td>
+        </tr>
+        <tr>
+          <td>4.0</td>
+          <td><strong>Transmission Line — Foundations</strong><br><span style="color:#888; font-size:0.85rem;">~140 drilled shaft foundations, reinforcement, concrete placement, backfill &amp; compaction</span></td>
+          <td>$6,840,000</td>
+        </tr>
+        <tr>
+          <td>5.0</td>
+          <td><strong>Transmission Line — Structures &amp; Hardware</strong><br><span style="color:#888; font-size:0.85rem;">Steel lattice towers, tubular steel monopoles, assembly, erection, hardware, insulators</span></td>
+          <td>$9,380,000</td>
+        </tr>
+        <tr>
+          <td>6.0</td>
+          <td><strong>Transmission Line — Conductor &amp; OPGW</strong><br><span style="color:#888; font-size:0.85rem;">1590 kcmil ACSS/TW conductor stringing, OPGW installation, clipping, sagging, splicing</span></td>
+          <td>$5,620,000</td>
+        </tr>
+        <tr>
+          <td>7.0</td>
+          <td><strong>Cedar Ridge Substation — Civil</strong><br><span style="color:#888; font-size:0.85rem;">Site grading, drainage, foundations, ground grid, cable trench, fencing, control house pad</span></td>
+          <td>$4,150,000</td>
+        </tr>
+        <tr>
+          <td>8.0</td>
+          <td><strong>Cedar Ridge Substation — Electrical</strong><br><span style="color:#888; font-size:0.85rem;">Bus, breakers, transformers, switches, CTs/PTs, surge arresters, control house, wiring</span></td>
+          <td>$8,940,000</td>
+        </tr>
+        <tr>
+          <td>9.0</td>
+          <td><strong>Plateau Substation Interconnection</strong><br><span style="color:#888; font-size:0.85rem;">New 230kV line bay, bus modifications, relay upgrades, civil expansion, grounding</span></td>
+          <td>$2,680,000</td>
+        </tr>
+        <tr>
+          <td>10.0</td>
+          <td><strong>Testing &amp; Commissioning</strong><br><span style="color:#888; font-size:0.85rem;">Relay testing, primary injection, SCADA integration, breaker timing, transformer testing, energization support</span></td>
+          <td>$1,560,000</td>
+        </tr>
+        <tr>
+          <td>11.0</td>
+          <td><strong>Site Restoration &amp; Closeout</strong><br><span style="color:#888; font-size:0.85rem;">Access road restoration, revegetation, as-built documentation, final inspections, warranty package</span></td>
+          <td>$985,000</td>
+        </tr>
+        <tr>
+          <td>12.0</td>
+          <td><strong>Contingency Allowance</strong><br><span style="color:#888; font-size:0.85rem;">3% contingency for unforeseen conditions including geotechnical, weather, and material escalation</span></td>
+          <td>$1,440,000</td>
+        </tr>
+        <tr class="total-row">
+          <td></td>
+          <td><strong>Total Lump-Sum Proposal</strong></td>
+          <td>$48,500,000</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="highlight-box" style="margin-top:1.5rem;">
+      <p><strong>Pricing Notes:</strong> This proposal includes performance and payment bonds (each at 100% of contract value), builder's risk insurance, and all applicable Colorado sales and use taxes on permanent materials. Pricing is based on prevailing wage rates for Mesa County, Colorado. Pricing is valid for 120 days from the date of submission. Detailed unit pricing for potential change order items is provided under separate cover in Appendix C.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY MYR GROUP -->
+<section class="section" id="why-myr">
+  <div class="container" style="text-align:center; max-width:900px;">
+    <div class="section-label" style="justify-content:center;">10 &mdash; Why MYR Group</div>
+    <h2 style="font-size:clamp(1.8rem,4vw,2.8rem);">The Clear Choice for <span class="accent">Cedar Ridge</span></h2>
+    <p style="max-width:650px; margin:0 auto 3rem; font-size:1.05rem;">
+      WREC's Cedar Ridge project demands a partner that combines national-scale resources with local expertise, financial strength with field-level execution, and an uncompromising commitment to safety with a track record of on-time, on-budget delivery. MYR Group and Sturgeon Electric are that partner.
+    </p>
+
+    <div class="differentiator-grid">
+      <div class="diff-item">
+        <div class="diff-icon">01</div>
+        <h3 style="color:#f0f0f0;">Local Presence, National Power</h3>
+        <p>
+          Sturgeon Electric's Grand Junction facility places our people and equipment 45 miles from the project site. Combined with MYR Group's $3.6B national platform, WREC gets the best of both worlds: a neighbor's responsiveness backed by a Fortune 1000 company's resources, bonding capacity, and supply chain leverage.
+        </p>
+      </div>
+      <div class="diff-item">
+        <div class="diff-icon">02</div>
+        <h3 style="color:#f0f0f0;">Unmatched 230kV Experience</h3>
+        <p>
+          Our team has built over 600 miles of 230kV and above transmission line across the Rocky Mountain region in the last decade. We know the terrain, the permitting agencies, the labor market, and the suppliers. This isn't our first project in Mesa County, and that familiarity translates directly to reduced risk and more predictable outcomes for WREC.
+        </p>
+      </div>
+      <div class="diff-item">
+        <div class="diff-icon">03</div>
+        <h3 style="color:#f0f0f0;">Proven Safety Record</h3>
+        <p>
+          Our 0.71 EMR and 0.82 TRIR are not just numbers &mdash; they represent a genuine cultural commitment to sending every worker home safely. With a dedicated Safety Director assigned full-time to the Cedar Ridge site, WREC can be confident that safety performance will meet the highest standards throughout the 18-month construction period.
+        </p>
+      </div>
+      <div class="diff-item">
+        <div class="diff-icon">04</div>
+        <h3 style="color:#f0f0f0;">Self-Perform Capability</h3>
+        <p>
+          MYR Group self-performs over 85% of our T&amp;D construction work with our own forces and company-owned equipment. This gives us direct control over quality, schedule, and safety performance &mdash; and insulates WREC from the risks associated with heavy subcontractor reliance. Our fleet includes over 3,500 pieces of owned equipment valued at more than $450 million.
+        </p>
+      </div>
+      <div class="diff-item">
+        <div class="diff-icon">05</div>
+        <h3 style="color:#f0f0f0;">Workforce Depth</h3>
+        <p>
+          With over 8,500 employees including approximately 6,000 skilled craft workers represented by IBEW, we can rapidly scale the Cedar Ridge workforce to meet schedule demands. Our industry-leading apprenticeship and training programs ensure a steady pipeline of qualified journeyman lineworkers, operators, and electricians to support project needs throughout the construction period.
+        </p>
+      </div>
+      <div class="diff-item">
+        <div class="diff-icon">06</div>
+        <h3 style="color:#f0f0f0;">Collaborative Approach</h3>
+        <p>
+          We view this not as a vendor-client relationship but as a construction partnership. Our project team is committed to transparent communication, proactive risk identification, and collaborative problem-solving. We will establish a regular cadence of progress meetings, provide real-time schedule and cost reporting, and ensure that WREC has full visibility into every aspect of project execution.
+        </p>
+      </div>
+    </div>
+
+    <div style="margin-top:4rem; padding:3rem 2rem; background:#161616; border:1px solid rgba(253,230,138,0.15); border-radius:12px;">
+      <p style="font-size:1.15rem; color:#ddd; margin-bottom:1.5rem;">
+        We appreciate the opportunity to submit this proposal and welcome the chance to discuss our qualifications, approach, and pricing in further detail. Our team is available for an in-person presentation at WREC's convenience.
+      </p>
+      <p style="color:#888; margin-bottom:0.5rem; font-size:0.9rem;">Primary Point of Contact</p>
+      <p style="font-size:1.2rem; font-weight:700; color:#f0f0f0; margin-bottom:0.25rem;">Robert Vasquez, Project Director</p>
+      <p style="color:#fde68a; margin-bottom:0;">Sturgeon Electric Company, Inc. &mdash; A MYR Group Company</p>
+      <p style="color:#999; font-size:0.9rem;">rvasquez@sturgeonelectric.com &nbsp;|&nbsp; (303) 286-8000 &nbsp;|&nbsp; Henderson, CO 80640</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p style="margin-bottom:0.5rem;">
+    <strong style="color:#fde68a;">MYR Group Inc.</strong> &mdash; Sturgeon Electric Company, Inc.
+  </p>
+  <p style="margin-bottom:0.5rem;">
+    This proposal is confidential and proprietary. &copy; 2026 MYR Group Inc. All rights reserved.
+  </p>
+  <p>
+    <em>This is a portfolio demonstration piece. All project details, personnel, and scenarios are fictional.</em>
+  </p>
+</footer>
+
+<script>
+(function() {
+  // ===== SCROLL ANIMATIONS =====
+  const sections = document.querySelectorAll('.section');
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  sections.forEach(function(s) { observer.observe(s); });
+
+  // ===== READING PROGRESS BAR =====
+  const progressBar = document.getElementById('reading-progress');
+  window.addEventListener('scroll', function() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = progress + '%';
+  });
+
+  // ===== NAV HIDE/SHOW ON SCROLL =====
+  var lastScrollY = 0;
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function() {
+    var currentY = window.pageYOffset || document.documentElement.scrollTop;
+    if (currentY > lastScrollY && currentY > 120) {
+      nav.classList.add('hidden');
+    } else {
+      nav.classList.remove('hidden');
+    }
+    lastScrollY = currentY;
+  });
+
+  // ===== ACTIVE NAV LINK =====
+  var navLinks = document.querySelectorAll('.nav-links a');
+  var sectionIds = [];
+  navLinks.forEach(function(link) {
+    var href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      sectionIds.push({ id: href.substring(1), el: link });
+    }
+  });
+
+  window.addEventListener('scroll', function() {
+    var scrollPos = window.pageYOffset + 150;
+    var current = '';
+    sectionIds.forEach(function(item) {
+      var target = document.getElementById(item.id);
+      if (target && target.offsetTop <= scrollPos) {
+        current = item.id;
+      }
+    });
+    navLinks.forEach(function(link) { link.classList.remove('active'); });
+    sectionIds.forEach(function(item) {
+      if (item.id === current) { item.el.classList.add('active'); }
+    });
+  });
+
+  // ===== COUNTER ANIMATION =====
+  var statNumbers = document.querySelectorAll('.stat-number');
+  var statObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting && !entry.target.dataset.animated) {
+        entry.target.dataset.animated = 'true';
+        animateStat(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  statNumbers.forEach(function(el) { statObserver.observe(el); });
+
+  function animateStat(el) {
+    var text = el.textContent.trim();
+    var match = text.match(/^[\$]?([\d,.]+)/);
+    if (!match) return;
+    var prefix = text.startsWith('$') ? '$' : '';
+    var numStr = match[1].replace(/,/g, '');
+    var suffix = text.replace(/^[\$]?[\d,.]+/, '');
+    var target = parseFloat(numStr);
+    var isDecimal = numStr.indexOf('.') !== -1;
+    var decimals = isDecimal ? (numStr.split('.')[1] || '').length : 0;
+    var duration = 1200;
+    var start = null;
+
+    function step(timestamp) {
+      if (!start) start = timestamp;
+      var progress = Math.min((timestamp - start) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var current = target * eased;
+      var display = isDecimal ? current.toFixed(decimals) : Math.round(current).toLocaleString();
+      el.textContent = prefix + display + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+})();
+</script>
+</body>
+</html>

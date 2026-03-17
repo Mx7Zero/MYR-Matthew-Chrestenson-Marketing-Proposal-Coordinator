@@ -65,6 +65,7 @@
     .top-menu-link.active[data-section="web-work"] { color:#111; background:#fde68a; border-color:#fde68a; }
     .top-menu-link.active[data-section="video-work"] { color:#111; background:#fbbf24; border-color:#fbbf24; }
     .top-menu-link.active[data-section="presentations"] { color:#fff; background:#dc2626; border-color:#dc2626; }
+    .top-menu-link.active[data-section="proposals"] { color:#fff; background:#7c3aed; border-color:#7c3aed; }
     .top-menu-divider { width:1px; height:18px; background:rgba(255,255,255,0.08); margin:0 0.3rem; }
 
     /* ── Hero ── */
@@ -154,6 +155,8 @@
     #video-work .bento-label-num { color: rgba(251,191,36,0.5); }
     #presentations .bento-label-name { color: #f87171; }
     #presentations .bento-label-num { color: rgba(248,113,113,0.5); }
+    #proposals .bento-label-name { color: #a78bfa; }
+    #proposals .bento-label-num { color: rgba(167,139,250,0.5); }
 
     /* ── Mobile Cards ── */
     .project-card {
@@ -265,6 +268,8 @@
     <a href="#video-work" class="top-menu-link" data-section="video-work">Video</a>
     <span class="top-menu-divider"></span>
     <a href="#presentations" class="top-menu-link" data-section="presentations">Presentations</a>
+    <span class="top-menu-divider"></span>
+    <a href="#proposals" class="top-menu-link" data-section="proposals">Proposals</a>
   </nav>
 
   <button class="back-to-top" id="backToTop" aria-label="Back to top">
@@ -300,6 +305,10 @@
   <!-- Presentations Bento -->
   <div class="bento-section-title" style="color:#f87171">Presentations</div>
   <div class="bento-page" id="presentations"></div>
+
+  <!-- Proposals Section -->
+  <div class="bento-section-title" style="color:#a78bfa">AI-Assisted Proposals</div>
+  <div class="bento-page" id="proposals"></div>
 
   <footer class="footer">
     <p class="footer-text">Matthew Chrestenson &mdash; MYR Group &mdash; 2026</p>
@@ -486,11 +495,68 @@
 
     smartGrid(presGrid, presentations.length, 3);
 
+    // ── Proposals ──
+    const proposalItems = [
+      { name: "RFP Response — Cedar Ridge 230kV Transmission & Substation", url: "/rfp-response.html" },
+      { name: "SOQ — Renewable Energy Electrical Construction", url: "/soq.html" },
+    ];
+
+    const propGrid = document.getElementById("proposals");
+    proposalItems.forEach((p, i) => {
+      const item = document.createElement("div");
+      const num = String(i+1).padStart(2,"0");
+      const tot = String(proposalItems.length).padStart(2,"0");
+      if (isMobile) {
+        item.className = "bento-item";
+        item.innerHTML = buildCard(p.name, num, tot, p.url, "#a78bfa");
+      } else {
+        item.className = "bento-item";
+        item.innerHTML = `
+          <div class="bento-tint tint-purple"></div>
+          <div class="bento-label">
+            <span class="bento-label-name">${p.name}</span>
+            <span class="bento-label-num">${num} / ${tot}</span>
+          </div>
+          <div class="bento-click"></div>
+        `;
+        item.dataset.idx = i;
+        item.querySelector(".bento-click").addEventListener("click", () => {
+          window.open(p.url, "_blank", "noopener,noreferrer");
+        });
+      }
+      propGrid.appendChild(item);
+    });
+
+    smartGrid(propGrid, proposalItems.length, 2);
+
+    // Lazy load proposal iframes (desktop only)
+    if (!isMobile) {
+      const propObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            const idx = parseInt(el.dataset.idx);
+            if (!el.querySelector("iframe") && !isNaN(idx)) {
+              const iframe = document.createElement("iframe");
+              iframe.src = proposalItems[idx].url;
+              iframe.title = proposalItems[idx].name;
+              iframe.loading = "lazy";
+              iframe.setAttribute("tabindex", "-1");
+              el.insertBefore(iframe, el.firstChild);
+            }
+            propObserver.unobserve(el);
+          }
+        });
+      }, { rootMargin: "400px" });
+      propGrid.querySelectorAll(".bento-item").forEach(el => propObserver.observe(el));
+    }
+
     // Recalculate on resize
     window.addEventListener("resize", () => {
       smartGrid(webGrid, projects.length, 4);
       smartGrid(vidGrid, videos.length, 3);
       smartGrid(presGrid, presentations.length, 3);
+      smartGrid(propGrid, proposalItems.length, 2);
     });
 
     // ── Randomize tint gradients ──
@@ -525,7 +591,7 @@
 
       // Active menu link
       const links = topMenu.querySelectorAll(".top-menu-link");
-      const sections = ["web-work", "video-work", "presentations"];
+      const sections = ["web-work", "video-work", "presentations", "proposals"];
       const scrollY = window.scrollY + window.innerHeight / 3;
       let active = null;
       for (let i = sections.length - 1; i >= 0; i--) {
