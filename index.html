@@ -286,33 +286,60 @@
       background: var(--bg-mid);
     }
 
-    /* Loading placeholder */
-    .project-loading {
+    /* Fallback card — shown immediately, screenshot loads over it */
+    .project-fallback {
       position: absolute;
       inset: 0;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: var(--bg-mid);
-      z-index: 5;
+      background: linear-gradient(165deg, #1a1a1a 0%, #222 40%, #1e1e1e 100%);
+      z-index: 2;
       transition: opacity 0.6s ease;
+      gap: 1rem;
     }
 
-    .project-loading.loaded {
+    .project-fallback.loaded {
       opacity: 0;
       pointer-events: none;
     }
 
-    .loading-spinner {
-      width: 24px;
-      height: 24px;
-      border: 1.5px solid var(--text-dim);
-      border-top-color: var(--text-primary);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
+    .fallback-number {
+      font-size: 4rem;
+      font-weight: 200;
+      color: rgba(255,255,255,0.06);
+      letter-spacing: -0.02em;
+      line-height: 1;
     }
 
-    @keyframes spin { to { transform: rotate(360deg); } }
+    .fallback-name {
+      font-size: 0.85rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      font-weight: 400;
+      text-align: center;
+      padding: 0 2rem;
+    }
+
+    .fallback-url {
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+      font-weight: 300;
+    }
+
+    .fallback-hint {
+      margin-top: 1.5rem;
+      font-size: 0.55rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 0.5rem 1rem;
+      border-radius: 2px;
+    }
 
     /* ── Nav Dots ── */
     .nav-dots {
@@ -408,9 +435,13 @@
       { name: "Salesman Toolkit", url: "https://salesman-toolkit.vercel.app/" },
     ];
 
-    // Screenshot API — generates a live capture of each URL
-    function screenshotUrl(url) {
-      return `https://image.thum.io/get/width/1440/crop/900/noanimate/${url}`;
+    // Screenshot services — try multiple, fall back gracefully
+    function screenshotUrls(url) {
+      const encoded = encodeURIComponent(url);
+      return [
+        `https://s.wordpress.com/mshots/v1/${encoded}?w=1440&h=900`,
+        `https://image.thum.io/get/width/1440/crop/900/noanimate/${url}`,
+      ];
     }
 
     const container = document.getElementById("projects");
@@ -430,9 +461,15 @@
       const section = document.createElement("section");
       section.className = "project";
       section.id = `project-${i}`;
+
+      const shortUrl = project.url.replace(/^https?:\/\//, '').replace(/\/$/, '');
+
       section.innerHTML = `
-        <div class="project-loading" id="loader-${i}">
-          <div class="loading-spinner"></div>
+        <div class="project-fallback" id="fallback-${i}">
+          <span class="fallback-number">${String(i + 1).padStart(2, "0")}</span>
+          <span class="fallback-name">${project.name}</span>
+          <span class="fallback-url">${shortUrl}</span>
+          <span class="fallback-hint">Click to open</span>
         </div>
         <div class="project-overlay"></div>
         <div class="project-header">
@@ -450,9 +487,8 @@
         </div>
       `;
 
-      // Click anywhere on the card opens the site
+      // Click anywhere opens the site in new tab
       section.addEventListener("click", (e) => {
-        // Don't double-fire if they clicked the CTA link
         if (e.target.closest(".project-cta")) return;
         window.open(project.url, "_blank", "noopener,noreferrer");
       });
@@ -469,32 +505,62 @@
       navDots.appendChild(dot);
     });
 
-    // Lazy load screenshots
+    // Load screenshot with fallback chain + timeout
+    function loadScreenshot(section, idx) {
+      const urls = screenshotUrls(projects[idx].url);
+      const fallback = document.getElementById(`fallback-${idx}`);
+      let attempt = 0;
+      let settled = false;
+
+      function tryNext() {
+        if (attempt >= urls.length || settled) return; // all failed — fallback card stays
+        const img = document.createElement("img");
+        img.className = "project-screenshot";
+        img.alt = `Screenshot of ${projects[idx].name}`;
+
+        // Timeout: if image hasn't loaded in 6s, try next source
+        const timer = setTimeout(() => {
+          if (!settled) {
+            img.src = "";
+            img.remove();
+            attempt++;
+            tryNext();
+          }
+        }, 6000);
+
+        img.addEventListener("load", () => {
+          if (settled) return;
+          settled = true;
+          clearTimeout(timer);
+          // Check it's not a 1x1 placeholder
+          if (img.naturalWidth > 10) {
+            section.insertBefore(img, section.querySelector(".project-overlay"));
+            if (fallback) fallback.classList.add("loaded");
+          }
+        });
+
+        img.addEventListener("error", () => {
+          if (settled) return;
+          clearTimeout(timer);
+          img.remove();
+          attempt++;
+          tryNext();
+        });
+
+        img.src = urls[attempt];
+      }
+
+      tryNext();
+    }
+
+    // Lazy load screenshots as they approach viewport
     const lazyObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const section = entry.target;
           const idx = parseInt(section.id.split("-")[1]);
           if (!section.querySelector("img")) {
-            const img = document.createElement("img");
-            img.className = "project-screenshot";
-            img.alt = `Screenshot of ${projects[idx].name}`;
-            img.loading = "lazy";
-            img.src = screenshotUrl(projects[idx].url);
-            img.addEventListener("load", () => {
-              const loader = document.getElementById(`loader-${idx}`);
-              if (loader) loader.classList.add("loaded");
-            });
-            // On error, show a fallback gradient
-            img.addEventListener("error", () => {
-              img.style.display = "none";
-              const loader = document.getElementById(`loader-${idx}`);
-              if (loader) {
-                loader.innerHTML = `<span style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:#666">${projects[idx].name}</span>`;
-              }
-            });
-            // Insert after loading div
-            section.insertBefore(img, section.querySelector(".project-overlay"));
+            loadScreenshot(section, idx);
           }
           lazyObserver.unobserve(section);
         }
