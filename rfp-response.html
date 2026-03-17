@@ -1621,6 +1621,13 @@
 </footer>
 
 <script>
+// Hide nav if loaded in iframe
+if (window !== window.top) {
+  var navEl = document.getElementById('nav');
+  if (navEl) navEl.style.display = 'none';
+  document.body.style.paddingTop = '0';
+}
+
 (function() {
   // ===== SCROLL ANIMATIONS =====
   var sections = document.querySelectorAll('.section');

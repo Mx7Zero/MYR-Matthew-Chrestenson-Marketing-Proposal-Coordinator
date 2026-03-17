@@ -1030,6 +1030,12 @@ section { width: 100%; }
 </footer>
 
 <script>
+// Hide nav if loaded in iframe
+if (window !== window.top) {
+  document.querySelector('.top-nav').style.display = 'none';
+  document.body.style.paddingTop = '0';
+}
+
 // --- NAV SCROLL ---
 const topNav = document.getElementById('topNav');
 window.addEventListener('scroll', () => {
