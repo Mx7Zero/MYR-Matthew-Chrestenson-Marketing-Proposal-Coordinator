@@ -173,6 +173,44 @@
       color: var(--text-primary); border-color: rgba(255,255,255,0.35);
     }
 
+    /* Fallback card for sites that block iframes */
+    .project-card {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: linear-gradient(165deg, #141414 0%, #1e1e1e 40%, #191919 100%);
+      gap: 1.2rem; z-index: 1;
+    }
+
+    .project-card-number {
+      font-size: clamp(5rem, 12vw, 9rem); font-weight: 100;
+      color: rgba(255,255,255,0.04); line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .project-card-name {
+      font-size: clamp(0.9rem, 2vw, 1.3rem); font-weight: 300;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--text-secondary); text-align: center; padding: 0 2rem;
+    }
+
+    .project-card-url {
+      font-size: 0.65rem; letter-spacing: 0.08em;
+      color: var(--text-dim); font-weight: 300;
+    }
+
+    .project-card-btn {
+      margin-top: 1rem; font-size: 0.65rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--text-dim);
+      border: 1px solid rgba(255,255,255,0.1); padding: 0.6rem 1.5rem;
+      border-radius: 2px; transition: all 0.3s ease; cursor: pointer;
+      background: none; font-family: var(--font);
+    }
+
+    .project-card-btn:hover {
+      color: var(--text-primary); border-color: rgba(255,255,255,0.3);
+    }
+
     /* Footer bar */
     .project-footer {
       position: absolute; bottom: 0; left: 0; right: 0; z-index: 20;
@@ -263,7 +301,7 @@
     const projects = [
       { name: "SUPR Tools", url: "https://supr-tools.vercel.app/" },
       { name: "Run Rate", url: "https://run-rate.vercel.app/" },
-      { name: "Atlas PCC Dashboard", url: "https://atlas-pcc-api.vercel.app/dashboard" },
+      { name: "Atlas PCC Dashboard", url: "https://atlas-pcc-api.vercel.app/dashboard", noIframe: true },
       { name: "SUPR Jobsite Supervisor", url: "https://supr-jobsite-supervisor.vercel.app/" },
       { name: "Wellspring Creative Partnership", url: "https://wellspring-creative-partnership.vercel.app/questionnaire.html" },
       { name: "VO2 Reaction Cardiorespiratory", url: "https://vo-2-reaction-cardiorespiratory-fit.vercel.app/" },
@@ -272,7 +310,7 @@
       { name: "DIY Codespring", url: "https://diy-codespring-u2yi.vercel.app/" },
       { name: "ROI Prime Reaction", url: "https://roi.primereaction.us/" },
       { name: "Prime Facility Vision", url: "https://prime-facility-vision-questionnaire.vercel.app/" },
-      { name: "Prime Reaction Tracker", url: "https://prime-reaction-project-tracker.vercel.app/" },
+      { name: "Prime Reaction Tracker", url: "https://prime-reaction-project-tracker.vercel.app/", noIframe: true },
       { name: "Not Fat Free", url: "https://www.notfatfree.com/" },
       { name: "Salesman Toolkit", url: "https://salesman-toolkit.vercel.app/" },
     ];
@@ -331,12 +369,30 @@
 
     // Lazy-load iframes when sections approach viewport
     function attachIframe(section) {
-      if (section.querySelector("iframe")) return;
       const idx = parseInt(section.dataset.projectIdx);
       if (isNaN(idx)) return;
+      const project = projects[idx];
+
+      // Sites that block iframes get a styled card instead
+      if (project.noIframe) {
+        if (section.querySelector(".project-card")) return;
+        const shortUrl = project.url.replace(/^https?:\/\//, '').replace(/\/$/, '');
+        const card = document.createElement("div");
+        card.className = "project-card";
+        card.innerHTML = `
+          <span class="project-card-number">${String(idx + 1).padStart(2, "0")}</span>
+          <span class="project-card-name">${project.name}</span>
+          <span class="project-card-url">${shortUrl}</span>
+          <button class="project-card-btn" onclick="window.open('${project.url}','_blank','noopener,noreferrer')">View Live Site &rarr;</button>
+        `;
+        section.insertBefore(card, section.firstChild);
+        return;
+      }
+
+      if (section.querySelector("iframe")) return;
       const iframe = document.createElement("iframe");
-      iframe.src = projects[idx].url;
-      iframe.title = projects[idx].name;
+      iframe.src = project.url;
+      iframe.title = project.name;
       iframe.loading = "lazy";
       iframe.setAttribute("tabindex", "-1");
       iframe.setAttribute("aria-hidden", "true");
