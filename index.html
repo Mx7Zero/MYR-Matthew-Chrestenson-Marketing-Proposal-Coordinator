@@ -119,9 +119,7 @@
       pointer-events: none;
       transition: opacity 0.4s ease;
     }
-    .bento-tint.tint-yellow { background: rgba(245, 200, 66, 0.93); }
-    .bento-tint.tint-orange { background: rgba(245, 158, 11, 0.93); }
-    .bento-tint.tint-red { background: rgba(220, 38, 38, 0.93); }
+    /* tint gradients applied per-item via JS */
 
     .bento-item:hover .bento-tint { opacity: 0; }
     .bento-item.revealed .bento-tint { opacity: 0; }
@@ -414,6 +412,38 @@
       smartGrid(webGrid, projects.length, 4);
       smartGrid(vidGrid, videos.length, 3);
       smartGrid(presGrid, presentations.length, 3);
+    });
+
+    // ── Randomize tint gradients ──
+    const tintPalettes = {
+      yellow: [
+        [245,200,66], [253,230,138], [234,179,8], [202,138,4], [250,204,21], [161,98,7]
+      ],
+      orange: [
+        [245,158,11], [251,191,36], [217,119,6], [180,83,9], [249,115,22], [234,88,12]
+      ],
+      red: [
+        [220,38,38], [248,113,113], [185,28,28], [239,68,68], [153,27,27], [252,165,165]
+      ]
+    };
+
+    function randomGradient(palette) {
+      const angle = Math.floor(Math.random() * 360);
+      const c1 = palette[Math.floor(Math.random() * palette.length)];
+      const c2 = palette[Math.floor(Math.random() * palette.length)];
+      const c3 = palette[Math.floor(Math.random() * palette.length)];
+      const o1 = 0.85 + Math.random() * 0.12;
+      const o2 = 0.80 + Math.random() * 0.15;
+      const o3 = 0.88 + Math.random() * 0.10;
+      return `linear-gradient(${angle}deg, rgba(${c1},${o1}) 0%, rgba(${c2},${o2}) 50%, rgba(${c3},${o3}) 100%)`;
+    }
+
+    document.querySelectorAll(".bento-tint").forEach(tint => {
+      let palette;
+      if (tint.classList.contains("tint-yellow")) palette = tintPalettes.yellow;
+      else if (tint.classList.contains("tint-orange")) palette = tintPalettes.orange;
+      else if (tint.classList.contains("tint-red")) palette = tintPalettes.red;
+      if (palette) tint.style.background = randomGradient(palette);
     });
 
     // ── UI Controls ──
