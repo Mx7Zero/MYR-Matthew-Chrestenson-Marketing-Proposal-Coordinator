@@ -218,26 +218,9 @@
       background: linear-gradient(90deg, var(--red-start), var(--red-mid), var(--red-end));
     }
 
-    .section-header.section-yellow {
-      background: linear-gradient(180deg, #1a1700 0%, #2a2200 30%, #3d3200 50%, #2a2200 70%, #1a1700 100%);
-    }
     .section-header.section-yellow .section-header-title { color: var(--yellow-mid); }
-    .section-header.section-yellow .section-header-label { color: var(--yellow-start); }
-    .section-header.section-yellow .section-header-count { color: var(--yellow-start); }
-
-    .section-header.section-orange {
-      background: linear-gradient(180deg, #1a0f00 0%, #2a1a00 30%, #3d2600 50%, #2a1a00 70%, #1a0f00 100%);
-    }
     .section-header.section-orange .section-header-title { color: var(--orange-end); }
-    .section-header.section-orange .section-header-label { color: var(--orange-start); }
-    .section-header.section-orange .section-header-count { color: var(--orange-start); }
-
-    .section-header.section-red {
-      background: linear-gradient(180deg, #1a0505 0%, #2a0a0a 30%, #3d1010 50%, #2a0a0a 70%, #1a0505 100%);
-    }
     .section-header.section-red .section-header-title { color: var(--red-end); }
-    .section-header.section-red .section-header-label { color: var(--red-start); }
-    .section-header.section-red .section-header-count { color: var(--red-start); }
 
     /* ── Placeholder Section ── */
     .section-placeholder {
@@ -456,6 +439,31 @@
       z-index:400;transition:width .1s linear;width:0%;
     }
 
+    /* ── Back to Top ── */
+    .back-to-top {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--text-secondary);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.3s ease;
+      opacity: 0; pointer-events: none;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .back-to-top.visible { opacity: 1; pointer-events: auto; }
+
+    .back-to-top:hover {
+      background: rgba(255,255,255,0.2);
+      border-color: rgba(255,255,255,0.35);
+      color: var(--text-primary);
+      transform: translateY(-2px);
+    }
+
+    .back-to-top svg { width: 18px; height: 18px; }
+
     /* ── Footer ── */
     .footer {
       padding: 3rem 2rem; text-align: center;
@@ -504,6 +512,13 @@
   </nav>
 
   <nav class="nav-dots" id="navDots" aria-label="Section navigation"></nav>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/>
+    </svg>
+  </button>
 
   <!-- Hero -->
   <section class="hero" id="hero">
@@ -698,12 +713,19 @@
       lazyObserver.observe(el);
     });
 
-    // Show top menu after scrolling past hero
+    // Show top menu + back-to-top after scrolling past hero
     const heroEl = document.getElementById("hero");
+    const backToTop = document.getElementById("backToTop");
+
+    backToTop.addEventListener("click", () => {
+      heroEl.scrollIntoView({ behavior: "smooth" });
+    });
 
     function updateTopMenu() {
       const heroBottom = heroEl.getBoundingClientRect().bottom;
-      topMenu.classList.toggle("visible", heroBottom < 0);
+      const pastHero = heroBottom < 0;
+      topMenu.classList.toggle("visible", pastHero);
+      backToTop.classList.toggle("visible", pastHero);
     }
 
     // Update active menu link based on scroll position
