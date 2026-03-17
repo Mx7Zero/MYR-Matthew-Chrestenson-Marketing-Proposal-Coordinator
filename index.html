@@ -322,24 +322,43 @@
 
     const isMobile = window.innerWidth < 640;
 
+    // ── Helper: build a styled card ──
+    function buildCard(name, num, total, url, color) {
+      const shortUrl = url.replace(/^https?:\/\//, '').replace(/\/$/, '');
+      return `
+        <div class="project-card">
+          <span class="project-card-number">${num}</span>
+          <span class="project-card-name" style="color:${color}">${name}</span>
+          <span class="project-card-url">${shortUrl}</span>
+          <button class="project-card-btn" style="color:${color};border-color:${color}" onclick="window.open('${url}','_blank','noopener,noreferrer')">View &rarr;</button>
+        </div>
+      `;
+    }
+
     // ── Web Work ──
     const webGrid = document.getElementById("web-work");
     projects.forEach((p, i) => {
       const item = document.createElement("div");
       item.className = "bento-item";
-      item.innerHTML = `
-        <div class="bento-tint tint-yellow"></div>
-        <div class="bento-label">
-          <span class="bento-label-name">${p.name}</span>
-          <span class="bento-label-num">${String(i+1).padStart(2,"0")} / ${String(projects.length).padStart(2,"0")}</span>
-        </div>
-        <div class="bento-click"></div>
-      `;
+      const num = String(i+1).padStart(2,"0");
+      const tot = String(projects.length).padStart(2,"0");
+      if (isMobile) {
+        item.innerHTML = buildCard(p.name, num, tot, p.url, "#fde68a");
+      } else {
+        item.innerHTML = `
+          <div class="bento-tint tint-yellow"></div>
+          <div class="bento-label">
+            <span class="bento-label-name">${p.name}</span>
+            <span class="bento-label-num">${num} / ${tot}</span>
+          </div>
+          <div class="bento-click"></div>
+        `;
+        item.dataset.idx = i;
+        item.querySelector(".bento-click").addEventListener("click", () => {
+          window.open(p.url, "_blank", "noopener,noreferrer");
+        });
+      }
       item.dataset.url = p.url;
-      item.dataset.idx = i;
-      item.querySelector(".bento-click").addEventListener("click", () => {
-        window.open(p.url, "_blank", "noopener,noreferrer");
-      });
       webGrid.appendChild(item);
     });
 
@@ -373,19 +392,11 @@
     videos.forEach((v, i) => {
       const item = document.createElement("div");
       const watchUrl = `https://www.youtube.com/watch?v=${v.id}`;
+      const num = String(i+1).padStart(2,"0");
+      const tot = String(videos.length).padStart(2,"0");
       if (isMobile) {
         item.className = "bento-item";
-        item.innerHTML = `
-          <div class="bento-tint tint-orange"></div>
-          <div class="bento-label">
-            <span class="bento-label-name">${v.name}</span>
-            <span class="bento-label-num">${String(i+1).padStart(2,"0")} / ${String(videos.length).padStart(2,"0")}</span>
-          </div>
-          <div class="bento-click"></div>
-        `;
-        item.querySelector(".bento-click").addEventListener("click", () => {
-          window.open(watchUrl, "_blank", "noopener,noreferrer");
-        });
+        item.innerHTML = buildCard(v.name, num, tot, watchUrl, "#fbbf24");
       } else {
         item.className = "bento-item interactive";
         const embedUrl = `https://www.youtube.com/embed/${v.id}?rel=0&modestbranding=1`;
@@ -393,7 +404,7 @@
           <div class="bento-tint tint-orange"></div>
           <div class="bento-label">
             <span class="bento-label-name">${v.name}</span>
-            <span class="bento-label-num">${String(i+1).padStart(2,"0")} / ${String(videos.length).padStart(2,"0")}</span>
+            <span class="bento-label-num">${num} / ${tot}</span>
           </div>
           <iframe src="${embedUrl}" title="${v.name}" loading="lazy"
             allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"
@@ -409,35 +420,22 @@
     const presGrid = document.getElementById("presentations");
     presentations.forEach((p, i) => {
       const item = document.createElement("div");
-      let linkUrl;
-      if (p.type === "youtube") {
-        linkUrl = `https://www.youtube.com/watch?v=${p.id}`;
-      } else {
-        linkUrl = p.embedUrl;
-      }
+      const linkUrl = p.type === "youtube" ? `https://www.youtube.com/watch?v=${p.id}` : p.embedUrl;
+      const num = String(i+1).padStart(2,"0");
+      const tot = String(presentations.length).padStart(2,"0");
       if (isMobile) {
         item.className = "bento-item";
-        item.innerHTML = `
-          <div class="bento-tint tint-red"></div>
-          <div class="bento-label">
-            <span class="bento-label-name">${p.name}</span>
-            <span class="bento-label-num">${String(i+1).padStart(2,"0")} / ${String(presentations.length).padStart(2,"0")}</span>
-          </div>
-          <div class="bento-click"></div>
-        `;
-        item.querySelector(".bento-click").addEventListener("click", () => {
-          window.open(linkUrl, "_blank", "noopener,noreferrer");
-        });
+        item.innerHTML = buildCard(p.name, num, tot, linkUrl, "#f87171");
       } else {
         item.className = "bento-item interactive";
-        let src = p.type === "youtube"
+        const src = p.type === "youtube"
           ? `https://www.youtube.com/embed/${p.id}?rel=0&modestbranding=1`
           : p.embedUrl;
         item.innerHTML = `
           <div class="bento-tint tint-red"></div>
           <div class="bento-label">
             <span class="bento-label-name">${p.name}</span>
-            <span class="bento-label-num">${String(i+1).padStart(2,"0")} / ${String(presentations.length).padStart(2,"0")}</span>
+            <span class="bento-label-num">${num} / ${tot}</span>
           </div>
           <iframe src="${src}" title="${p.name}" loading="lazy"
             allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"
