@@ -200,13 +200,12 @@
 
     /* Section title bar */
     .bento-section-title {
-      width: 100%; padding: 0.6rem 1.2rem;
-      font-size: 0.6rem; font-weight: 500;
+      width: 100%; padding: 2.5rem 1.5rem;
+      font-size: 1.2rem; font-weight: 200;
       letter-spacing: 0.3em; text-transform: uppercase;
       color: var(--text-dim); background: var(--bg-dark);
       text-align: center;
     }
-    .bento-section-title.light { color: rgba(255,255,255,0.7); }
 
     /* ── Back to Top ── */
     .back-to-top {
@@ -241,8 +240,11 @@
       .top-menu{gap:0.3rem}
       .top-menu-brand{display:none}
       .top-menu-link{font-size:0.5rem;padding:0.25rem 0.5rem;letter-spacing:0.1em}
-      .bento-item{min-height:30vh}
-      .bento-label-name{font-size:0.6rem}
+      .bento-page{display:flex;flex-direction:column;height:auto!important;min-height:auto!important}
+      .bento-item{width:100%!important;height:auto!important;min-height:200px;position:relative}
+      .project-card{position:relative;padding:2.5rem 1.5rem;gap:0.8rem}
+      .project-card-number{font-size:4rem;position:absolute;opacity:0.04}
+      .bento-section-title{padding:2rem 1rem;font-size:1rem}
       .back-to-top{width:36px;height:36px;bottom:1rem;right:1rem}
     }
 
