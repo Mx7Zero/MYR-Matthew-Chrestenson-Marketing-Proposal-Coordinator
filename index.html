@@ -147,6 +147,14 @@
       margin-top: 0.3rem;
     }
 
+    /* Section-specific label colors */
+    #web-work .bento-label-name { color: #fde68a; }
+    #web-work .bento-label-num { color: rgba(253,230,138,0.5); }
+    #video-work .bento-label-name { color: #fbbf24; }
+    #video-work .bento-label-num { color: rgba(251,191,36,0.5); }
+    #presentations .bento-label-name { color: #f87171; }
+    #presentations .bento-label-num { color: rgba(248,113,113,0.5); }
+
     /* Click overlay for web projects */
     .bento-click {
       position: absolute; inset: 0; z-index: 5;
@@ -244,15 +252,15 @@
   </section>
 
   <!-- Web Work Bento -->
-  <div class="bento-section-title">Web Work</div>
+  <div class="bento-section-title" style="color:#fde68a">Web Work</div>
   <div class="bento-page" id="web-work"></div>
 
   <!-- Video Bento -->
-  <div class="bento-section-title">Video</div>
+  <div class="bento-section-title" style="color:#fbbf24">Video</div>
   <div class="bento-page" id="video-work"></div>
 
   <!-- Presentations Bento -->
-  <div class="bento-section-title light">Presentations</div>
+  <div class="bento-section-title" style="color:#f87171">Presentations</div>
   <div class="bento-page" id="presentations"></div>
 
   <footer class="footer">
@@ -312,6 +320,8 @@
       container.style.height = "100vh";
     }
 
+    const isMobile = window.innerWidth < 640;
+
     // ── Web Work ──
     const webGrid = document.getElementById("web-work");
     projects.forEach((p, i) => {
@@ -335,26 +345,28 @@
 
     smartGrid(webGrid, projects.length, 4);
 
-    // Lazy load iframes for web projects
-    const webObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const el = entry.target;
-          const idx = parseInt(el.dataset.idx);
-          if (!el.querySelector("iframe") && !isNaN(idx)) {
-            const iframe = document.createElement("iframe");
-            iframe.src = projects[idx].url;
-            iframe.title = projects[idx].name;
-            iframe.loading = "lazy";
-            iframe.setAttribute("tabindex", "-1");
-            el.insertBefore(iframe, el.firstChild);
+    // Lazy load iframes for web projects (desktop only)
+    if (!isMobile) {
+      const webObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            const idx = parseInt(el.dataset.idx);
+            if (!el.querySelector("iframe") && !isNaN(idx)) {
+              const iframe = document.createElement("iframe");
+              iframe.src = projects[idx].url;
+              iframe.title = projects[idx].name;
+              iframe.loading = "lazy";
+              iframe.setAttribute("tabindex", "-1");
+              el.insertBefore(iframe, el.firstChild);
+            }
+            webObserver.unobserve(el);
           }
-          webObserver.unobserve(el);
-        }
-      });
-    }, { rootMargin: "400px" });
+        });
+      }, { rootMargin: "400px" });
 
-    webGrid.querySelectorAll(".bento-item").forEach(el => webObserver.observe(el));
+      webGrid.querySelectorAll(".bento-item").forEach(el => webObserver.observe(el));
+    }
 
     // ── Video: 3 cols, some span-2 ──
     const vidGrid = document.getElementById("video-work");
