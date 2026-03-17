@@ -97,30 +97,13 @@
     /* ── Bento Section (full page) ── */
     .bento-page {
       width: 100%;
-      min-height: 100vh;
-      display: grid;
-      gap: 0px;
+      display: flex;
+      flex-wrap: wrap;
       position: relative;
-    }
-
-    #web-work {
-      grid-template-columns: repeat(4, 1fr);
-      grid-auto-rows: 25vh;
-    }
-
-    #video-work {
-      grid-template-columns: repeat(3, 1fr);
-      grid-auto-rows: 50vh;
-    }
-
-    #presentations {
-      grid-template-columns: repeat(3, 1fr);
-      grid-auto-rows: 50vh;
     }
 
     .bento-item {
       position: relative; overflow: hidden; cursor: pointer;
-      min-height: 200px;
     }
 
     .bento-item iframe {
@@ -220,10 +203,7 @@
       .top-menu{gap:0.3rem}
       .top-menu-brand{display:none}
       .top-menu-link{font-size:0.5rem;padding:0.25rem 0.5rem;letter-spacing:0.1em}
-      #web-work{grid-template-columns:1fr 1fr;grid-template-rows:auto}
-      #video-work{grid-template-columns:1fr;grid-template-rows:auto}
-      #presentations{grid-template-columns:1fr;grid-template-rows:auto}
-      .bento-item{min-height:35vh}
+      .bento-item{min-height:30vh}
       .bento-label-name{font-size:0.6rem}
       .back-to-top{width:36px;height:36px;bottom:1rem;right:1rem}
     }
@@ -317,7 +297,28 @@
       { name: "Briotix PPE Training", id: "CEq9fcqbs8I", type: "youtube" },
     ];
 
-    // ── Web Work: 4 cols x 4 rows, some span-2 for variety ──
+    // Smart grid: calculates width/height so items always fill with no black space
+    function smartGrid(container, count, targetCols) {
+      const isMobile = window.innerWidth < 640;
+      const cols = isMobile ? Math.min(2, targetCols) : targetCols;
+      const rows = Math.ceil(count / cols);
+      const items = container.querySelectorAll(".bento-item");
+      const lastRowItems = count % cols || cols;
+
+      items.forEach((item, i) => {
+        const row = Math.floor(i / cols);
+        const isLastRow = row === rows - 1;
+        const widthPct = isLastRow ? (100 / lastRowItems) : (100 / cols);
+        const heightPct = 100 / rows;
+        item.style.width = widthPct + "%";
+        item.style.height = heightPct + "%";
+      });
+
+      // Set container to exact viewport height
+      container.style.height = "100vh";
+    }
+
+    // ── Web Work ──
     const webGrid = document.getElementById("web-work");
     projects.forEach((p, i) => {
       const item = document.createElement("div");
@@ -337,6 +338,8 @@
       });
       webGrid.appendChild(item);
     });
+
+    smartGrid(webGrid, projects.length, 4);
 
     // Lazy load iframes for web projects
     const webObserver = new IntersectionObserver((entries) => {
@@ -378,6 +381,8 @@
       vidGrid.appendChild(item);
     });
 
+    smartGrid(vidGrid, videos.length, 3);
+
     // ── Presentations: 3 cols ──
     const presGrid = document.getElementById("presentations");
     presentations.forEach((p, i) => {
@@ -402,6 +407,14 @@
       presGrid.appendChild(item);
     });
 
+    smartGrid(presGrid, presentations.length, 3);
+
+    // Recalculate on resize
+    window.addEventListener("resize", () => {
+      smartGrid(webGrid, projects.length, 4);
+      smartGrid(vidGrid, videos.length, 3);
+      smartGrid(presGrid, presentations.length, 3);
+    });
 
     // ── UI Controls ──
     const heroEl = document.getElementById("hero");
