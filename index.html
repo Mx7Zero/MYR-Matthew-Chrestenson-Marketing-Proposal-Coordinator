@@ -65,7 +65,7 @@
     .top-menu-link.active[data-section="web-work"] { color:#111; background:#fde68a; border-color:#fde68a; }
     .top-menu-link.active[data-section="video-work"] { color:#111; background:#fbbf24; border-color:#fbbf24; }
     .top-menu-link.active[data-section="presentations"] { color:#fff; background:#dc2626; border-color:#dc2626; }
-    .top-menu-link.active[data-section="proposals"] { color:#fff; background:#7c3aed; border-color:#7c3aed; }
+    .top-menu-link.active[data-section="proposals"] { color:#111; background:#ffffff; border-color:#ffffff; }
     .top-menu-divider { width:1px; height:18px; background:rgba(255,255,255,0.08); margin:0 0.3rem; }
 
     /* ── Hero ── */
@@ -155,8 +155,8 @@
     #video-work .bento-label-num { color: rgba(251,191,36,0.5); }
     #presentations .bento-label-name { color: #f87171; }
     #presentations .bento-label-num { color: rgba(248,113,113,0.5); }
-    #proposals .bento-label-name { color: #a78bfa; }
-    #proposals .bento-label-num { color: rgba(167,139,250,0.5); }
+    #proposals .bento-label-name { color: #ffffff; }
+    #proposals .bento-label-num { color: rgba(255,255,255,0.5); }
 
     /* ── Mobile Cards ── */
     .project-card {
@@ -263,13 +263,13 @@
 
   <nav class="top-menu" id="topMenu">
     <a href="#hero" class="top-menu-brand" style="text-decoration:none;cursor:pointer">MC Portfolio</a>
+    <a href="#proposals" class="top-menu-link" data-section="proposals">Sample RFP/SOQ</a>
+    <span class="top-menu-divider"></span>
     <a href="#web-work" class="top-menu-link" data-section="web-work">Web Work</a>
     <span class="top-menu-divider"></span>
     <a href="#video-work" class="top-menu-link" data-section="video-work">Video</a>
     <span class="top-menu-divider"></span>
     <a href="#presentations" class="top-menu-link" data-section="presentations">Presentations</a>
-    <span class="top-menu-divider"></span>
-    <a href="#proposals" class="top-menu-link" data-section="proposals">Proposals</a>
   </nav>
 
   <button class="back-to-top" id="backToTop" aria-label="Back to top">
@@ -294,6 +294,10 @@
     <p class="scroll-hint">Scroll to explore</p>
   </section>
 
+  <!-- Proposals Section -->
+  <div class="bento-section-title" style="color:#ffffff">Sample RFP / SOQ</div>
+  <div class="bento-page" id="proposals"></div>
+
   <!-- Web Work Bento -->
   <div class="bento-section-title" style="color:#fde68a">Web Work</div>
   <div class="bento-page" id="web-work"></div>
@@ -305,10 +309,6 @@
   <!-- Presentations Bento -->
   <div class="bento-section-title" style="color:#f87171">Presentations</div>
   <div class="bento-page" id="presentations"></div>
-
-  <!-- Proposals Section -->
-  <div class="bento-section-title" style="color:#a78bfa">AI-Assisted Proposals</div>
-  <div class="bento-page" id="proposals"></div>
 
   <footer class="footer">
     <p class="footer-text">Matthew Chrestenson &mdash; MYR Group &mdash; 2026</p>
@@ -508,7 +508,7 @@
       const tot = String(proposalItems.length).padStart(2,"0");
       if (isMobile) {
         item.className = "bento-item";
-        item.innerHTML = buildCard(p.name, num, tot, p.url, "#a78bfa");
+        item.innerHTML = buildCard(p.name, num, tot, p.url, "#ffffff");
       } else {
         item.className = "bento-item";
         item.innerHTML = `
