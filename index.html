@@ -368,48 +368,82 @@
       webGrid.querySelectorAll(".bento-item").forEach(el => webObserver.observe(el));
     }
 
-    // ── Video: 3 cols, some span-2 ──
+    // ── Video ──
     const vidGrid = document.getElementById("video-work");
     videos.forEach((v, i) => {
       const item = document.createElement("div");
-      item.className = "bento-item interactive";
-      const embedUrl = `https://www.youtube.com/embed/${v.id}?rel=0&modestbranding=1`;
-      item.innerHTML = `
-        <div class="bento-tint tint-orange"></div>
-        <div class="bento-label">
-          <span class="bento-label-name">${v.name}</span>
-          <span class="bento-label-num">${String(i+1).padStart(2,"0")} / ${String(videos.length).padStart(2,"0")}</span>
-        </div>
-        <iframe src="${embedUrl}" title="${v.name}" loading="lazy"
-          allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"
-          allowfullscreen style="pointer-events:auto"></iframe>
-      `;
+      const watchUrl = `https://www.youtube.com/watch?v=${v.id}`;
+      if (isMobile) {
+        item.className = "bento-item";
+        item.innerHTML = `
+          <div class="bento-tint tint-orange"></div>
+          <div class="bento-label">
+            <span class="bento-label-name">${v.name}</span>
+            <span class="bento-label-num">${String(i+1).padStart(2,"0")} / ${String(videos.length).padStart(2,"0")}</span>
+          </div>
+          <div class="bento-click"></div>
+        `;
+        item.querySelector(".bento-click").addEventListener("click", () => {
+          window.open(watchUrl, "_blank", "noopener,noreferrer");
+        });
+      } else {
+        item.className = "bento-item interactive";
+        const embedUrl = `https://www.youtube.com/embed/${v.id}?rel=0&modestbranding=1`;
+        item.innerHTML = `
+          <div class="bento-tint tint-orange"></div>
+          <div class="bento-label">
+            <span class="bento-label-name">${v.name}</span>
+            <span class="bento-label-num">${String(i+1).padStart(2,"0")} / ${String(videos.length).padStart(2,"0")}</span>
+          </div>
+          <iframe src="${embedUrl}" title="${v.name}" loading="lazy"
+            allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"
+            allowfullscreen style="pointer-events:auto"></iframe>
+        `;
+      }
       vidGrid.appendChild(item);
     });
 
     smartGrid(vidGrid, videos.length, 3);
 
-    // ── Presentations: 3 cols ──
+    // ── Presentations ──
     const presGrid = document.getElementById("presentations");
     presentations.forEach((p, i) => {
       const item = document.createElement("div");
-      item.className = "bento-item interactive";
-      let src;
+      let linkUrl;
       if (p.type === "youtube") {
-        src = `https://www.youtube.com/embed/${p.id}?rel=0&modestbranding=1`;
+        linkUrl = `https://www.youtube.com/watch?v=${p.id}`;
       } else {
-        src = p.embedUrl;
+        linkUrl = p.embedUrl;
       }
-      item.innerHTML = `
-        <div class="bento-tint tint-red"></div>
-        <div class="bento-label">
-          <span class="bento-label-name">${p.name}</span>
-          <span class="bento-label-num">${String(i+1).padStart(2,"0")} / ${String(presentations.length).padStart(2,"0")}</span>
-        </div>
-        <iframe src="${src}" title="${p.name}" loading="lazy"
-          allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"
-          allowfullscreen scrolling="no" style="pointer-events:auto"></iframe>
-      `;
+      if (isMobile) {
+        item.className = "bento-item";
+        item.innerHTML = `
+          <div class="bento-tint tint-red"></div>
+          <div class="bento-label">
+            <span class="bento-label-name">${p.name}</span>
+            <span class="bento-label-num">${String(i+1).padStart(2,"0")} / ${String(presentations.length).padStart(2,"0")}</span>
+          </div>
+          <div class="bento-click"></div>
+        `;
+        item.querySelector(".bento-click").addEventListener("click", () => {
+          window.open(linkUrl, "_blank", "noopener,noreferrer");
+        });
+      } else {
+        item.className = "bento-item interactive";
+        let src = p.type === "youtube"
+          ? `https://www.youtube.com/embed/${p.id}?rel=0&modestbranding=1`
+          : p.embedUrl;
+        item.innerHTML = `
+          <div class="bento-tint tint-red"></div>
+          <div class="bento-label">
+            <span class="bento-label-name">${p.name}</span>
+            <span class="bento-label-num">${String(i+1).padStart(2,"0")} / ${String(presentations.length).padStart(2,"0")}</span>
+          </div>
+          <iframe src="${src}" title="${p.name}" loading="lazy"
+            allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"
+            allowfullscreen scrolling="no" style="pointer-events:auto"></iframe>
+        `;
+      }
       presGrid.appendChild(item);
     });
 
@@ -477,14 +511,6 @@
         document.getElementById(link.dataset.section)?.scrollIntoView({ behavior: "smooth" });
       });
     });
-
-    // Mobile: reveal on scroll
-    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
-      const revealObs = new IntersectionObserver((entries) => {
-        entries.forEach(e => e.target.classList.toggle("revealed", e.isIntersecting));
-      }, { threshold: 0.3 });
-      document.querySelectorAll(".bento-item").forEach(el => revealObs.observe(el));
-    }
 
     // Keyboard nav
     document.addEventListener("keydown", (e) => {
