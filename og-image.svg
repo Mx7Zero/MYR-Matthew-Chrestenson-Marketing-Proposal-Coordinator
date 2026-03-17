@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0d0d0d"/>
+      <stop offset="50%" stop-color="#1a1a1a"/>
+      <stop offset="100%" stop-color="#222222"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <text x="600" y="220" font-family="-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif" font-size="22" fill="#666666" text-anchor="middle" letter-spacing="8" font-weight="400">PORTFOLIO</text>
+  <text x="600" y="290" font-family="-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif" font-size="52" fill="#f0f0f0" text-anchor="middle" letter-spacing="-1" font-weight="300">Current Design Work</text>
+  <text x="600" y="355" font-family="-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif" font-size="52" fill="#f0f0f0" text-anchor="middle" letter-spacing="-1" font-weight="600">Matthew Chrestenson</text>
+  <text x="600" y="410" font-family="-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif" font-size="28" fill="#999999" text-anchor="middle" letter-spacing="3" font-weight="200">2026</text>
+  <text x="600" y="480" font-family="-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif" font-size="16" fill="#666666" text-anchor="middle" letter-spacing="4" font-weight="400">MARKETING PROPOSAL COORDINATOR  ·  MYR GROUP  ·  THORNTON, COLORADO</text>
+</svg>
