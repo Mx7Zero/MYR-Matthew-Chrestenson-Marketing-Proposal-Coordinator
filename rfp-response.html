@@ -62,7 +62,6 @@
     border-bottom: 1px solid #e5e5e5;
     transition: transform 0.35s ease;
   }
-  .nav.hidden { transform: translateY(-100%); }
   .nav-inner {
     max-width: 1200px;
     margin: 0 auto;
@@ -1643,18 +1642,8 @@
     progressBar.style.width = progress + '%';
   });
 
-  // ===== NAV HIDE/SHOW ON SCROLL =====
-  var lastScrollY = 0;
+  // Nav always visible
   var nav = document.getElementById('nav');
-  window.addEventListener('scroll', function() {
-    var currentY = window.pageYOffset || document.documentElement.scrollTop;
-    if (currentY > lastScrollY && currentY > 120) {
-      nav.classList.add('hidden');
-    } else {
-      nav.classList.remove('hidden');
-    }
-    lastScrollY = currentY;
-  });
 
   // ===== ACTIVE NAV LINK =====
   var navLinks = document.querySelectorAll('.nav-links a');
