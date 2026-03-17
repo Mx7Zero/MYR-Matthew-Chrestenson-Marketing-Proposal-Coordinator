@@ -381,6 +381,422 @@ section { width: 100%; }
   .section-inner { padding: 3.5rem 1.2rem; }
   .hero-content h1 { font-size: 1.8rem; }
 }
+
+/* --- DOWNLOAD PDF BUTTON --- */
+.pdf-download-btn {
+  position: fixed;
+  top: 72px;
+  right: 2rem;
+  z-index: 999;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  color: #111;
+  border: none;
+  padding: 0.55rem 1.3rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 16px rgba(251,191,36,0.25);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.pdf-download-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(251,191,36,0.35);
+}
+.pdf-download-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: #111;
+}
+
+/* ============================================================
+   PRINT STYLESHEET
+   Premium consulting-grade print layout
+   ============================================================ */
+@media print {
+
+  /* --- PAGE SETUP --- */
+  @page {
+    size: letter;
+    margin: 0.75in;
+    @bottom-center {
+      content: "CONFIDENTIAL \2014  MYR Group / CSI Electrical Contractors";
+      font-size: 8pt;
+      color: #888;
+      font-family: Georgia, 'Times New Roman', serif;
+    }
+  }
+
+  /* --- BASE RESET FOR PRINT --- */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  html {
+    font-size: 11pt;
+  }
+
+  body {
+    background: #fff !important;
+    color: #1a1a1a !important;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.55;
+    overflow: visible !important;
+  }
+
+  /* --- HIDE NON-PRINT ELEMENTS --- */
+  .top-nav,
+  .nav-toggle,
+  .pdf-download-btn,
+  .hero-scroll,
+  .hero-bg-grid,
+  .hero-glow {
+    display: none !important;
+  }
+
+  /* --- KILL ALL ANIMATIONS --- */
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .fade-in {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* --- TYPOGRAPHY --- */
+  h1, h2, h3, h4,
+  .section-title,
+  .hero-content h1 {
+    font-family: Georgia, 'Times New Roman', serif !important;
+    color: #111 !important;
+    orphans: 3;
+    widows: 3;
+  }
+
+  .section-title {
+    font-size: 18pt !important;
+    margin-bottom: 4pt !important;
+    padding-top: 0 !important;
+  }
+
+  .section-title::after {
+    background: #b45309 !important;
+    height: 2px !important;
+    width: 40px !important;
+  }
+
+  .section-subtitle {
+    color: #555 !important;
+    font-size: 9.5pt !important;
+    margin-bottom: 14pt !important;
+  }
+
+  /* --- ACCENT COLOR: print-friendly dark amber --- */
+  .accent,
+  a,
+  .hero-badge,
+  .nav-brand {
+    color: #b45309 !important;
+  }
+
+  a {
+    text-decoration: none !important;
+  }
+
+  /* --- LINKS --- */
+  a[href]::after {
+    content: none !important;
+  }
+
+  /* --- HERO SECTION --- */
+  .hero {
+    min-height: auto !important;
+    background: #fff !important;
+    padding: 0.5in 0 0.3in 0 !important;
+    page-break-after: always;
+  }
+
+  .hero-content {
+    text-align: left !important;
+    padding: 0 !important;
+  }
+
+  .hero-content h1 {
+    font-size: 22pt !important;
+    color: #111 !important;
+    line-height: 1.2 !important;
+  }
+
+  .hero-content h1 span {
+    color: #b45309 !important;
+  }
+
+  .hero-badge {
+    border-color: #b45309 !important;
+    color: #b45309 !important;
+    font-size: 7pt !important;
+    padding: 3pt 10pt !important;
+  }
+
+  .hero-divider {
+    background: #b45309 !important;
+    margin: 10pt 0 !important;
+  }
+
+  .hero-meta {
+    color: #333 !important;
+    font-size: 10pt !important;
+  }
+
+  .hero-meta strong {
+    color: #111 !important;
+  }
+
+  /* --- SECTIONS --- */
+  section {
+    page-break-before: always;
+    background: #fff !important;
+  }
+
+  section:first-of-type {
+    page-break-before: avoid;
+  }
+
+  .section-inner {
+    padding: 0.25in 0 !important;
+    max-width: 100% !important;
+  }
+
+  /* --- CARDS & GRIDS --- */
+  .stats-grid,
+  .cap-grid,
+  .org-grid,
+  .project-grid,
+  .team-grid,
+  .ref-grid,
+  .certs-grid,
+  .equip-grid {
+    display: grid !important;
+    gap: 10pt !important;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+
+  .stat-card,
+  .cap-card,
+  .project-card,
+  .team-card,
+  .ref-card,
+  .cert-badge,
+  .org-card {
+    background: #fafafa !important;
+    border: 1px solid #ddd !important;
+    color: #1a1a1a !important;
+    overflow: visible !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    border-radius: 4px !important;
+    padding: 10pt !important;
+  }
+
+  .stat-card h3,
+  .cap-card h3,
+  .project-card h3,
+  .team-card h3,
+  .ref-card h3,
+  .org-card h3 {
+    color: #111 !important;
+    font-family: Georgia, 'Times New Roman', serif !important;
+  }
+
+  .stat-card p,
+  .cap-card p,
+  .project-card p,
+  .team-card p,
+  .ref-card p,
+  .org-card p {
+    color: #333 !important;
+  }
+
+  .stat-number,
+  .counter {
+    color: #b45309 !important;
+    font-family: Georgia, 'Times New Roman', serif !important;
+  }
+
+  /* --- BAR CHARTS: MAKE STATIC --- */
+  .chart-bar,
+  [data-height] {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .chart-bar {
+    background: #b45309 !important;
+  }
+
+  .bar-label,
+  .bar-value,
+  .chart-label {
+    color: #333 !important;
+    font-size: 8pt !important;
+  }
+
+  .chart-container,
+  .emr-chart,
+  .rev-chart {
+    background: #fafafa !important;
+    border: 1px solid #ddd !important;
+    overflow: visible !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .industry-line {
+    border-color: #999 !important;
+  }
+
+  .industry-label {
+    color: #666 !important;
+  }
+
+  /* --- PROJECT CARDS --- */
+  .project-card {
+    border-left: 3px solid #b45309 !important;
+  }
+
+  .project-tag {
+    background: #f5f0e6 !important;
+    color: #b45309 !important;
+    border: 1px solid #ddd !important;
+    font-size: 7pt !important;
+  }
+
+  /* --- TEAM / PERSONNEL --- */
+  .team-card .role,
+  .team-role {
+    color: #b45309 !important;
+  }
+
+  /* --- REFERENCES --- */
+  .ref-org {
+    color: #b45309 !important;
+    font-size: 9pt !important;
+  }
+
+  .ref-contact {
+    color: #666 !important;
+    font-size: 8pt !important;
+  }
+
+  /* --- CERTIFICATIONS --- */
+  .cert-badge {
+    text-align: center !important;
+  }
+
+  .cert-icon {
+    font-size: 18pt !important;
+    color: #b45309 !important;
+  }
+
+  .cert-badge h4 {
+    color: #111 !important;
+    font-family: Georgia, 'Times New Roman', serif !important;
+    font-size: 9pt !important;
+  }
+
+  .cert-badge p {
+    font-size: 8pt !important;
+    color: #555 !important;
+  }
+
+  /* --- EQUIPMENT --- */
+  .equip-list {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .equip-list h3 {
+    color: #111 !important;
+    font-family: Georgia, 'Times New Roman', serif !important;
+  }
+
+  .equip-list ul {
+    color: #333 !important;
+  }
+
+  .equip-list li {
+    font-size: 9pt !important;
+    line-height: 1.6 !important;
+  }
+
+  /* --- FOOTER --- */
+  .footer {
+    background: #fff !important;
+    border-top: 1px solid #ddd !important;
+    page-break-before: avoid;
+    padding: 12pt 0 !important;
+  }
+
+  .footer p {
+    color: #333 !important;
+    font-size: 8pt !important;
+  }
+
+  .footer .accent {
+    color: #b45309 !important;
+  }
+
+  /* --- CONFIDENTIAL FOOTER STAMP --- */
+  body::after {
+    content: "CONFIDENTIAL \2014  MYR Group / CSI Electrical Contractors";
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 7.5pt;
+    color: #999;
+    font-family: Georgia, 'Times New Roman', serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 6pt 0;
+    border-top: 0.5pt solid #ddd;
+  }
+
+  /* --- GENERAL OVERFLOW FIX --- */
+  * {
+    overflow: visible !important;
+  }
+
+  img, svg {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+
+  /* --- PREVENT ORPHAN HEADINGS --- */
+  h1, h2, h3, h4 {
+    page-break-after: avoid;
+  }
+
+  p, li {
+    orphans: 3;
+    widows: 3;
+  }
+
+}
 </style>
 </head>
 <body>
@@ -402,6 +818,12 @@ section { width: 100%; }
     <a href="#certifications">Certifications</a>
   </div>
 </nav>
+
+<!-- DOWNLOAD PDF BUTTON -->
+<button class="pdf-download-btn" onclick="window.print()" title="Download as PDF">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 15v-4H9l4-5 4 5h-4v4h-2v0zm1-10V3.5L18.5 8H14z"/></svg>
+  Download PDF
+</button>
 
 <!-- HERO -->
 <section class="hero" id="hero">
@@ -1117,6 +1539,27 @@ animateBars('revBars');
   const chart = document.querySelector('.emr-chart');
   if (chart) chart.style.position = 'relative';
 })();
+
+// --- PRINT PREPARATION ---
+// Before printing, force all animated bars to their target heights
+// and all counters to their target values so print output is complete.
+window.addEventListener('beforeprint', () => {
+  document.querySelectorAll('[data-height]').forEach(bar => {
+    bar.style.height = bar.dataset.height + '%';
+  });
+  document.querySelectorAll('.counter').forEach(el => {
+    const target = parseFloat(el.dataset.target);
+    const decimals = parseInt(el.dataset.decimals) || 0;
+    if (decimals === 0 && target >= 100) {
+      el.textContent = Math.round(target).toLocaleString();
+    } else {
+      el.textContent = target.toFixed(decimals);
+    }
+  });
+  document.querySelectorAll('.fade-in').forEach(el => {
+    el.classList.add('visible');
+  });
+});
 </script>
 
 </body>
