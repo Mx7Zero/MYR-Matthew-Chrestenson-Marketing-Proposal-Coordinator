@@ -209,11 +209,9 @@
     .section-header.section-yellow .section-header-line {
       background: linear-gradient(90deg, var(--yellow-start), var(--yellow-mid), var(--yellow-end));
     }
-
     .section-header.section-orange .section-header-line {
       background: linear-gradient(90deg, var(--orange-start), var(--orange-mid), var(--orange-end));
     }
-
     .section-header.section-red .section-header-line {
       background: linear-gradient(90deg, var(--red-start), var(--red-mid), var(--red-end));
     }
@@ -221,28 +219,6 @@
     .section-header.section-yellow .section-header-title { color: var(--yellow-mid); }
     .section-header.section-orange .section-header-title { color: var(--orange-end); }
     .section-header.section-red .section-header-title { color: var(--red-end); }
-
-    /* ── Placeholder Section ── */
-    .section-placeholder {
-      width: 100%; padding: 6rem 2rem;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      text-align: center;
-      background: linear-gradient(165deg, #141414 0%, #1a1a1a 40%, #161616 100%);
-      border-top: 1px solid rgba(255,255,255,0.04);
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-    }
-
-    .section-placeholder-title {
-      font-size: clamp(1.2rem, 3vw, 2rem); font-weight: 200;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--text-secondary); margin-bottom: 0.8rem;
-    }
-
-    .section-placeholder-sub {
-      font-size: 0.7rem; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--text-dim);
-    }
 
     /* ── Project Sections ── */
     .project {
@@ -261,7 +237,7 @@
       background: rgba(0,0,0,0.12);
     }
 
-    /* Iframe — web projects: no interaction; video projects: playable */
+    /* Iframe */
     .project iframe {
       width: 100%; height: 100%;
       border: none; display: block;
@@ -272,18 +248,46 @@
     .project.video-section iframe {
       pointer-events: auto;
     }
-
     .project.video-section .project-overlay {
       display: none;
     }
-
     .project.video-section .project-header {
-      opacity: 1;
-      pointer-events: none;
+      opacity: 1; pointer-events: none;
     }
-
     .project.video-section .project-header * {
       pointer-events: auto;
+    }
+
+    /* ── Center Label (floating over content) ── */
+    .project-center-label {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%); z-index: 15;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px;
+      padding: 0.8rem 1.8rem;
+      text-align: center;
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 0.4s ease;
+    }
+
+    .project:hover .project-center-label {
+      opacity: 0;
+    }
+
+    .project-center-name {
+      font-size: 0.8rem; font-weight: 500;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--text-primary); white-space: nowrap;
+    }
+
+    .project-center-num {
+      font-size: 0.55rem; font-weight: 400;
+      letter-spacing: 0.15em; color: var(--text-dim);
+      margin-top: 0.3rem;
     }
 
     /* Header bar */
@@ -410,7 +414,6 @@
     .project-bar.bar-red .project-bar-name,
     .project-bar.bar-red .project-bar-number,
     .project-bar.bar-red .project-bar-hint { color: #fff; }
-
     .project-bar.bar-red .project-bar-number { color: rgba(255,255,255,0.7); }
     .project-bar.bar-red .project-bar-hint { color: rgba(255,255,255,0.6); }
     .project-bar.bar-red .project-bar-divider { background: rgba(255,255,255,0.25); }
@@ -481,10 +484,12 @@
       .hero{min-height:80vh;min-height:80dvh;padding:1.5rem}
       .hero h1{font-size:1.6rem}
       .hero-meta{flex-direction:column;gap:.6rem}
-      .nav-dots{right:.6rem;gap:.5rem}
-      .nav-dot{width:5px;height:5px}
-      .project{height:60vh;height:60dvh}
-      .project iframe{width:100%;height:100%;object-fit:cover}
+      .nav-dots{display:none}
+      .project{height:50vh;height:50dvh}
+      .project iframe{width:100%;height:100%}
+      .project-center-label{padding:0.6rem 1.2rem}
+      .project-center-name{font-size:0.6rem;letter-spacing:0.12em;white-space:normal;max-width:200px}
+      .project-center-num{font-size:0.45rem}
       .project-header{padding:.6rem .8rem}
       .project-number{font-size:.55rem}
       .project-title{font-size:.55rem;letter-spacing:.12em}
@@ -525,8 +530,6 @@
     <span class="top-menu-divider"></span>
     <a href="#presentations" class="top-menu-link" data-section="presentations">Presentations</a>
   </nav>
-
-  <nav class="nav-dots" id="navDots" aria-label="Section navigation"></nav>
 
   <!-- Back to Top -->
   <button class="back-to-top" id="backToTop" aria-label="Back to top">
@@ -587,6 +590,8 @@
   </footer>
 
   <script>
+    const isMobile = window.innerWidth < 640;
+
     const projects = [
       { name: "SUPR Tools", url: "https://supr-tools.vercel.app/" },
       { name: "Run Rate", url: "https://run-rate.vercel.app/" },
@@ -612,228 +617,133 @@
       { name: "The Gate Is Open — A Pilgrimage Across the Stars", id: "Cl5qBOxF9bA" },
     ];
 
-    const total = String(projects.length).padStart(2, "0");
-    const videoTotal = String(videos.length).padStart(2, "0");
-    const container = document.getElementById("projects");
     const presentations = [
       { name: "Presentations.ai Deck", embedUrl: "https://app.presentations.ai/view/8CQXVcms7d", type: "embed" },
       { name: "Briotix Costco Presentation", id: "BAzL6b1WaDY", type: "youtube" },
       { name: "Briotix PPE Training", id: "CEq9fcqbs8I", type: "youtube" },
     ];
 
+    const total = String(projects.length).padStart(2, "0");
+    const videoTotal = String(videos.length).padStart(2, "0");
+    const presentationTotal = String(presentations.length).padStart(2, "0");
+    const container = document.getElementById("projects");
     const videoContainer = document.getElementById("videos");
     const presentationContainer = document.getElementById("presentation-items");
-    const navDots = document.getElementById("navDots");
     const topMenu = document.getElementById("topMenu");
-    const presentationTotal = String(presentations.length).padStart(2, "0");
 
     // Set counts
     document.getElementById("webWorkCount").textContent = projects.length + " Projects";
     document.getElementById("videoCount").textContent = videos.length + " Videos";
     document.getElementById("presentationCount").textContent = presentations.length + (presentations.length === 1 ? " Presentation" : " Presentations");
 
-    // Hero dot
-    const heroDot = document.createElement("button");
-    heroDot.className = "nav-dot active";
-    heroDot.setAttribute("aria-label", "Go to top");
-    heroDot.addEventListener("click", () => {
-      document.getElementById("hero").scrollIntoView({ behavior: "smooth" });
-    });
-    navDots.appendChild(heroDot);
-
-    // Build sections
+    // ── Build Web Project Sections ──
     projects.forEach((project, i) => {
       const section = document.createElement("section");
       section.className = "project";
       section.id = `project-${i}`;
       section.dataset.projectIdx = i;
-      section.innerHTML = `
-        <div class="project-overlay"></div>
-        <div class="project-header">
-          <div class="project-info">
-            <span class="project-number">${String(i + 1).padStart(2, "0")} / ${total}</span>
-            <span class="project-title">${project.name}</span>
-          </div>
-          <a class="project-cta" href="${project.url}" target="_blank" rel="noopener noreferrer">
-            Visit Site <span>&rarr;</span>
-          </a>
-        </div>
-        <div class="project-bar">
-          <span class="project-bar-number">${String(i + 1).padStart(2, "0")} / ${total}</span>
-          <span class="project-bar-divider"></span>
-          <span class="project-bar-name">${project.name}</span>
-          <span class="project-bar-divider"></span>
-          <span class="project-bar-hint">Click to open &rarr;</span>
-        </div>
-      `;
 
-      section.querySelector(".project-overlay").addEventListener("click", () => {
-        window.open(project.url, "_blank", "noopener,noreferrer");
-      });
+      const shortUrl = project.url.replace(/^https?:\/\//, '').replace(/\/$/, '');
+
+      // On mobile: show card instead of iframe to save memory
+      if (isMobile) {
+        section.innerHTML = `
+          <div class="project-card">
+            <span class="project-card-number">${String(i + 1).padStart(2, "0")}</span>
+            <span class="project-card-name">${project.name}</span>
+            <span class="project-card-url">${shortUrl}</span>
+            <button class="project-card-btn" onclick="window.open('${project.url}','_blank','noopener,noreferrer')">View Live Site &rarr;</button>
+          </div>
+          <div class="project-bar">
+            <span class="project-bar-number">${String(i + 1).padStart(2, "0")} / ${total}</span>
+            <span class="project-bar-divider"></span>
+            <span class="project-bar-name">${project.name}</span>
+            <span class="project-bar-divider"></span>
+            <span class="project-bar-hint">Tap to open &rarr;</span>
+          </div>
+        `;
+        section.addEventListener("click", () => {
+          window.open(project.url, "_blank", "noopener,noreferrer");
+        });
+      } else {
+        section.innerHTML = `
+          <div class="project-overlay"></div>
+          <div class="project-center-label">
+            <div class="project-center-name">${project.name}</div>
+            <div class="project-center-num">${String(i + 1).padStart(2, "0")} / ${total}</div>
+          </div>
+          <div class="project-header">
+            <div class="project-info">
+              <span class="project-number">${String(i + 1).padStart(2, "0")} / ${total}</span>
+              <span class="project-title">${project.name}</span>
+            </div>
+            <a class="project-cta" href="${project.url}" target="_blank" rel="noopener noreferrer">
+              Visit Site <span>&rarr;</span>
+            </a>
+          </div>
+          <div class="project-bar">
+            <span class="project-bar-number">${String(i + 1).padStart(2, "0")} / ${total}</span>
+            <span class="project-bar-divider"></span>
+            <span class="project-bar-name">${project.name}</span>
+            <span class="project-bar-divider"></span>
+            <span class="project-bar-hint">Click to open &rarr;</span>
+          </div>
+        `;
+        section.querySelector(".project-overlay").addEventListener("click", () => {
+          window.open(project.url, "_blank", "noopener,noreferrer");
+        });
+      }
 
       container.appendChild(section);
-
-      // Nav dot
-      const dot = document.createElement("button");
-      dot.className = "nav-dot";
-      dot.setAttribute("aria-label", `Go to ${project.name}`);
-      dot.addEventListener("click", () => {
-        section.scrollIntoView({ behavior: "smooth" });
-      });
-      navDots.appendChild(dot);
     });
 
-    // Lazy-load iframes when sections approach viewport
-    function attachIframe(section) {
-      const idx = parseInt(section.dataset.projectIdx);
-      if (isNaN(idx)) return;
-      const project = projects[idx];
+    // Lazy-load iframes for desktop web projects only
+    if (!isMobile) {
+      function attachIframe(section) {
+        const idx = parseInt(section.dataset.projectIdx);
+        if (isNaN(idx)) return;
+        const project = projects[idx];
 
-      if (project.noIframe) {
-        if (section.querySelector(".project-card")) return;
-        const shortUrl = project.url.replace(/^https?:\/\//, '').replace(/\/$/, '');
-        const card = document.createElement("div");
-        card.className = "project-card";
-        card.innerHTML = `
-          <span class="project-card-number">${String(idx + 1).padStart(2, "0")}</span>
-          <span class="project-card-name">${project.name}</span>
-          <span class="project-card-url">${shortUrl}</span>
-          <button class="project-card-btn" onclick="window.open('${project.url}','_blank','noopener,noreferrer')">View Live Site &rarr;</button>
-        `;
-        section.insertBefore(card, section.firstChild);
-        return;
-      }
-
-      if (section.querySelector("iframe")) return;
-      const iframe = document.createElement("iframe");
-      iframe.src = project.url;
-      iframe.title = project.name;
-      iframe.loading = "lazy";
-      iframe.setAttribute("tabindex", "-1");
-      iframe.setAttribute("aria-hidden", "true");
-      section.insertBefore(iframe, section.firstChild);
-    }
-
-    const lazyObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          attachIframe(entry.target);
-          lazyObserver.unobserve(entry.target);
+        if (project.noIframe) {
+          if (section.querySelector(".project-card")) return;
+          const shortUrl = project.url.replace(/^https?:\/\//, '').replace(/\/$/, '');
+          const card = document.createElement("div");
+          card.className = "project-card";
+          card.innerHTML = `
+            <span class="project-card-number">${String(idx + 1).padStart(2, "0")}</span>
+            <span class="project-card-name">${project.name}</span>
+            <span class="project-card-url">${shortUrl}</span>
+            <button class="project-card-btn" onclick="window.open('${project.url}','_blank','noopener,noreferrer')">View Live Site &rarr;</button>
+          `;
+          section.insertBefore(card, section.firstChild);
+          return;
         }
-      });
-    }, { rootMargin: "300px" });
 
-    document.querySelectorAll(".project").forEach((el) => {
-      el.dataset.observed = "1";
-      lazyObserver.observe(el);
-    });
-
-    // Show top menu + back-to-top after scrolling past hero
-    const heroEl = document.getElementById("hero");
-    const backToTop = document.getElementById("backToTop");
-
-    backToTop.addEventListener("click", () => {
-      heroEl.scrollIntoView({ behavior: "smooth" });
-    });
-
-    function updateTopMenu() {
-      const heroBottom = heroEl.getBoundingClientRect().bottom;
-      const pastHero = heroBottom < 0;
-      topMenu.classList.toggle("visible", pastHero);
-      backToTop.classList.toggle("visible", pastHero);
-    }
-
-    // Update active menu link based on scroll position
-    function updateMenuLinks() {
-      const links = topMenu.querySelectorAll(".top-menu-link");
-      const sections = ["web-work", "video-work", "presentations"];
-      const scrollY = window.scrollY + window.innerHeight / 3;
-
-      let activeSection = null;
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const el = document.getElementById(sections[i]);
-        if (el && el.offsetTop <= scrollY) {
-          activeSection = sections[i];
-          break;
-        }
+        if (section.querySelector("iframe")) return;
+        const iframe = document.createElement("iframe");
+        iframe.src = project.url;
+        iframe.title = project.name;
+        iframe.loading = "lazy";
+        iframe.setAttribute("tabindex", "-1");
+        iframe.setAttribute("aria-hidden", "true");
+        section.insertBefore(iframe, section.firstChild);
       }
 
-      links.forEach((link) => {
-        link.classList.toggle("active", link.dataset.section === activeSection);
+      const lazyObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            attachIframe(entry.target);
+            lazyObserver.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: "600px" });
+
+      document.querySelectorAll(".project[data-project-idx],.project[data-projectidx]").forEach((el) => {
+        lazyObserver.observe(el);
       });
-    }
-
-    // Active section tracking for nav dots
-    function updateActiveDot() {
-      const viewMid = window.innerHeight / 2;
-      const allDots = document.querySelectorAll(".nav-dot");
-
-      const heroRect = heroEl.getBoundingClientRect();
-      if (heroRect.top <= viewMid && heroRect.bottom > viewMid) {
-        allDots.forEach((d, i) => d.classList.toggle("active", i === 0));
-        document.querySelectorAll(".project").forEach((p) => p.classList.remove("active"));
-        return;
-      }
-
-      const visibleProjects = document.querySelectorAll(".project");
-      visibleProjects.forEach((p) => p.classList.remove("active"));
-
-      for (const p of visibleProjects) {
-        const r = p.getBoundingClientRect();
-        if (r.top <= viewMid && r.bottom > viewMid) {
-          p.classList.add("active");
-          const idx = parseInt(p.dataset.projectIdx);
-          allDots.forEach((d, di) => d.classList.toggle("active", di === idx + 1));
-          break;
-        }
-      }
-    }
-
-    window.addEventListener("scroll", () => {
-      updateActiveDot();
-      updateTopMenu();
-      updateMenuLinks();
-    }, { passive: true });
-
-    // Progress bar
-    window.addEventListener("scroll", () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      document.getElementById("progressBar").style.width = progress + "%";
-    }, { passive: true });
-
-    // ── Seamless infinite scroll for web work ──
-    let appendCount = 0;
-    const MAX_SETS = 6;
-
-    function buildProjectSection(project, idx) {
-      const section = document.createElement("section");
-      section.className = "project";
-      section.dataset.projectIdx = idx;
-      section.innerHTML = `
-        <div class="project-overlay"></div>
-        <div class="project-header">
-          <div class="project-info">
-            <span class="project-number">${String(idx + 1).padStart(2, "0")} / ${total}</span>
-            <span class="project-title">${project.name}</span>
-          </div>
-          <a class="project-cta" href="${project.url}" target="_blank" rel="noopener noreferrer">
-            Visit Site <span>&rarr;</span>
-          </a>
-        </div>
-        <div class="project-bar">
-          <span class="project-bar-number">${String(idx + 1).padStart(2, "0")} / ${total}</span>
-          <span class="project-bar-divider"></span>
-          <span class="project-bar-name">${project.name}</span>
-          <span class="project-bar-divider"></span>
-          <span class="project-bar-hint">Click to open &rarr;</span>
-        </div>
-      `;
-      section.querySelector(".project-overlay").addEventListener("click", () => {
-        window.open(project.url, "_blank", "noopener,noreferrer");
+      container.querySelectorAll(".project").forEach((el) => {
+        lazyObserver.observe(el);
       });
-      return section;
     }
 
     // ── Build Video Sections ──
@@ -841,7 +751,6 @@
       const section = document.createElement("section");
       section.className = "project video-section";
       section.id = `video-${i}`;
-      section.dataset.videoIdx = i;
       const embedUrl = `https://www.youtube.com/embed/${video.id}?rel=0&modestbranding=1&color=white`;
       const watchUrl = `https://www.youtube.com/watch?v=${video.id}`;
       section.innerHTML = `
@@ -853,6 +762,10 @@
           allowfullscreen
           style="pointer-events:auto"
         ></iframe>
+        <div class="project-center-label">
+          <div class="project-center-name">${video.name}</div>
+          <div class="project-center-num">${String(i + 1).padStart(2, "0")} / ${videoTotal}</div>
+        </div>
         <div class="project-header">
           <div class="project-info">
             <span class="project-number">${String(i + 1).padStart(2, "0")} / ${videoTotal}</span>
@@ -900,6 +813,10 @@
           scrolling="no"
           style="pointer-events:auto"
         ></iframe>
+        <div class="project-center-label">
+          <div class="project-center-name">${pres.name}</div>
+          <div class="project-center-num">${String(i + 1).padStart(2, "0")} / ${presentationTotal}</div>
+        </div>
         <div class="project-header">
           <div class="project-info">
             <span class="project-number">${String(i + 1).padStart(2, "0")} / ${presentationTotal}</span>
@@ -919,6 +836,53 @@
       `;
       presentationContainer.appendChild(section);
     });
+
+    // ── UI Controls ──
+    const heroEl = document.getElementById("hero");
+    const backToTop = document.getElementById("backToTop");
+
+    backToTop.addEventListener("click", () => {
+      heroEl.scrollIntoView({ behavior: "smooth" });
+    });
+
+    function updateTopMenu() {
+      const heroBottom = heroEl.getBoundingClientRect().bottom;
+      const pastHero = heroBottom < 0;
+      topMenu.classList.toggle("visible", pastHero);
+      backToTop.classList.toggle("visible", pastHero);
+    }
+
+    function updateMenuLinks() {
+      const links = topMenu.querySelectorAll(".top-menu-link");
+      const sections = ["web-work", "video-work", "presentations"];
+      const scrollY = window.scrollY + window.innerHeight / 3;
+
+      let activeSection = null;
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sections[i]);
+        if (el && el.offsetTop <= scrollY) {
+          activeSection = sections[i];
+          break;
+        }
+      }
+
+      links.forEach((link) => {
+        link.classList.toggle("active", link.dataset.section === activeSection);
+      });
+    }
+
+    window.addEventListener("scroll", () => {
+      updateTopMenu();
+      updateMenuLinks();
+    }, { passive: true });
+
+    // Progress bar
+    window.addEventListener("scroll", () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      document.getElementById("progressBar").style.width = progress + "%";
+    }, { passive: true });
 
     // Smooth scroll for menu links
     topMenu.querySelectorAll(".top-menu-link").forEach((link) => {
