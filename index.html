@@ -39,6 +39,9 @@
       --text-secondary: #999999;
       --text-dim: #666666;
       --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --yellow-start: #f5c842;
+      --yellow-mid: #fde68a;
+      --yellow-end: #f5c842;
     }
 
     html { scroll-behavior: smooth; overflow-x: hidden; }
@@ -50,6 +53,51 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
+    }
+
+    /* ── Top Menu Bar ── */
+    .top-menu {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+      height: 48px;
+      background: rgba(17, 17, 17, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex; align-items: center; justify-content: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transform: translateY(-100%);
+      transition: transform 0.4s ease;
+    }
+
+    .top-menu.visible { transform: translateY(0); }
+
+    .top-menu-brand {
+      font-size: 0.65rem; font-weight: 500; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--text-dim);
+      margin-right: 1.5rem;
+    }
+
+    .top-menu-link {
+      font-size: 0.6rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--text-secondary);
+      text-decoration: none; padding: 0.35rem 0.8rem;
+      border: 1px solid rgba(255,255,255,0.08); border-radius: 2px;
+      transition: all 0.3s ease; font-weight: 500;
+      display: inline-flex; align-items: center; gap: 0.35rem;
+    }
+
+    .top-menu-link:hover {
+      color: var(--text-primary); border-color: rgba(255,255,255,0.3);
+    }
+
+    .top-menu-link.active {
+      color: #111; background: var(--yellow-mid);
+      border-color: var(--yellow-mid);
+    }
+
+    .top-menu-divider {
+      width: 1px; height: 18px;
+      background: rgba(255,255,255,0.08); margin: 0 0.3rem;
     }
 
     /* ── Hero ── */
@@ -110,6 +158,61 @@
       0%,100%{opacity:.4;transform:translateY(0)} 50%{opacity:1;transform:translateY(4px)}
     }
 
+    /* ── Section Headers ── */
+    .section-header {
+      width: 100%; padding: 4rem 2rem;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      background: linear-gradient(180deg, #0d0d0d 0%, #181818 50%, #111 100%);
+      position: relative;
+    }
+
+    .section-header-label {
+      font-size: 0.6rem; letter-spacing: 0.4em;
+      text-transform: uppercase; color: var(--text-dim);
+      margin-bottom: 1rem; font-weight: 400;
+    }
+
+    .section-header-title {
+      font-size: clamp(1.4rem, 4vw, 2.5rem); font-weight: 200;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text-primary);
+    }
+
+    .section-header-count {
+      margin-top: 0.8rem; font-size: 0.65rem;
+      letter-spacing: 0.2em; color: var(--text-dim);
+    }
+
+    .section-header-line {
+      margin-top: 1.5rem; width: 40px; height: 2px;
+      background: linear-gradient(90deg, var(--yellow-start), var(--yellow-mid), var(--yellow-end));
+      border-radius: 1px;
+    }
+
+    /* ── Placeholder Section ── */
+    .section-placeholder {
+      width: 100%; padding: 6rem 2rem;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      background: linear-gradient(165deg, #141414 0%, #1a1a1a 40%, #161616 100%);
+      border-top: 1px solid rgba(255,255,255,0.04);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .section-placeholder-title {
+      font-size: clamp(1.2rem, 3vw, 2rem); font-weight: 200;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-secondary); margin-bottom: 0.8rem;
+    }
+
+    .section-placeholder-sub {
+      font-size: 0.7rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--text-dim);
+    }
+
     /* ── Project Sections ── */
     .project {
       position: relative; width: 100%;
@@ -117,7 +220,7 @@
       overflow: hidden; cursor: pointer;
     }
 
-    /* Click-capture overlay — sits on top of iframe, blocks interaction */
+    /* Click-capture overlay */
     .project-overlay {
       position: absolute; inset: 0; z-index: 10;
       background: transparent; transition: background 0.4s ease;
@@ -127,7 +230,7 @@
       background: rgba(0,0,0,0.12);
     }
 
-    /* Iframe — renders the live site, no interaction */
+    /* Iframe */
     .project iframe {
       width: 100%; height: 100%;
       border: none; display: block;
@@ -211,35 +314,37 @@
       color: var(--text-primary); border-color: rgba(255,255,255,0.3);
     }
 
-    /* ── Gradient info bar ── */
+    /* ── Yellow Gradient Info Bar ── */
     .project-bar {
       position: absolute; bottom: 0; left: 0; right: 0; z-index: 20;
       height: 56px;
-      background: linear-gradient(90deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
+      background: linear-gradient(90deg, #c9a227 0%, #f5d653 25%, #fde68a 50%, #f5d653 75%, #c9a227 100%);
       display: flex; align-items: center; justify-content: center;
       gap: 1.5rem;
-      border-top: 1px solid rgba(255,255,255,0.06);
+      border-top: none;
+      box-shadow: 0 -4px 20px rgba(245, 198, 66, 0.15);
     }
 
     .project-bar-number {
-      font-size: 0.6rem; color: var(--text-dim); font-weight: 400;
+      font-size: 0.6rem; color: rgba(0,0,0,0.5); font-weight: 600;
       letter-spacing: 0.15em; font-variant-numeric: tabular-nums;
     }
 
     .project-bar-divider {
       width: 1px; height: 16px;
-      background: rgba(255,255,255,0.1);
+      background: rgba(0,0,0,0.15);
     }
 
     .project-bar-name {
-      font-size: 0.75rem; font-weight: 400;
+      font-size: 0.75rem; font-weight: 700;
       letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--text-secondary);
+      color: #111111;
     }
 
     .project-bar-hint {
       font-size: 0.55rem; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--text-dim);
+      text-transform: uppercase; color: rgba(0,0,0,0.45);
+      font-weight: 500;
     }
 
     /* ── Nav Dots ── */
@@ -262,8 +367,20 @@
     /* ── Progress Bar ── */
     .progress-bar {
       position:fixed;top:0;left:0;height:2px;
-      background:linear-gradient(90deg,var(--text-dim),var(--text-primary));
-      z-index:200;transition:width .1s linear;width:0%;
+      background:linear-gradient(90deg, #c9a227, #fde68a, #c9a227);
+      z-index:400;transition:width .1s linear;width:0%;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      padding: 3rem 2rem; text-align: center;
+      background: #0d0d0d;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .footer-text {
+      font-size: 0.6rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--text-dim);
     }
 
     /* ── Mobile ── */
@@ -275,6 +392,10 @@
       .project-header{padding:.8rem 1rem}
       .project-bar{height:48px;gap:1rem}
       .project-bar-name{font-size:.65rem;letter-spacing:.15em}
+      .top-menu{gap:0.3rem}
+      .top-menu-brand{display:none}
+      .top-menu-link{font-size:0.55rem;padding:0.3rem 0.6rem;letter-spacing:0.12em}
+      .section-header{padding:3rem 1.5rem}
     }
 
     @media(prefers-reduced-motion:reduce){
@@ -286,6 +407,17 @@
 <body>
 
   <div class="progress-bar" id="progressBar"></div>
+
+  <!-- Top Menu Bar -->
+  <nav class="top-menu" id="topMenu">
+    <span class="top-menu-brand">MC Portfolio</span>
+    <a href="#web-work" class="top-menu-link" data-section="web-work">Web Work</a>
+    <span class="top-menu-divider"></span>
+    <a href="#video-work" class="top-menu-link" data-section="video-work">Video</a>
+    <span class="top-menu-divider"></span>
+    <a href="#presentations" class="top-menu-link" data-section="presentations">Presentations</a>
+  </nav>
+
   <nav class="nav-dots" id="navDots" aria-label="Section navigation"></nav>
 
   <!-- Hero -->
@@ -304,7 +436,46 @@
     <p class="scroll-hint">Scroll to explore</p>
   </section>
 
+  <!-- Web Work Section Header -->
+  <section class="section-header" id="web-work">
+    <span class="section-header-label">Section 01</span>
+    <h2 class="section-header-title">Web Work</h2>
+    <span class="section-header-count" id="webWorkCount"></span>
+    <div class="section-header-line"></div>
+  </section>
+
   <div id="projects"></div>
+
+  <!-- Video Work Section -->
+  <section class="section-header" id="video-work">
+    <span class="section-header-label">Section 02</span>
+    <h2 class="section-header-title">Video</h2>
+    <span class="section-header-count">Coming Soon</span>
+    <div class="section-header-line"></div>
+  </section>
+
+  <div class="section-placeholder" id="video-content">
+    <p class="section-placeholder-title">Video Work</p>
+    <p class="section-placeholder-sub">Content coming soon</p>
+  </div>
+
+  <!-- Presentations Section -->
+  <section class="section-header" id="presentations">
+    <span class="section-header-label">Section 03</span>
+    <h2 class="section-header-title">Presentations</h2>
+    <span class="section-header-count">Coming Soon</span>
+    <div class="section-header-line"></div>
+  </section>
+
+  <div class="section-placeholder" id="presentations-content">
+    <p class="section-placeholder-title">Presentation Work</p>
+    <p class="section-placeholder-sub">Content coming soon</p>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p class="footer-text">Matthew Chrestenson &mdash; MYR Group &mdash; 2026</p>
+  </footer>
 
   <script>
     const projects = [
@@ -327,6 +498,10 @@
     const total = String(projects.length).padStart(2, "0");
     const container = document.getElementById("projects");
     const navDots = document.getElementById("navDots");
+    const topMenu = document.getElementById("topMenu");
+
+    // Set web work count
+    document.getElementById("webWorkCount").textContent = projects.length + " Projects";
 
     // Hero dot
     const heroDot = document.createElement("button");
@@ -342,6 +517,7 @@
       const section = document.createElement("section");
       section.className = "project";
       section.id = `project-${i}`;
+      section.dataset.projectIdx = i;
       section.innerHTML = `
         <div class="project-overlay"></div>
         <div class="project-header">
@@ -362,7 +538,6 @@
         </div>
       `;
 
-      // Click overlay opens site in new tab
       section.querySelector(".project-overlay").addEventListener("click", () => {
         window.open(project.url, "_blank", "noopener,noreferrer");
       });
@@ -385,7 +560,6 @@
       if (isNaN(idx)) return;
       const project = projects[idx];
 
-      // Sites that block iframes get a styled card instead
       if (project.noIframe) {
         if (section.querySelector(".project-card")) return;
         const shortUrl = project.url.replace(/^https?:\/\//, '').replace(/\/$/, '');
@@ -420,16 +594,44 @@
       });
     }, { rootMargin: "300px" });
 
-    document.querySelectorAll(".project").forEach((el) => lazyObserver.observe(el));
+    document.querySelectorAll(".project").forEach((el) => {
+      el.dataset.observed = "1";
+      lazyObserver.observe(el);
+    });
 
-    // Active section tracking for nav dots
+    // Show top menu after scrolling past hero
     const heroEl = document.getElementById("hero");
 
+    function updateTopMenu() {
+      const heroBottom = heroEl.getBoundingClientRect().bottom;
+      topMenu.classList.toggle("visible", heroBottom < 0);
+    }
+
+    // Update active menu link based on scroll position
+    function updateMenuLinks() {
+      const links = topMenu.querySelectorAll(".top-menu-link");
+      const sections = ["web-work", "video-work", "presentations"];
+      const scrollY = window.scrollY + window.innerHeight / 3;
+
+      let activeSection = null;
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sections[i]);
+        if (el && el.offsetTop <= scrollY) {
+          activeSection = sections[i];
+          break;
+        }
+      }
+
+      links.forEach((link) => {
+        link.classList.toggle("active", link.dataset.section === activeSection);
+      });
+    }
+
+    // Active section tracking for nav dots
     function updateActiveDot() {
       const viewMid = window.innerHeight / 2;
       const allDots = document.querySelectorAll(".nav-dot");
 
-      // Check hero first
       const heroRect = heroEl.getBoundingClientRect();
       if (heroRect.top <= viewMid && heroRect.bottom > viewMid) {
         allDots.forEach((d, i) => d.classList.toggle("active", i === 0));
@@ -437,7 +639,6 @@
         return;
       }
 
-      // Find which project is in view — use the original index for dot mapping
       const visibleProjects = document.querySelectorAll(".project");
       visibleProjects.forEach((p) => p.classList.remove("active"));
 
@@ -446,31 +647,29 @@
         if (r.top <= viewMid && r.bottom > viewMid) {
           p.classList.add("active");
           const idx = parseInt(p.dataset.projectIdx);
-          // dot 0 = hero, dots 1..N = projects
           allDots.forEach((d, di) => d.classList.toggle("active", di === idx + 1));
           break;
         }
       }
     }
 
-    window.addEventListener("scroll", updateActiveDot, { passive: true });
+    window.addEventListener("scroll", () => {
+      updateActiveDot();
+      updateTopMenu();
+      updateMenuLinks();
+    }, { passive: true });
 
-    // Progress bar — cycles per loop through projects
+    // Progress bar
     window.addEventListener("scroll", () => {
       const scrollTop = window.scrollY;
-      const oneLoop = projects.length * window.innerHeight;
-      const heroH = heroEl.offsetHeight;
-      const inProjects = Math.max(0, scrollTop - heroH);
-      const progress = oneLoop > 0 ? ((inProjects % oneLoop) / oneLoop) * 100 : 0;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
       document.getElementById("progressBar").style.width = progress + "%";
     }, { passive: true });
 
-    // ── Seamless infinite scroll ──
-    // When user nears bottom, clone and append another full set of project sections.
-    // Clean up old sections that are far above to keep DOM reasonable.
-
+    // ── Seamless infinite scroll for web work ──
     let appendCount = 0;
-    const MAX_SETS = 6; // max cloned sets in DOM at once
+    const MAX_SETS = 6;
 
     function buildProjectSection(project, idx) {
       const section = document.createElement("section");
@@ -501,70 +700,14 @@
       return section;
     }
 
-    // Tag original sections with data-project-idx
-    document.querySelectorAll(".project").forEach((el, i) => {
-      el.dataset.projectIdx = i;
+    // Smooth scroll for menu links
+    topMenu.querySelectorAll(".top-menu-link").forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const target = document.getElementById(link.dataset.section);
+        if (target) target.scrollIntoView({ behavior: "smooth" });
+      });
     });
-
-    function appendNextSet() {
-      appendCount++;
-      const frag = document.createDocumentFragment();
-      projects.forEach((project, i) => {
-        const section = buildProjectSection(project, i);
-        frag.appendChild(section);
-      });
-      container.appendChild(frag);
-
-      // Observe new sections for lazy iframe loading
-      const newSections = container.querySelectorAll(".project:not([data-observed])");
-      newSections.forEach((el) => {
-        el.dataset.observed = "1";
-        lazyObserver.observe(el);
-      });
-    }
-
-    // Mark originals as observed
-    document.querySelectorAll(".project").forEach((el) => { el.dataset.observed = "1"; });
-
-    // Prune old sections that are far above the viewport to keep DOM lean
-    function pruneAbove() {
-      const allProjects = container.querySelectorAll(".project");
-      const totalSections = allProjects.length;
-      if (totalSections <= projects.length * 2) return; // keep at least 2 sets
-
-      const cutoff = window.scrollY - window.innerHeight * 3;
-      let removed = 0;
-      for (const el of allProjects) {
-        if (el.offsetTop + el.offsetHeight < cutoff) {
-          const h = el.offsetHeight;
-          el.remove();
-          // Adjust scroll position so user doesn't jump
-          window.scrollBy(0, -h);
-          removed++;
-        } else {
-          break; // sections are in order, stop once we hit visible area
-        }
-        if (removed >= projects.length) break; // prune one set at a time
-      }
-    }
-
-    // Check on scroll if we need to append more
-    window.addEventListener("scroll", () => {
-      const scrollBottom = window.scrollY + window.innerHeight;
-      const docHeight = document.documentElement.scrollHeight;
-
-      // When within 2 viewports of the bottom, append another set
-      if (scrollBottom >= docHeight - window.innerHeight * 2) {
-        if (appendCount < MAX_SETS) {
-          appendNextSet();
-        } else {
-          // Hit max sets — prune top and reset counter
-          pruneAbove();
-          appendCount = Math.max(0, appendCount - 1);
-          appendNextSet();
-        }
-      }
-    }, { passive: true });
 
     // Keyboard navigation
     document.addEventListener("keydown", (e) => {
