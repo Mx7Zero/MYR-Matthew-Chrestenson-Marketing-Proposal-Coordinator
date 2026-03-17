@@ -329,82 +329,180 @@
       navDots.appendChild(dot);
     });
 
-    // Lazy-load iframes only when section approaches viewport
+    // Lazy-load iframes when sections approach viewport
+    function attachIframe(section) {
+      if (section.querySelector("iframe")) return;
+      const idx = parseInt(section.dataset.projectIdx);
+      if (isNaN(idx)) return;
+      const iframe = document.createElement("iframe");
+      iframe.src = projects[idx].url;
+      iframe.title = projects[idx].name;
+      iframe.loading = "lazy";
+      iframe.setAttribute("tabindex", "-1");
+      iframe.setAttribute("aria-hidden", "true");
+      section.insertBefore(iframe, section.firstChild);
+    }
+
     const lazyObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          const section = entry.target;
-          const idx = parseInt(section.id.split("-")[1]);
-          if (!section.querySelector("iframe")) {
-            const iframe = document.createElement("iframe");
-            iframe.src = projects[idx].url;
-            iframe.title = projects[idx].name;
-            iframe.loading = "lazy";
-            iframe.setAttribute("tabindex", "-1");
-            iframe.setAttribute("aria-hidden", "true");
-            // Insert before overlay so overlay stays on top
-            section.insertBefore(iframe, section.firstChild);
-          }
-          lazyObserver.unobserve(section);
+          attachIframe(entry.target);
+          lazyObserver.unobserve(entry.target);
         }
       });
-    }, { rootMargin: "200px" });
+    }, { rootMargin: "300px" });
 
     document.querySelectorAll(".project").forEach((el) => lazyObserver.observe(el));
 
-    // Active section tracking
-    const allSections = [document.getElementById("hero"), ...document.querySelectorAll(".project")];
-    const allDots = document.querySelectorAll(".nav-dot");
+    // Active section tracking for nav dots
+    const heroEl = document.getElementById("hero");
 
-    const sectionObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const idx = allSections.indexOf(entry.target);
-          allDots.forEach((d, di) => d.classList.toggle("active", di === idx));
-          document.querySelectorAll(".project").forEach((p) => p.classList.remove("active"));
-          if (entry.target.classList.contains("project")) {
-            entry.target.classList.add("active");
-          }
+    function updateActiveDot() {
+      const viewMid = window.innerHeight / 2;
+      const allDots = document.querySelectorAll(".nav-dot");
+
+      // Check hero first
+      const heroRect = heroEl.getBoundingClientRect();
+      if (heroRect.top <= viewMid && heroRect.bottom > viewMid) {
+        allDots.forEach((d, i) => d.classList.toggle("active", i === 0));
+        document.querySelectorAll(".project").forEach((p) => p.classList.remove("active"));
+        return;
+      }
+
+      // Find which project is in view — use the original index for dot mapping
+      const visibleProjects = document.querySelectorAll(".project");
+      visibleProjects.forEach((p) => p.classList.remove("active"));
+
+      for (const p of visibleProjects) {
+        const r = p.getBoundingClientRect();
+        if (r.top <= viewMid && r.bottom > viewMid) {
+          p.classList.add("active");
+          const idx = parseInt(p.dataset.projectIdx);
+          // dot 0 = hero, dots 1..N = projects
+          allDots.forEach((d, di) => d.classList.toggle("active", di === idx + 1));
+          break;
         }
-      });
-    }, { threshold: 0.5 });
+      }
+    }
 
-    allSections.forEach((s) => sectionObserver.observe(s));
+    window.addEventListener("scroll", updateActiveDot, { passive: true });
 
-    // Progress bar
+    // Progress bar — cycles per loop through projects
     window.addEventListener("scroll", () => {
       const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      document.getElementById("progressBar").style.width =
-        (docHeight > 0 ? (scrollTop / docHeight) * 100 : 0) + "%";
+      const oneLoop = projects.length * window.innerHeight;
+      const heroH = heroEl.offsetHeight;
+      const inProjects = Math.max(0, scrollTop - heroH);
+      const progress = oneLoop > 0 ? ((inProjects % oneLoop) / oneLoop) * 100 : 0;
+      document.getElementById("progressBar").style.width = progress + "%";
     }, { passive: true });
 
-    // Infinite scroll loop
-    let loopCooldown = false;
+    // ── Seamless infinite scroll ──
+    // When user nears bottom, clone and append another full set of project sections.
+    // Clean up old sections that are far above to keep DOM reasonable.
+
+    let appendCount = 0;
+    const MAX_SETS = 6; // max cloned sets in DOM at once
+
+    function buildProjectSection(project, idx) {
+      const section = document.createElement("section");
+      section.className = "project";
+      section.dataset.projectIdx = idx;
+      section.innerHTML = `
+        <div class="project-overlay"></div>
+        <div class="project-header">
+          <div class="project-info">
+            <span class="project-number">${String(idx + 1).padStart(2, "0")} / ${total}</span>
+            <span class="project-title">${project.name}</span>
+          </div>
+          <a class="project-cta" href="${project.url}" target="_blank" rel="noopener noreferrer">
+            Visit Site <span>&rarr;</span>
+          </a>
+        </div>
+        <div class="project-footer">
+          <span class="project-footer-name">${project.name}</span>
+          <span class="project-footer-hint">Click to open &rarr;</span>
+        </div>
+      `;
+      section.querySelector(".project-overlay").addEventListener("click", () => {
+        window.open(project.url, "_blank", "noopener,noreferrer");
+      });
+      return section;
+    }
+
+    // Tag original sections with data-project-idx
+    document.querySelectorAll(".project").forEach((el, i) => {
+      el.dataset.projectIdx = i;
+    });
+
+    function appendNextSet() {
+      appendCount++;
+      const frag = document.createDocumentFragment();
+      projects.forEach((project, i) => {
+        const section = buildProjectSection(project, i);
+        frag.appendChild(section);
+      });
+      container.appendChild(frag);
+
+      // Observe new sections for lazy iframe loading
+      const newSections = container.querySelectorAll(".project:not([data-observed])");
+      newSections.forEach((el) => {
+        el.dataset.observed = "1";
+        lazyObserver.observe(el);
+      });
+    }
+
+    // Mark originals as observed
+    document.querySelectorAll(".project").forEach((el) => { el.dataset.observed = "1"; });
+
+    // Prune old sections that are far above the viewport to keep DOM lean
+    function pruneAbove() {
+      const allProjects = container.querySelectorAll(".project");
+      const totalSections = allProjects.length;
+      if (totalSections <= projects.length * 2) return; // keep at least 2 sets
+
+      const cutoff = window.scrollY - window.innerHeight * 3;
+      let removed = 0;
+      for (const el of allProjects) {
+        if (el.offsetTop + el.offsetHeight < cutoff) {
+          const h = el.offsetHeight;
+          el.remove();
+          // Adjust scroll position so user doesn't jump
+          window.scrollBy(0, -h);
+          removed++;
+        } else {
+          break; // sections are in order, stop once we hit visible area
+        }
+        if (removed >= projects.length) break; // prune one set at a time
+      }
+    }
+
+    // Check on scroll if we need to append more
     window.addEventListener("scroll", () => {
-      if (loopCooldown) return;
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      if (scrollTop >= docHeight - 2) {
-        loopCooldown = true;
-        setTimeout(() => {
-          window.scrollTo({ top: 0, behavior: "smooth" });
-          setTimeout(() => { loopCooldown = false; }, 1500);
-        }, 600);
+      const scrollBottom = window.scrollY + window.innerHeight;
+      const docHeight = document.documentElement.scrollHeight;
+
+      // When within 2 viewports of the bottom, append another set
+      if (scrollBottom >= docHeight - window.innerHeight * 2) {
+        if (appendCount < MAX_SETS) {
+          appendNextSet();
+        } else {
+          // Hit max sets — prune top and reset counter
+          pruneAbove();
+          appendCount = Math.max(0, appendCount - 1);
+          appendNextSet();
+        }
       }
     }, { passive: true });
 
     // Keyboard navigation
     document.addEventListener("keydown", (e) => {
-      const currentIdx = [...allDots].findIndex((d) => d.classList.contains("active"));
       if (e.key === "ArrowDown" || e.key === "j") {
         e.preventDefault();
-        const next = Math.min(currentIdx + 1, allSections.length - 1);
-        allSections[next].scrollIntoView({ behavior: "smooth" });
+        window.scrollBy({ top: window.innerHeight, behavior: "smooth" });
       } else if (e.key === "ArrowUp" || e.key === "k") {
         e.preventDefault();
-        const prev = Math.max(currentIdx - 1, 0);
-        allSections[prev].scrollIntoView({ behavior: "smooth" });
+        window.scrollBy({ top: -window.innerHeight, behavior: "smooth" });
       }
     });
   </script>
