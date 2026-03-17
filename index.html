@@ -211,25 +211,34 @@
       color: var(--text-primary); border-color: rgba(255,255,255,0.3);
     }
 
-    /* Footer bar */
-    .project-footer {
+    /* ── Gradient info bar ── */
+    .project-bar {
       position: absolute; bottom: 0; left: 0; right: 0; z-index: 20;
-      padding: 1.5rem;
-      background: linear-gradient(0deg, rgba(17,17,17,0.92) 0%, rgba(17,17,17,0.5) 70%, transparent 100%);
-      display: flex; align-items: flex-end; justify-content: space-between;
-      opacity: 0; transition: opacity 0.4s ease;
+      height: 56px;
+      background: linear-gradient(90deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
+      display: flex; align-items: center; justify-content: center;
+      gap: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
     }
 
-    .project:hover .project-footer,
-    .project.active .project-footer { opacity: 1; }
-
-    .project-footer-name {
-      font-size: 1.1rem; font-weight: 300;
-      letter-spacing: 0.04em; color: var(--text-primary);
+    .project-bar-number {
+      font-size: 0.6rem; color: var(--text-dim); font-weight: 400;
+      letter-spacing: 0.15em; font-variant-numeric: tabular-nums;
     }
 
-    .project-footer-hint {
-      font-size: 0.6rem; letter-spacing: 0.2em;
+    .project-bar-divider {
+      width: 1px; height: 16px;
+      background: rgba(255,255,255,0.1);
+    }
+
+    .project-bar-name {
+      font-size: 0.75rem; font-weight: 400;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+
+    .project-bar-hint {
+      font-size: 0.55rem; letter-spacing: 0.2em;
       text-transform: uppercase; color: var(--text-dim);
     }
 
@@ -264,8 +273,8 @@
       .nav-dots{right:.6rem;gap:.5rem}
       .nav-dot{width:5px;height:5px}
       .project-header{padding:.8rem 1rem}
-      .project-footer{opacity:1}
-      .project-footer-name{font-size:.9rem}
+      .project-bar{height:48px;gap:1rem}
+      .project-bar-name{font-size:.65rem;letter-spacing:.15em}
     }
 
     @media(prefers-reduced-motion:reduce){
@@ -344,9 +353,12 @@
             Visit Site <span>&rarr;</span>
           </a>
         </div>
-        <div class="project-footer">
-          <span class="project-footer-name">${project.name}</span>
-          <span class="project-footer-hint">Click to open &rarr;</span>
+        <div class="project-bar">
+          <span class="project-bar-number">${String(i + 1).padStart(2, "0")} / ${total}</span>
+          <span class="project-bar-divider"></span>
+          <span class="project-bar-name">${project.name}</span>
+          <span class="project-bar-divider"></span>
+          <span class="project-bar-hint">Click to open &rarr;</span>
         </div>
       `;
 
@@ -475,9 +487,12 @@
             Visit Site <span>&rarr;</span>
           </a>
         </div>
-        <div class="project-footer">
-          <span class="project-footer-name">${project.name}</span>
-          <span class="project-footer-hint">Click to open &rarr;</span>
+        <div class="project-bar">
+          <span class="project-bar-number">${String(idx + 1).padStart(2, "0")} / ${total}</span>
+          <span class="project-bar-divider"></span>
+          <span class="project-bar-name">${project.name}</span>
+          <span class="project-bar-divider"></span>
+          <span class="project-bar-hint">Click to open &rarr;</span>
         </div>
       `;
       section.querySelector(".project-overlay").addEventListener("click", () => {
