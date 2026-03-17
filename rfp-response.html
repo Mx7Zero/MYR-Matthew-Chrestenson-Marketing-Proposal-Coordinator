@@ -9,36 +9,45 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; font-size: 16px; }
   body {
-    background: #111;
-    color: #f0f0f0;
-    font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    line-height: 1.7;
+    background: #ffffff;
+    color: #1a1a1a;
+    font-family: -apple-system, 'Segoe UI', system-ui, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.75;
     overflow-x: hidden;
   }
-  ::selection { background: #fde68a; color: #111; }
+  ::selection { background: #fef3c7; color: #1a1a1a; }
   img { max-width: 100%; display: block; }
 
   /* ===== TYPOGRAPHY ===== */
-  h1, h2, h3, h4, h5 { font-weight: 700; line-height: 1.2; }
-  h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); letter-spacing: -0.03em; }
-  h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); letter-spacing: -0.02em; margin-bottom: 1.5rem; }
-  h3 { font-size: 1.25rem; margin-bottom: 0.75rem; }
-  p { margin-bottom: 1rem; color: #ccc; }
-  strong { color: #f0f0f0; }
+  h1, h2, h3, h4, h5 {
+    font-family: Georgia, 'Times New Roman', 'Iowan Old Style', 'Palatino Linotype', serif;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #111;
+  }
+  h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); letter-spacing: -0.02em; }
+  h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); letter-spacing: -0.01em; margin-bottom: 1.5rem; }
+  h3 { font-size: 1.2rem; margin-bottom: 0.75rem; }
+  p { margin-bottom: 1rem; color: #444; }
+  strong { color: #1a1a1a; }
 
-  .accent { color: #fde68a; }
-  .accent-bg { background: #fde68a; color: #111; }
+  .accent { color: #b8960f; }
+  .accent-bg { background: #f5c842; color: #1a1a1a; }
 
   /* ===== LAYOUT ===== */
-  .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+  .container { max-width: 1060px; margin: 0 auto; padding: 0 2.5rem; }
   .section {
-    padding: 6rem 0;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 5rem 0;
+    border-bottom: 1px solid #e8e8e8;
     opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
   }
   .section.visible { opacity: 1; transform: translateY(0); }
+
+  /* Alternating section backgrounds */
+  .section:nth-of-type(even) { background: #f8f8f8; }
+  .section:nth-of-type(odd) { background: #ffffff; }
 
   /* ===== NAV ===== */
   .nav {
@@ -47,10 +56,10 @@
     left: 0;
     width: 100%;
     z-index: 1000;
-    background: rgba(17,17,17,0.85);
+    background: rgba(255,255,255,0.95);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid #e5e5e5;
     transition: transform 0.35s ease;
   }
   .nav.hidden { transform: translateY(-100%); }
@@ -64,16 +73,17 @@
     height: 60px;
   }
   .nav-logo {
-    font-weight: 800;
-    font-size: 0.95rem;
-    letter-spacing: 0.04em;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: #fde68a;
+    color: #b8960f;
     white-space: nowrap;
   }
   .nav-links {
     display: flex;
-    gap: 0.25rem;
+    gap: 0.15rem;
     list-style: none;
     overflow-x: auto;
     -ms-overflow-style: none;
@@ -81,19 +91,41 @@
   }
   .nav-links::-webkit-scrollbar { display: none; }
   .nav-links a {
-    color: #999;
+    color: #777;
     text-decoration: none;
-    font-size: 0.78rem;
-    font-weight: 500;
-    letter-spacing: 0.03em;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    padding: 0.4rem 0.65rem;
+    padding: 0.4rem 0.6rem;
     border-radius: 4px;
     transition: color 0.2s, background 0.2s;
     white-space: nowrap;
   }
   .nav-links a:hover,
-  .nav-links a.active { color: #fde68a; background: rgba(253,230,138,0.08); }
+  .nav-links a.active { color: #b8960f; background: rgba(245,200,66,0.1); }
+
+  /* ===== DOWNLOAD PDF BUTTON ===== */
+  .pdf-btn {
+    position: fixed;
+    top: 80px;
+    right: 24px;
+    z-index: 999;
+    background: #1a1a1a;
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-family: -apple-system, 'Segoe UI', system-ui, sans-serif;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  }
+  .pdf-btn:hover { background: #333; }
 
   /* ===== HERO ===== */
   .hero {
@@ -103,85 +135,88 @@
     justify-content: center;
     position: relative;
     overflow: hidden;
-    padding: 8rem 2rem 6rem;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 8rem 2.5rem 6rem;
+    border-bottom: 3px solid #f5c842;
+    background: #ffffff;
   }
   .hero::before {
     content: '';
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(253,230,138,0.06) 0%, transparent 70%),
-      radial-gradient(ellipse 60% 50% at 20% 80%, rgba(253,230,138,0.03) 0%, transparent 60%);
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(245,200,66,0.04) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 50% at 20% 80%, rgba(245,200,66,0.02) 0%, transparent 60%);
     pointer-events: none;
   }
   .hero-grid {
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px);
     background-size: 60px 60px;
     pointer-events: none;
   }
-  .hero-content { position: relative; max-width: 900px; }
+  .hero-content { position: relative; max-width: 860px; }
   .hero-badge {
     display: inline-block;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #fde68a;
-    border: 1px solid rgba(253,230,138,0.3);
+    color: #b8960f;
+    border: 1.5px solid rgba(184,150,15,0.4);
     padding: 0.45rem 1.1rem;
     border-radius: 100px;
     margin-bottom: 2rem;
   }
-  .hero h1 { margin-bottom: 1.5rem; }
+  .hero h1 { margin-bottom: 1.5rem; color: #111; }
   .hero h1 .line { display: block; }
-  .hero h1 .line.dim { color: #888; }
+  .hero h1 .line.dim { color: #999; }
   .hero-meta {
     display: flex;
     flex-wrap: wrap;
     gap: 2.5rem;
     margin-top: 2.5rem;
     padding-top: 2.5rem;
-    border-top: 1px solid rgba(255,255,255,0.08);
+    border-top: 1px solid #e0e0e0;
   }
   .hero-meta-item { }
   .hero-meta-label {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #666;
+    letter-spacing: 0.12em;
+    color: #999;
     margin-bottom: 0.3rem;
+    font-weight: 600;
   }
-  .hero-meta-value { font-size: 1rem; font-weight: 600; color: #f0f0f0; }
+  .hero-meta-value { font-size: 1rem; font-weight: 700; color: #1a1a1a; }
 
   /* ===== STAT STRIP ===== */
   .stat-strip {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 8px;
+    background: #e5e5e5;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
     overflow: hidden;
     margin: 3rem 0;
   }
   .stat-item {
-    background: #161616;
+    background: #fafafa;
     padding: 2rem 1.5rem;
     text-align: center;
   }
   .stat-number {
+    font-family: Georgia, 'Times New Roman', serif;
     font-size: 2.2rem;
-    font-weight: 800;
-    color: #fde68a;
+    font-weight: 700;
+    color: #b8960f;
     line-height: 1;
     margin-bottom: 0.5rem;
   }
-  .stat-label { font-size: 0.8rem; color: #888; text-transform: uppercase; letter-spacing: 0.06em; }
+  .stat-label { font-size: 0.75rem; color: #888; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
 
   /* ===== TWO-COL ===== */
   .two-col {
@@ -194,69 +229,71 @@
 
   /* ===== CARDS ===== */
   .card {
-    background: #161616;
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 8px;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
     padding: 2rem;
-    transition: border-color 0.3s, transform 0.3s;
+    transition: border-color 0.3s, box-shadow 0.3s;
   }
-  .card:hover { border-color: rgba(253,230,138,0.2); transform: translateY(-2px); }
+  .card:hover { border-color: #f5c842; box-shadow: 0 4px 16px rgba(0,0,0,0.05); }
   .card-tag {
     display: inline-block;
-    font-size: 0.68rem;
-    font-weight: 600;
+    font-size: 0.65rem;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: #fde68a;
-    background: rgba(253,230,138,0.1);
+    color: #b8960f;
+    background: rgba(245,200,66,0.12);
     padding: 0.25rem 0.7rem;
-    border-radius: 4px;
+    border-radius: 3px;
     margin-bottom: 1rem;
   }
   .card-value {
+    font-family: Georgia, 'Times New Roman', serif;
     font-size: 1.5rem;
-    font-weight: 800;
-    color: #f0f0f0;
+    font-weight: 700;
+    color: #1a1a1a;
     margin-bottom: 0.25rem;
   }
 
   /* ===== PERSONNEL ===== */
   .person-card {
-    background: #161616;
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 8px;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
     padding: 2rem;
     display: flex;
     gap: 1.5rem;
     align-items: flex-start;
     transition: border-color 0.3s;
   }
-  .person-card:hover { border-color: rgba(253,230,138,0.2); }
+  .person-card:hover { border-color: #f5c842; }
   .person-avatar {
-    width: 64px;
-    height: 64px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #fde68a 0%, #f59e0b 100%);
+    background: linear-gradient(135deg, #f5c842 0%, #b8960f 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.4rem;
+    font-size: 1.1rem;
     font-weight: 800;
-    color: #111;
+    color: #fff;
     flex-shrink: 0;
+    font-family: -apple-system, system-ui, sans-serif;
   }
   .person-info { flex: 1; }
-  .person-name { font-size: 1.1rem; font-weight: 700; color: #f0f0f0; margin-bottom: 0.15rem; }
-  .person-title { font-size: 0.85rem; color: #fde68a; margin-bottom: 0.5rem; }
-  .person-details { font-size: 0.85rem; color: #999; }
+  .person-name { font-size: 1.05rem; font-weight: 700; color: #1a1a1a; margin-bottom: 0.15rem; }
+  .person-title { font-size: 0.85rem; color: #b8960f; margin-bottom: 0.5rem; font-weight: 600; }
+  .person-details { font-size: 0.85rem; color: #666; }
   .person-certs { margin-top: 0.5rem; display: flex; gap: 0.4rem; flex-wrap: wrap; }
   .cert-badge {
-    font-size: 0.65rem;
+    font-size: 0.62rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    background: rgba(253,230,138,0.1);
-    color: #fde68a;
+    background: rgba(245,200,66,0.12);
+    color: #b8960f;
     padding: 0.2rem 0.5rem;
     border-radius: 3px;
   }
@@ -270,7 +307,7 @@
     top: 0;
     bottom: 0;
     width: 2px;
-    background: rgba(253,230,138,0.2);
+    background: #e5d9a0;
   }
   .timeline-phase {
     position: relative;
@@ -285,8 +322,9 @@
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    background: #fde68a;
-    border: 3px solid #111;
+    background: #f5c842;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 1px #e5d9a0;
   }
   .timeline-header {
     display: flex;
@@ -295,8 +333,8 @@
     margin-bottom: 0.75rem;
     flex-wrap: wrap;
   }
-  .timeline-title { font-size: 1.15rem; font-weight: 700; color: #f0f0f0; }
-  .timeline-dates { font-size: 0.8rem; color: #fde68a; font-weight: 600; }
+  .timeline-title { font-size: 1.1rem; font-weight: 700; color: #1a1a1a; }
+  .timeline-dates { font-size: 0.8rem; color: #b8960f; font-weight: 700; }
 
   /* ===== GANTT ===== */
   .gantt { margin: 2rem 0; overflow-x: auto; }
@@ -309,11 +347,12 @@
   }
   .gantt-header span {
     font-size: 0.65rem;
-    color: #666;
+    color: #999;
     text-align: center;
     padding: 0.3rem 0;
     text-transform: uppercase;
     letter-spacing: 0.04em;
+    font-weight: 600;
   }
   .gantt-header span:first-child { text-align: left; }
   .gantt-row {
@@ -323,7 +362,7 @@
     margin-bottom: 4px;
     min-height: 32px;
   }
-  .gantt-label { font-size: 0.78rem; color: #ccc; font-weight: 500; padding-right: 1rem; }
+  .gantt-label { font-size: 0.78rem; color: #555; font-weight: 500; padding-right: 1rem; }
   .gantt-bar {
     height: 24px;
     border-radius: 4px;
@@ -332,12 +371,12 @@
   .gantt-bar-fill {
     height: 100%;
     border-radius: 4px;
-    background: linear-gradient(90deg, #fde68a, #f59e0b);
-    opacity: 0.85;
+    background: linear-gradient(90deg, #f5c842, #b8960f);
+    opacity: 0.8;
   }
   .gantt-bar-alt .gantt-bar-fill {
-    background: linear-gradient(90deg, #fbbf24, #d97706);
-    opacity: 0.6;
+    background: linear-gradient(90deg, #f5c842, #d4a917);
+    opacity: 0.45;
   }
 
   /* ===== TABLE ===== */
@@ -349,25 +388,26 @@
   .price-table th, .price-table td {
     padding: 1rem 1.25rem;
     text-align: left;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid #eee;
   }
   .price-table th {
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: #888;
-    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: #999;
+    font-weight: 700;
+    border-bottom: 2px solid #e5e5e5;
   }
-  .price-table td { font-size: 0.95rem; color: #ccc; }
-  .price-table td:last-child { text-align: right; font-weight: 700; color: #f0f0f0; font-variant-numeric: tabular-nums; }
+  .price-table td { font-size: 0.95rem; color: #444; }
+  .price-table td:last-child { text-align: right; font-weight: 700; color: #1a1a1a; font-variant-numeric: tabular-nums; }
   .price-table th:last-child { text-align: right; }
-  .price-table tr:hover td { background: rgba(253,230,138,0.03); }
+  .price-table tr:hover td { background: rgba(245,200,66,0.05); }
   .price-table .total-row td {
-    border-top: 2px solid #fde68a;
+    border-top: 2px solid #f5c842;
     border-bottom: none;
     font-size: 1.1rem;
     font-weight: 800;
-    color: #fde68a;
+    color: #b8960f;
     padding-top: 1.25rem;
   }
 
@@ -388,32 +428,35 @@
     text-align: left;
   }
   .diff-item {
-    background: #161616;
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 8px;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
     padding: 2rem;
+    transition: box-shadow 0.3s;
   }
+  .diff-item:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
   .diff-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
-    background: rgba(253,230,138,0.1);
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    background: rgba(245,200,66,0.12);
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 1rem;
-    font-size: 1.2rem;
-    color: #fde68a;
+    font-size: 1rem;
+    color: #b8960f;
     font-weight: 800;
+    font-family: Georgia, 'Times New Roman', serif;
   }
 
   /* ===== SECTION LABEL ===== */
   .section-label {
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     font-weight: 700;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #fde68a;
+    color: #b8960f;
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
@@ -423,7 +466,7 @@
     content: '';
     flex: 1;
     height: 1px;
-    background: rgba(253,230,138,0.15);
+    background: #e5d9a0;
   }
 
   /* ===== LISTS ===== */
@@ -431,7 +474,7 @@
   .check-list li {
     padding: 0.5rem 0 0.5rem 1.75rem;
     position: relative;
-    color: #ccc;
+    color: #444;
     font-size: 0.95rem;
   }
   .check-list li::before {
@@ -442,7 +485,7 @@
     width: 8px;
     height: 8px;
     border-radius: 2px;
-    background: #fde68a;
+    background: #f5c842;
   }
 
   /* ===== FOOTER ===== */
@@ -450,10 +493,11 @@
     padding: 3rem 2rem;
     text-align: center;
     font-size: 0.8rem;
-    color: #555;
-    border-top: 1px solid rgba(255,255,255,0.06);
+    color: #999;
+    border-top: 1px solid #e5e5e5;
+    background: #fafafa;
   }
-  .footer a { color: #fde68a; text-decoration: none; }
+  .footer a { color: #b8960f; text-decoration: none; }
 
   /* ===== RESPONSIVE ===== */
   @media (max-width: 768px) {
@@ -465,6 +509,7 @@
     .person-card { flex-direction: column; }
     .stat-strip { grid-template-columns: 1fr 1fr; }
     .gantt-chart { min-width: 600px; }
+    .pdf-btn { top: 70px; right: 12px; padding: 0.5rem 0.8rem; font-size: 0.65rem; }
   }
 
   /* ===== PROGRESS BAR ===== */
@@ -473,7 +518,7 @@
     top: 60px;
     left: 0;
     height: 2px;
-    background: #fde68a;
+    background: #f5c842;
     z-index: 999;
     width: 0%;
     transition: width 0.1s linear;
@@ -489,26 +534,27 @@
     padding: 0.2rem 0.6rem;
     border-radius: 3px;
     margin-right: 0.5rem;
+    font-family: -apple-system, system-ui, sans-serif;
   }
-  .phase-1 { background: rgba(253,230,138,0.15); color: #fde68a; }
-  .phase-2 { background: rgba(251,191,36,0.15); color: #fbbf24; }
-  .phase-3 { background: rgba(245,158,11,0.15); color: #f59e0b; }
+  .phase-1 { background: rgba(245,200,66,0.15); color: #b8960f; }
+  .phase-2 { background: rgba(245,200,66,0.22); color: #a0820d; }
+  .phase-3 { background: rgba(245,200,66,0.30); color: #8a700b; }
 
   /* ===== BLOCKQUOTE ===== */
   .highlight-box {
-    border-left: 3px solid #fde68a;
-    background: rgba(253,230,138,0.04);
+    border-left: 3px solid #f5c842;
+    background: rgba(245,200,66,0.05);
     padding: 1.5rem 2rem;
-    border-radius: 0 8px 8px 0;
+    border-radius: 0 6px 6px 0;
     margin: 2rem 0;
   }
-  .highlight-box p { color: #ddd; margin-bottom: 0; }
+  .highlight-box p { color: #444; margin-bottom: 0; }
 
   /* ===== SUBSECTION DIVIDER ===== */
   .sub-divider {
     width: 40px;
     height: 3px;
-    background: #fde68a;
+    background: #f5c842;
     border-radius: 2px;
     margin: 2rem 0;
   }
@@ -521,12 +567,12 @@
     margin: 1.5rem 0;
   }
   .equip-item {
-    background: #1a1a1a;
-    border: 1px solid rgba(255,255,255,0.04);
+    background: #fafafa;
+    border: 1px solid #eee;
     border-radius: 6px;
     padding: 0.85rem 1rem;
     font-size: 0.85rem;
-    color: #bbb;
+    color: #555;
     display: flex;
     align-items: center;
     gap: 0.6rem;
@@ -534,9 +580,197 @@
   .equip-dot {
     width: 6px;
     height: 6px;
-    background: #fde68a;
+    background: #f5c842;
     border-radius: 50%;
     flex-shrink: 0;
+  }
+
+  /* ===== PRINT STYLESHEET ===== */
+  @media print {
+    @page {
+      size: letter;
+      margin: 1in 0.85in 1.2in 0.85in;
+      @bottom-center {
+        content: "CONFIDENTIAL — MYR Group / Sturgeon Electric";
+        font-size: 7pt;
+        color: #999;
+        font-family: Georgia, 'Times New Roman', serif;
+      }
+    }
+
+    body {
+      background: #fff !important;
+      color: #111 !important;
+      font-family: Georgia, 'Times New Roman', 'Iowan Old Style', 'Palatino Linotype', serif !important;
+      font-size: 10.5pt !important;
+      line-height: 1.6 !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    /* Hide non-print elements */
+    .nav,
+    .reading-progress,
+    .pdf-btn {
+      display: none !important;
+    }
+
+    /* Remove all animations */
+    *, *::before, *::after {
+      animation: none !important;
+      transition: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    .section {
+      opacity: 1 !important;
+      transform: none !important;
+      padding: 1.5rem 0 !important;
+      border-bottom: 0.5pt solid #ddd !important;
+      background: #fff !important;
+    }
+
+    /* Page breaks */
+    .hero {
+      min-height: auto !important;
+      padding: 2rem 0 1.5rem !important;
+      page-break-after: always;
+      border-bottom: 2pt solid #f5c842 !important;
+    }
+
+    #executive-summary { page-break-after: always; }
+    #company { page-break-after: always; }
+    #understanding { page-break-after: always; }
+    #approach { page-break-after: always; }
+    #personnel { page-break-after: always; }
+    #experience { page-break-after: always; }
+    #safety { page-break-after: always; }
+    #schedule { page-break-after: always; }
+
+    .person-card,
+    .card,
+    .diff-item,
+    .stat-strip,
+    .highlight-box,
+    .price-table,
+    .timeline {
+      page-break-inside: avoid;
+    }
+
+    h2, h3 {
+      page-break-after: avoid;
+    }
+
+    /* Typography for print */
+    h1, h2, h3, h4, h5 {
+      font-family: Georgia, 'Times New Roman', serif !important;
+      color: #111 !important;
+    }
+
+    h1 { font-size: 22pt !important; }
+    h2 { font-size: 16pt !important; }
+    h3 { font-size: 12pt !important; }
+
+    p {
+      color: #222 !important;
+      font-size: 10.5pt !important;
+      orphans: 3;
+      widows: 3;
+    }
+
+    .accent { color: #8a700b !important; }
+
+    .container {
+      max-width: 100% !important;
+      padding: 0 !important;
+    }
+
+    /* Print-friendly stat strips */
+    .stat-strip {
+      border: 0.5pt solid #ddd !important;
+      background: #f8f8f8 !important;
+    }
+    .stat-item {
+      background: #f8f8f8 !important;
+      padding: 0.8rem 1rem !important;
+    }
+    .stat-number { color: #333 !important; font-size: 16pt !important; }
+    .stat-label { color: #666 !important; }
+
+    /* Cards */
+    .card, .person-card, .diff-item {
+      border: 0.5pt solid #ddd !important;
+      box-shadow: none !important;
+      background: #fff !important;
+    }
+
+    .card:hover, .person-card:hover, .diff-item:hover {
+      border-color: #ddd !important;
+      box-shadow: none !important;
+    }
+
+    /* Clean links */
+    a { color: #111 !important; text-decoration: none !important; }
+
+    /* Person avatars in print */
+    .person-avatar {
+      background: #ddd !important;
+      color: #333 !important;
+    }
+
+    /* Highlight boxes */
+    .highlight-box {
+      border-left: 2pt solid #b8960f !important;
+      background: #fafafa !important;
+    }
+
+    /* Table */
+    .price-table th { border-bottom: 1pt solid #999 !important; }
+    .price-table td { border-bottom: 0.5pt solid #ddd !important; }
+    .total-row td { border-top: 1.5pt solid #b8960f !important; color: #111 !important; }
+
+    /* Hero adjustments */
+    .hero-grid { display: none !important; }
+    .hero::before { display: none !important; }
+    .hero-badge { border-color: #b8960f !important; color: #b8960f !important; }
+
+    /* Gantt chart */
+    .gantt-bar-fill { opacity: 1 !important; background: #ccc !important; }
+    .gantt-bar-alt .gantt-bar-fill { background: #e5e5e5 !important; }
+
+    /* Footer */
+    .footer {
+      border-top: 0.5pt solid #ddd !important;
+      padding: 1rem 0 !important;
+      background: #fff !important;
+    }
+
+    /* Section labels */
+    .section-label { color: #b8960f !important; }
+    .section-label::after { background: #ddd !important; }
+
+    /* Cert badges */
+    .cert-badge { background: #f0f0f0 !important; color: #555 !important; }
+
+    /* Phase tags */
+    .phase-tag { background: #f0f0f0 !important; color: #555 !important; }
+
+    /* Equipment items */
+    .equip-item { background: #fafafa !important; border-color: #ddd !important; }
+
+    /* Confidential footer on every page (fallback for browsers without @page support) */
+    .footer::after {
+      content: "CONFIDENTIAL — MYR Group / Sturgeon Electric";
+      display: block;
+      margin-top: 1rem;
+      font-size: 8pt;
+      color: #999;
+      letter-spacing: 0.05em;
+    }
+
+    /* Two-col adjustments */
+    .two-col { gap: 1.5rem !important; }
   }
 </style>
 </head>
@@ -572,7 +806,7 @@
       <span class="line">Transmission &amp;</span>
       <span class="line dim">Substation Expansion</span>
     </h1>
-    <p style="font-size:1.15rem; color:#999; max-width:600px; margin-top:0.5rem;">
+    <p style="font-size:1.1rem; color:#666; max-width:600px; margin-top:0.5rem;">
       A comprehensive proposal for the design-assist construction of 22 miles of high-voltage transmission line and new substation facilities in Mesa County, Colorado.
     </p>
     <div class="hero-meta">
@@ -590,7 +824,7 @@
       </div>
       <div class="hero-meta-item">
         <div class="hero-meta-label">Project Value</div>
-        <div class="hero-meta-value" style="color:#fde68a;">$48.5 Million</div>
+        <div class="hero-meta-value" style="color:#b8960f;">$48.5 Million</div>
       </div>
     </div>
   </div>
@@ -602,7 +836,7 @@
     <div class="section-label">01 &mdash; Executive Summary</div>
     <h2>The Right Partner for <span class="accent">Critical Infrastructure</span></h2>
 
-    <p style="font-size:1.1rem; color:#ddd;">
+    <p style="font-size:1.05rem; color:#333;">
       MYR Group Inc., through its subsidiary Sturgeon Electric Company, Inc., is pleased to submit this proposal in response to Western Regional Electric Cooperative's Request for Proposal for the Cedar Ridge 230kV Transmission Line and Substation Expansion project. With over 130 years of experience delivering critical electrical infrastructure across the United States, MYR Group brings unmatched technical capability, financial strength, and regional expertise to this transformative project for WREC and the communities it serves throughout Mesa County.
     </p>
 
@@ -688,7 +922,7 @@
     <div class="section-label">03 &mdash; Project Understanding</div>
     <h2>Comprehensive Understanding of <span class="accent">WREC's Vision</span></h2>
 
-    <p style="font-size:1.05rem; color:#ddd;">
+    <p style="font-size:1.05rem; color:#333;">
       The Cedar Ridge 230kV Transmission Line and Substation Expansion project represents a critical investment in the long-term reliability and capacity of WREC's transmission network. We understand that this project is driven by growing load demands in the eastern Mesa County service territory, the need to reduce transmission congestion along the existing 115kV corridor, and WREC's strategic objective to provide a second high-voltage feed into the region to enhance N-1 contingency performance in compliance with NERC TPL reliability standards.
     </p>
 
@@ -747,7 +981,7 @@
     <div class="section-label">04 &mdash; Technical Approach</div>
     <h2>A Proven Methodology for <span class="accent">Complex Transmission</span></h2>
 
-    <p style="font-size:1.05rem; color:#ddd;">
+    <p style="font-size:1.05rem; color:#333;">
       Our construction methodology for the Cedar Ridge project is organized into three overlapping phases designed to optimize resource utilization, minimize environmental disturbance, and deliver the project within the 18-month construction window. Each phase incorporates rigorous quality control checkpoints, environmental compliance monitoring, and safety reviews to ensure that the finished product meets or exceeds WREC's technical specifications and all applicable codes and standards.
     </p>
 
@@ -755,7 +989,7 @@
 
     <!-- PHASE 1 -->
     <div style="margin-bottom:3rem;">
-      <h3><span class="phase-tag phase-1">Phase 1</span> Pre-Construction &amp; Site Preparation <span style="color:#888; font-weight:400; font-size:0.9rem;">&mdash; Months 1&ndash;4</span></h3>
+      <h3><span class="phase-tag phase-1">Phase 1</span> Pre-Construction &amp; Site Preparation <span style="color:#999; font-weight:400; font-size:0.9rem;">&mdash; Months 1&ndash;4</span></h3>
       <div class="two-col" style="margin-top:1rem;">
         <div>
           <p>
@@ -778,7 +1012,7 @@
 
     <!-- PHASE 2 -->
     <div style="margin-bottom:3rem;">
-      <h3><span class="phase-tag phase-2">Phase 2</span> Foundations, Structures &amp; Substation Construction <span style="color:#888; font-weight:400; font-size:0.9rem;">&mdash; Months 3&ndash;14</span></h3>
+      <h3><span class="phase-tag phase-2">Phase 2</span> Foundations, Structures &amp; Substation Construction <span style="color:#999; font-weight:400; font-size:0.9rem;">&mdash; Months 3&ndash;14</span></h3>
       <div class="two-col" style="margin-top:1rem;">
         <div>
           <p>
@@ -801,7 +1035,7 @@
 
     <!-- PHASE 3 -->
     <div style="margin-bottom:2rem;">
-      <h3><span class="phase-tag phase-3">Phase 3</span> Wire Stringing, Commissioning &amp; Energization <span style="color:#888; font-weight:400; font-size:0.9rem;">&mdash; Months 12&ndash;18</span></h3>
+      <h3><span class="phase-tag phase-3">Phase 3</span> Wire Stringing, Commissioning &amp; Energization <span style="color:#999; font-weight:400; font-size:0.9rem;">&mdash; Months 12&ndash;18</span></h3>
       <div class="two-col" style="margin-top:1rem;">
         <div>
           <p>
@@ -958,7 +1192,7 @@
       <div class="card">
         <div class="card-tag">230kV Transmission</div>
         <div class="card-value">$62.4M</div>
-        <h3 style="color:#f0f0f0;">Ault-to-Cheyenne 230kV Transmission Line</h3>
+        <h3 style="color:#1a1a1a;">Ault-to-Cheyenne 230kV Transmission Line</h3>
         <p><strong>Client:</strong> Western Area Power Administration (WAPA)<br>
         <strong>Location:</strong> Weld County, CO to Laramie County, WY<br>
         <strong>Completed:</strong> September 2024</p>
@@ -971,7 +1205,7 @@
       <div class="card">
         <div class="card-tag">Substation &amp; Transmission</div>
         <div class="card-value">$41.8M</div>
-        <h3 style="color:#f0f0f0;">Montrose 230/115kV Substation &amp; Line Extension</h3>
+        <h3 style="color:#1a1a1a;">Montrose 230/115kV Substation &amp; Line Extension</h3>
         <p><strong>Client:</strong> Tri-State Generation &amp; Transmission<br>
         <strong>Location:</strong> Montrose County, CO<br>
         <strong>Completed:</strong> March 2023</p>
@@ -984,7 +1218,7 @@
       <div class="card">
         <div class="card-tag">345kV Transmission</div>
         <div class="card-value">$89.2M</div>
-        <h3 style="color:#f0f0f0;">Pawnee-Daniels Park 345kV Rebuild</h3>
+        <h3 style="color:#1a1a1a;">Pawnee-Daniels Park 345kV Rebuild</h3>
         <p><strong>Client:</strong> Xcel Energy / Public Service Company of Colorado<br>
         <strong>Location:</strong> Morgan, Adams &amp; Douglas Counties, CO<br>
         <strong>Completed:</strong> November 2022</p>
@@ -997,7 +1231,7 @@
       <div class="card">
         <div class="card-tag">Substation Expansion</div>
         <div class="card-value">$28.6M</div>
-        <h3 style="color:#f0f0f0;">Rifle-Silt 230kV Substation Expansion</h3>
+        <h3 style="color:#1a1a1a;">Rifle-Silt 230kV Substation Expansion</h3>
         <p><strong>Client:</strong> Holy Cross Energy<br>
         <strong>Location:</strong> Garfield County, CO<br>
         <strong>Completed:</strong> June 2025</p>
@@ -1016,7 +1250,7 @@
     <div class="section-label">07 &mdash; Safety Program</div>
     <h2>Zero-Incident Culture <span class="accent">by Design</span></h2>
 
-    <p style="font-size:1.05rem; color:#ddd;">
+    <p style="font-size:1.05rem; color:#333;">
       At MYR Group, safety is not a program bolted onto our operations &mdash; it is the foundation upon which every project is planned, staffed, and executed. Our corporate safety philosophy, branded internally as "Target Zero," establishes the expectation that every employee, every subcontractor, and every crew member will return home safely at the end of every work day. This is not an aspiration; it is a performance standard that is measured, managed, and reinforced at every level of the organization.
     </p>
 
@@ -1097,7 +1331,7 @@
           <span>O</span><span>N</span><span>D</span><span>J</span><span>F</span><span>M</span>
           <span>A</span><span>M</span><span>J</span><span>J</span><span>A</span><span>S</span>
         </div>
-        <div style="font-size:0.65rem; color:#555; display:grid; grid-template-columns:200px repeat(18,1fr); margin-bottom:1rem;">
+        <div style="font-size:0.65rem; color:#aaa; display:grid; grid-template-columns:200px repeat(18,1fr); margin-bottom:1rem;">
           <span></span>
           <span style="grid-column:2/8; text-align:center;">2026</span>
           <span style="grid-column:8/14; text-align:center;"></span>
@@ -1236,62 +1470,62 @@
       <tbody>
         <tr>
           <td>1.0</td>
-          <td><strong>Mobilization &amp; Demobilization</strong><br><span style="color:#888; font-size:0.85rem;">Project field office, equipment transport, staging area prep, site security, temporary facilities</span></td>
+          <td><strong>Mobilization &amp; Demobilization</strong><br><span style="color:#999; font-size:0.85rem;">Project field office, equipment transport, staging area prep, site security, temporary facilities</span></td>
           <td>$2,180,000</td>
         </tr>
         <tr>
           <td>2.0</td>
-          <td><strong>Pre-Construction Services</strong><br><span style="color:#888; font-size:0.85rem;">Geotechnical investigation, survey verification, construction engineering, permitting support</span></td>
+          <td><strong>Pre-Construction Services</strong><br><span style="color:#999; font-size:0.85rem;">Geotechnical investigation, survey verification, construction engineering, permitting support</span></td>
           <td>$1,450,000</td>
         </tr>
         <tr>
           <td>3.0</td>
-          <td><strong>Access Roads &amp; Site Preparation</strong><br><span style="color:#888; font-size:0.85rem;">12 miles new access roads, 8 miles road improvement, erosion control, clearing &amp; grubbing</span></td>
+          <td><strong>Access Roads &amp; Site Preparation</strong><br><span style="color:#999; font-size:0.85rem;">12 miles new access roads, 8 miles road improvement, erosion control, clearing &amp; grubbing</span></td>
           <td>$3,275,000</td>
         </tr>
         <tr>
           <td>4.0</td>
-          <td><strong>Transmission Line — Foundations</strong><br><span style="color:#888; font-size:0.85rem;">~140 drilled shaft foundations, reinforcement, concrete placement, backfill &amp; compaction</span></td>
+          <td><strong>Transmission Line — Foundations</strong><br><span style="color:#999; font-size:0.85rem;">~140 drilled shaft foundations, reinforcement, concrete placement, backfill &amp; compaction</span></td>
           <td>$6,840,000</td>
         </tr>
         <tr>
           <td>5.0</td>
-          <td><strong>Transmission Line — Structures &amp; Hardware</strong><br><span style="color:#888; font-size:0.85rem;">Steel lattice towers, tubular steel monopoles, assembly, erection, hardware, insulators</span></td>
+          <td><strong>Transmission Line — Structures &amp; Hardware</strong><br><span style="color:#999; font-size:0.85rem;">Steel lattice towers, tubular steel monopoles, assembly, erection, hardware, insulators</span></td>
           <td>$9,380,000</td>
         </tr>
         <tr>
           <td>6.0</td>
-          <td><strong>Transmission Line — Conductor &amp; OPGW</strong><br><span style="color:#888; font-size:0.85rem;">1590 kcmil ACSS/TW conductor stringing, OPGW installation, clipping, sagging, splicing</span></td>
+          <td><strong>Transmission Line — Conductor &amp; OPGW</strong><br><span style="color:#999; font-size:0.85rem;">1590 kcmil ACSS/TW conductor stringing, OPGW installation, clipping, sagging, splicing</span></td>
           <td>$5,620,000</td>
         </tr>
         <tr>
           <td>7.0</td>
-          <td><strong>Cedar Ridge Substation — Civil</strong><br><span style="color:#888; font-size:0.85rem;">Site grading, drainage, foundations, ground grid, cable trench, fencing, control house pad</span></td>
+          <td><strong>Cedar Ridge Substation — Civil</strong><br><span style="color:#999; font-size:0.85rem;">Site grading, drainage, foundations, ground grid, cable trench, fencing, control house pad</span></td>
           <td>$4,150,000</td>
         </tr>
         <tr>
           <td>8.0</td>
-          <td><strong>Cedar Ridge Substation — Electrical</strong><br><span style="color:#888; font-size:0.85rem;">Bus, breakers, transformers, switches, CTs/PTs, surge arresters, control house, wiring</span></td>
+          <td><strong>Cedar Ridge Substation — Electrical</strong><br><span style="color:#999; font-size:0.85rem;">Bus, breakers, transformers, switches, CTs/PTs, surge arresters, control house, wiring</span></td>
           <td>$8,940,000</td>
         </tr>
         <tr>
           <td>9.0</td>
-          <td><strong>Plateau Substation Interconnection</strong><br><span style="color:#888; font-size:0.85rem;">New 230kV line bay, bus modifications, relay upgrades, civil expansion, grounding</span></td>
+          <td><strong>Plateau Substation Interconnection</strong><br><span style="color:#999; font-size:0.85rem;">New 230kV line bay, bus modifications, relay upgrades, civil expansion, grounding</span></td>
           <td>$2,680,000</td>
         </tr>
         <tr>
           <td>10.0</td>
-          <td><strong>Testing &amp; Commissioning</strong><br><span style="color:#888; font-size:0.85rem;">Relay testing, primary injection, SCADA integration, breaker timing, transformer testing, energization support</span></td>
+          <td><strong>Testing &amp; Commissioning</strong><br><span style="color:#999; font-size:0.85rem;">Relay testing, primary injection, SCADA integration, breaker timing, transformer testing, energization support</span></td>
           <td>$1,560,000</td>
         </tr>
         <tr>
           <td>11.0</td>
-          <td><strong>Site Restoration &amp; Closeout</strong><br><span style="color:#888; font-size:0.85rem;">Access road restoration, revegetation, as-built documentation, final inspections, warranty package</span></td>
+          <td><strong>Site Restoration &amp; Closeout</strong><br><span style="color:#999; font-size:0.85rem;">Access road restoration, revegetation, as-built documentation, final inspections, warranty package</span></td>
           <td>$985,000</td>
         </tr>
         <tr>
           <td>12.0</td>
-          <td><strong>Contingency Allowance</strong><br><span style="color:#888; font-size:0.85rem;">3% contingency for unforeseen conditions including geotechnical, weather, and material escalation</span></td>
+          <td><strong>Contingency Allowance</strong><br><span style="color:#999; font-size:0.85rem;">3% contingency for unforeseen conditions including geotechnical, weather, and material escalation</span></td>
           <td>$1,440,000</td>
         </tr>
         <tr class="total-row">
@@ -1320,56 +1554,56 @@
     <div class="differentiator-grid">
       <div class="diff-item">
         <div class="diff-icon">01</div>
-        <h3 style="color:#f0f0f0;">Local Presence, National Power</h3>
+        <h3 style="color:#1a1a1a;">Local Presence, National Power</h3>
         <p>
           Sturgeon Electric's Grand Junction facility places our people and equipment 45 miles from the project site. Combined with MYR Group's $3.6B national platform, WREC gets the best of both worlds: a neighbor's responsiveness backed by a Fortune 1000 company's resources, bonding capacity, and supply chain leverage.
         </p>
       </div>
       <div class="diff-item">
         <div class="diff-icon">02</div>
-        <h3 style="color:#f0f0f0;">Unmatched 230kV Experience</h3>
+        <h3 style="color:#1a1a1a;">Unmatched 230kV Experience</h3>
         <p>
           Our team has built over 600 miles of 230kV and above transmission line across the Rocky Mountain region in the last decade. We know the terrain, the permitting agencies, the labor market, and the suppliers. This isn't our first project in Mesa County, and that familiarity translates directly to reduced risk and more predictable outcomes for WREC.
         </p>
       </div>
       <div class="diff-item">
         <div class="diff-icon">03</div>
-        <h3 style="color:#f0f0f0;">Proven Safety Record</h3>
+        <h3 style="color:#1a1a1a;">Proven Safety Record</h3>
         <p>
           Our 0.71 EMR and 0.82 TRIR are not just numbers &mdash; they represent a genuine cultural commitment to sending every worker home safely. With a dedicated Safety Director assigned full-time to the Cedar Ridge site, WREC can be confident that safety performance will meet the highest standards throughout the 18-month construction period.
         </p>
       </div>
       <div class="diff-item">
         <div class="diff-icon">04</div>
-        <h3 style="color:#f0f0f0;">Self-Perform Capability</h3>
+        <h3 style="color:#1a1a1a;">Self-Perform Capability</h3>
         <p>
           MYR Group self-performs over 85% of our T&amp;D construction work with our own forces and company-owned equipment. This gives us direct control over quality, schedule, and safety performance &mdash; and insulates WREC from the risks associated with heavy subcontractor reliance. Our fleet includes over 3,500 pieces of owned equipment valued at more than $450 million.
         </p>
       </div>
       <div class="diff-item">
         <div class="diff-icon">05</div>
-        <h3 style="color:#f0f0f0;">Workforce Depth</h3>
+        <h3 style="color:#1a1a1a;">Workforce Depth</h3>
         <p>
           With over 8,500 employees including approximately 6,000 skilled craft workers represented by IBEW, we can rapidly scale the Cedar Ridge workforce to meet schedule demands. Our industry-leading apprenticeship and training programs ensure a steady pipeline of qualified journeyman lineworkers, operators, and electricians to support project needs throughout the construction period.
         </p>
       </div>
       <div class="diff-item">
         <div class="diff-icon">06</div>
-        <h3 style="color:#f0f0f0;">Collaborative Approach</h3>
+        <h3 style="color:#1a1a1a;">Collaborative Approach</h3>
         <p>
           We view this not as a vendor-client relationship but as a construction partnership. Our project team is committed to transparent communication, proactive risk identification, and collaborative problem-solving. We will establish a regular cadence of progress meetings, provide real-time schedule and cost reporting, and ensure that WREC has full visibility into every aspect of project execution.
         </p>
       </div>
     </div>
 
-    <div style="margin-top:4rem; padding:3rem 2rem; background:#161616; border:1px solid rgba(253,230,138,0.15); border-radius:12px;">
-      <p style="font-size:1.15rem; color:#ddd; margin-bottom:1.5rem;">
+    <div style="margin-top:4rem; padding:3rem 2rem; background:#fafafa; border:1px solid #e5e5e5; border-top: 3px solid #f5c842; border-radius:2px;">
+      <p style="font-size:1.1rem; color:#333; margin-bottom:1.5rem;">
         We appreciate the opportunity to submit this proposal and welcome the chance to discuss our qualifications, approach, and pricing in further detail. Our team is available for an in-person presentation at WREC's convenience.
       </p>
-      <p style="color:#888; margin-bottom:0.5rem; font-size:0.9rem;">Primary Point of Contact</p>
-      <p style="font-size:1.2rem; font-weight:700; color:#f0f0f0; margin-bottom:0.25rem;">Robert Vasquez, Project Director</p>
-      <p style="color:#fde68a; margin-bottom:0;">Sturgeon Electric Company, Inc. &mdash; A MYR Group Company</p>
-      <p style="color:#999; font-size:0.9rem;">rvasquez@sturgeonelectric.com &nbsp;|&nbsp; (303) 286-8000 &nbsp;|&nbsp; Henderson, CO 80640</p>
+      <p style="color:#999; margin-bottom:0.5rem; font-size:0.85rem; text-transform:uppercase; letter-spacing:0.08em; font-weight:600;">Primary Point of Contact</p>
+      <p style="font-size:1.15rem; font-weight:700; color:#1a1a1a; margin-bottom:0.25rem; font-family: Georgia, 'Times New Roman', serif;">Robert Vasquez, Project Director</p>
+      <p style="color:#b8960f; margin-bottom:0; font-weight:600;">Sturgeon Electric Company, Inc. &mdash; A MYR Group Company</p>
+      <p style="color:#777; font-size:0.9rem;">rvasquez@sturgeonelectric.com &nbsp;|&nbsp; (303) 286-8000 &nbsp;|&nbsp; Henderson, CO 80640</p>
     </div>
   </div>
 </section>
@@ -1377,7 +1611,7 @@
 <!-- FOOTER -->
 <footer class="footer">
   <p style="margin-bottom:0.5rem;">
-    <strong style="color:#fde68a;">MYR Group Inc.</strong> &mdash; Sturgeon Electric Company, Inc.
+    <strong style="color:#b8960f;">MYR Group Inc.</strong> &mdash; Sturgeon Electric Company, Inc.
   </p>
   <p style="margin-bottom:0.5rem;">
     This proposal is confidential and proprietary. &copy; 2026 MYR Group Inc. All rights reserved.
@@ -1390,8 +1624,8 @@
 <script>
 (function() {
   // ===== SCROLL ANIMATIONS =====
-  const sections = document.querySelectorAll('.section');
-  const observer = new IntersectionObserver(function(entries) {
+  var sections = document.querySelectorAll('.section');
+  var observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
@@ -1401,11 +1635,11 @@
   sections.forEach(function(s) { observer.observe(s); });
 
   // ===== READING PROGRESS BAR =====
-  const progressBar = document.getElementById('reading-progress');
+  var progressBar = document.getElementById('reading-progress');
   window.addEventListener('scroll', function() {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
     progressBar.style.width = progress + '%';
   });
 
