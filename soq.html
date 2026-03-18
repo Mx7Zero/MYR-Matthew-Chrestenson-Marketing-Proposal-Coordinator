@@ -54,6 +54,19 @@ a:hover { text-decoration: underline; }
 }
 .nav-links a:hover,
 .nav-links a.active { color: #fbbf24; background: rgba(251,191,36,0.1); }
+
+/* PDF download button */
+.pdf-btn {
+  position: fixed; top: 72px; right: 24px; z-index: 999;
+  background: transparent; color: #888;
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 0.35rem 0.9rem; font-size: 0.6rem; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  cursor: pointer; transition: all 0.3s ease;
+  font-family: -apple-system, 'Segoe UI', system-ui, sans-serif;
+  text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;
+}
+.pdf-btn:hover { color: #fbbf24; border-color: rgba(251,191,36,0.4); }
 .nav-toggle { display: none; background: none; border: none; color: #fbbf24; font-size: 1.5rem; cursor: pointer; }
 
 /* --- SECTIONS --- */
@@ -416,6 +429,8 @@ section { width: 100%; }
     </div>
   </div>
 </nav>
+
+<a class="pdf-btn" href="/CedarRidge_SOQ_MYRGroup_CSI.pdf" download>Download PDF &darr;</a>
 
 <!-- HERO -->
 <section class="hero" id="hero">
@@ -1048,6 +1063,8 @@ section { width: 100%; }
 // Hide nav if loaded in iframe
 if (window !== window.top) {
   document.querySelector('.top-nav').style.display = 'none';
+  var pdfEl = document.querySelector('.pdf-btn');
+  if (pdfEl) pdfEl.style.display = 'none';
   document.body.style.paddingTop = '0';
 }
 
