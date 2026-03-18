@@ -350,6 +350,9 @@ def build_story():
         ('$3.6B',  '2025 Annual Revenue'),
         ('9,500+', 'Employees Nationwide'),
         ('40+',    'Years in Business'),
+    ]))
+    st.append(Spacer(1, 4))
+    st.append(stat_row([
         ('14',     'Subsidiaries / Regions'),
         ('50+',    'States Served'),
         ('0.71',   'EMR Rating (2025)'),
