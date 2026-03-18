@@ -26,9 +26,14 @@ a:hover { text-decoration: underline; }
 }
 .top-nav.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,0.5); }
 .nav-inner {
-  max-width: 1200px; margin: 0 auto;
-  display: flex; align-items: center; justify-content: space-between;
+  width: 100%;
+  display: flex; align-items: center;
   padding: 0 2rem; height: 60px;
+  position: relative;
+}
+.nav-brand { position: absolute; left: 2rem; }
+.nav-links-wrap {
+  flex: 1; display: flex; justify-content: center;
 }
 .nav-brand {
   font-family: Georgia, 'Times New Roman', serif;
@@ -395,17 +400,19 @@ section { width: 100%; }
 <nav class="top-nav" id="topNav">
   <div class="nav-inner">
     <div class="nav-brand">MYR GROUP <span>/ CSI Electrical</span></div>
-    <div class="nav-links" id="navLinks">
-      <a href="#profile">Profile</a>
-      <a href="#organization">Org</a>
-      <a href="#capabilities">Capabilities</a>
-      <a href="#projects">Projects</a>
-      <a href="#personnel">Team</a>
-      <a href="#safety">Safety</a>
-      <a href="#financial">Financial</a>
-      <a href="#equipment">Equip</a>
-      <a href="#references">Refs</a>
-      <a href="#certifications">Certs</a>
+    <div class="nav-links-wrap">
+      <div class="nav-links" id="navLinks">
+        <a href="#profile">Profile</a>
+        <a href="#organization">Org</a>
+        <a href="#capabilities">Capabilities</a>
+        <a href="#projects">Projects</a>
+        <a href="#personnel">Team</a>
+        <a href="#safety">Safety</a>
+        <a href="#financial">Financial</a>
+        <a href="#equipment">Equip</a>
+        <a href="#references">Refs</a>
+        <a href="#certifications">Certs</a>
+      </div>
     </div>
   </div>
 </nav>
