@@ -96,14 +96,16 @@ def draw_cover(c, doc):
     c.setFont('Helvetica', 7.5)
     c.drawRightString(PW - MR, PH - 13, 'NASDAQ: MYRG')
 
-    # Left accent bar from bottom card to top stripe
+    # Left accent bar from info card to top stripe
     c.setFillColor(GOLD)
-    c.rect(ML - 9, 160, 4, PH - 30 - 160, fill=1, stroke=0)
+    c.rect(ML - 9, 133, 4, PH - 30 - 133, fill=1, stroke=0)
 
     TX = ML + 8
 
-    # Title block — just under vertical center, left justified
-    y = PH / 2 + 20  # start just above center, text flows down
+    # Title block — vertically centered between top stripe (PH-25) and info card (133)
+    # Available space: PH-25 to 133 = 634 pts. Center = 133 + 634/2 = 450
+    # Title block is ~180pts tall, so start at 450 + 90 = 540, but nudge down a bit
+    y = 420  # just under center of available space
 
     c.setFillColor(GOLD2)
     c.setFont('Helvetica', 8.5)
@@ -383,34 +385,26 @@ def build_story():
     mid.setStyle(TableStyle([('ALIGN',(0,0),(-1,-1),'CENTER'),
                               ('TOPPADDING',(0,0),(-1,-1),0),('BOTTOMPADDING',(0,0),(-1,-1),5)]))
     st.append(mid)
-    depts = [('Project\nManagement','Planning & Cost Control'),
-             ('Engineering','Design & Estimation'),
-             ('Field\nOperations','Construction & Testing'),
-             ('Safety','HSE & Compliance'),
-             ('Quality','QA/QC & Inspections')]
-    dcw = CW / 5
-    dept_cells = []
-    for d in depts:
-        cell = Table([[Paragraph(d[0], S['org_box']),
-                       Paragraph(d[1], ParagraphStyle('ds', fontName='Helvetica', fontSize=7,
-                                                       textColor=GOLD2, leading=9, alignment=TA_CENTER))]],
-                     colWidths=[dcw - 6])
-        cell.setStyle(TableStyle([
-            ('BACKGROUND', (0,0),(-1,-1), HexColor('#1B3A5C')),
-            ('BOX',        (0,0),(-1,-1), 1, GOLD),
-            ('TOPPADDING', (0,0),(-1,-1),5),('BOTTOMPADDING',(0,0),(-1,-1),5),
-            ('ALIGN',      (0,0),(-1,-1),'CENTER'),('VALIGN',(0,0),(-1,-1),'MIDDLE'),
-        ]))
-        dept_cells.append(cell)
-    dept_row = Table([dept_cells], colWidths=[dcw]*5)
+    depts = ['Project Mgmt', 'Engineering', 'Field Ops', 'Safety', 'QA/QC']
+    ncols = len(depts)
+    dcw = CW / ncols
+    dept_data = [[Paragraph(d, ParagraphStyle('dd', fontName='Helvetica-Bold', fontSize=8,
+                                               textColor=WHITE, leading=11, alignment=TA_CENTER))
+                  for d in depts]]
+    dept_row = Table(dept_data, colWidths=[dcw]*ncols)
     dept_row.setStyle(TableStyle([
-        ('LEFTPADDING',(0,0),(-1,-1),3),('RIGHTPADDING',(0,0),(-1,-1),3),
-        ('TOPPADDING',(0,0),(-1,-1),0),('BOTTOMPADDING',(0,0),(-1,-1),0),
+        ('BACKGROUND', (0,0),(-1,-1), NAVY2),
+        ('BOX',        (0,0),(-1,-1), 1, GOLD),
+        ('INNERGRID',  (0,0),(-1,-1), 0.5, GOLD),
+        ('TOPPADDING', (0,0),(-1,-1), 8),
+        ('BOTTOMPADDING',(0,0),(-1,-1), 8),
+        ('ALIGN',      (0,0),(-1,-1), 'CENTER'),
+        ('VALIGN',     (0,0),(-1,-1), 'MIDDLE'),
     ]))
     st.append(dept_row)
 
     # ── 02 CORE CAPABILITIES ──────────────────────────────────────────────────
-    st.append(PageBreak())
+    st.append(Spacer(1, 16))
     st += sec_block('02', 'Core Capabilities', 'Full-Spectrum Renewable Energy Electrical Construction')
     caps = [
         ('Solar Farm Construction',
