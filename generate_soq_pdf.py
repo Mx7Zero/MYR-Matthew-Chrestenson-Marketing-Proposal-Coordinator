@@ -96,40 +96,43 @@ def draw_cover(c, doc):
     c.setFont('Helvetica', 7.5)
     c.drawRightString(PW - MR, PH - 13, 'NASDAQ: MYRG')
 
+    # Left accent bar from bottom card to top stripe
     c.setFillColor(GOLD)
     c.rect(ML - 9, 160, 4, PH - 30 - 160, fill=1, stroke=0)
 
     TX = ML + 8
 
-    y = PH - 53
+    # Title block — just under vertical center, left justified
+    y = PH / 2 + 20  # start just above center, text flows down
+
     c.setFillColor(GOLD2)
     c.setFont('Helvetica', 8.5)
-    c.drawString(TX, y, 'PREQUALIFICATION SUBMITTAL  —  2026–2028')
+    c.drawString(TX, y, 'PREQUALIFICATION SUBMITTAL  \u2014  2026\u20132028')
 
-    y -= 52
+    y -= 42
     c.setFillColor(WHITE)
     c.setFont('Helvetica-Bold', 44)
     c.drawString(TX, y, 'MYR GROUP')
 
-    rule_y = y - 8
+    y -= 10
     c.setFillColor(GOLD)
-    c.rect(TX, rule_y, 3.8 * IN, 2.5, fill=1, stroke=0)
+    c.rect(TX, y, 3.8 * IN, 2.5, fill=1, stroke=0)
 
-    y = rule_y - 36
+    y -= 32
     c.setFillColor(WHITE)
     c.setFont('Helvetica-Bold', 26)
     c.drawString(TX, y, 'Statement of Qualifications')
 
-    y -= 26
+    y -= 24
     c.setFillColor(GOLD2)
     c.setFont('Helvetica', 13)
     c.drawString(TX, y, 'Renewable Energy Electrical Construction')
 
-    y -= 16
+    y -= 18
     c.setFillColor(GOLD)
     c.rect(TX, y, 4.1 * IN, 1.5, fill=1, stroke=0)
 
-    y -= 24
+    y -= 22
     tags = ['Solar', 'Wind', 'BESS', 'Substation', 'HV Interconnection']
     tx2 = TX
     c.setFont('Helvetica', 8)
