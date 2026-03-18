@@ -20,26 +20,35 @@ a:hover { text-decoration: underline; }
 /* --- NAV --- */
 .top-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-  background: rgba(17,17,17,0.92);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(251,191,36,0.15);
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 2.5rem; height: 60px;
-  transition: box-shadow 0.3s;
+  background: rgba(17,17,17,0.95);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 .top-nav.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,0.5); }
+.nav-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2rem; height: 60px;
+}
 .nav-brand {
-  font-weight: 700; font-size: 1.05rem; color: #fbbf24;
-  letter-spacing: 0.5px; white-space: nowrap;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 700; font-size: 0.9rem; color: #fbbf24;
+  letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap;
 }
 .nav-brand span { color: #f0f0f0; font-weight: 400; }
-.nav-links { display: flex; gap: 0.8rem; align-items: center; flex-wrap: nowrap; justify-content: flex-end; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.nav-links {
+  display: flex; gap: 0.15rem; list-style: none;
+  overflow-x: auto; -ms-overflow-style: none; scrollbar-width: none;
+}
+.nav-links::-webkit-scrollbar { display: none; }
 .nav-links a {
-  color: #ccc; font-size: 0.68rem; text-transform: uppercase;
-  letter-spacing: 0.4px; font-weight: 500; transition: color 0.2s;
+  color: #888; font-size: 0.72rem; text-transform: uppercase;
+  letter-spacing: 0.06em; font-weight: 600; padding: 0.4rem 0.6rem;
+  transition: color 0.2s, background 0.2s;
   text-decoration: none; white-space: nowrap;
 }
-.nav-links a:hover { color: #fbbf24; text-decoration: none; }
+.nav-links a:hover,
+.nav-links a.active { color: #fbbf24; background: rgba(251,191,36,0.1); }
 .nav-toggle { display: none; background: none; border: none; color: #fbbf24; font-size: 1.5rem; cursor: pointer; }
 
 /* --- SECTIONS --- */
@@ -384,19 +393,20 @@ section { width: 100%; }
 
 <!-- NAV -->
 <nav class="top-nav" id="topNav">
-  <div class="nav-brand">MYR GROUP <span>/ CSI Electrical</span></div>
-  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">&#9776;</button>
-  <div class="nav-links" id="navLinks">
-    <a href="#profile">Profile</a>
-    <a href="#organization">Organization</a>
-    <a href="#capabilities">Capabilities</a>
-    <a href="#projects">Projects</a>
-    <a href="#personnel">Personnel</a>
-    <a href="#safety">Safety</a>
-    <a href="#financial">Financial</a>
-    <a href="#equipment">Equipment</a>
-    <a href="#references">References</a>
-    <a href="#certifications">Certifications</a>
+  <div class="nav-inner">
+    <div class="nav-brand">MYR GROUP <span>/ CSI Electrical</span></div>
+    <div class="nav-links" id="navLinks">
+      <a href="#profile">Profile</a>
+      <a href="#organization">Organization</a>
+      <a href="#capabilities">Capabilities</a>
+      <a href="#projects">Projects</a>
+      <a href="#personnel">Personnel</a>
+      <a href="#safety">Safety</a>
+      <a href="#financial">Financial</a>
+      <a href="#equipment">Equipment</a>
+      <a href="#references">References</a>
+      <a href="#certifications">Certifications</a>
+    </div>
   </div>
 </nav>
 
