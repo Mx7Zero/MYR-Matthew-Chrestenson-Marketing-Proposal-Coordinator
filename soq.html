@@ -1050,12 +1050,13 @@ window.addEventListener('scroll', () => {
   topNav.classList.toggle('scrolled', window.scrollY > 40);
 });
 
-// --- NAV TOGGLE ---
-document.getElementById('navToggle').addEventListener('click', () => {
-  document.getElementById('navLinks').classList.toggle('open');
-});
+// --- NAV SMOOTH SCROLL ---
 document.querySelectorAll('.nav-links a').forEach(a => {
-  a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+  a.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  });
 });
 
 // --- FADE IN ON SCROLL ---
