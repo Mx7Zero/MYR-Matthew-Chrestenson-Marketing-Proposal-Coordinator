@@ -294,6 +294,10 @@
     <p class="scroll-hint">Scroll to explore</p>
   </section>
 
+  <!-- Featured / Current Role Project -->
+  <div class="bento-section-title" style="color:#7dd3fc">Instructional Design</div>
+  <div class="bento-page" id="featured"></div>
+
   <!-- Proposals Section -->
   <div class="bento-section-title" style="color:#ffffff">Sample RFP / SOQ</div>
   <div class="bento-page" id="proposals"></div>
@@ -495,6 +499,60 @@
 
     smartGrid(presGrid, presentations.length, 3);
 
+    // ── Featured ──
+    const featuredItems = [
+      { name: "Transamerica · Instructional Designer's Handbook", url: "https://ta-id-training.vercel.app/" },
+    ];
+
+    const featGrid = document.getElementById("featured");
+    featuredItems.forEach((p, i) => {
+      const item = document.createElement("div");
+      const num = String(i+1).padStart(2,"0");
+      const tot = String(featuredItems.length).padStart(2,"0");
+      if (isMobile) {
+        item.className = "bento-item";
+        item.innerHTML = buildCard(p.name, num, tot, p.url, "#7dd3fc");
+      } else {
+        item.className = "bento-item";
+        item.innerHTML = `
+          <div class="bento-tint tint-blue"></div>
+          <div class="bento-label">
+            <span class="bento-label-name">${p.name}</span>
+            <span class="bento-label-num">${num} / ${tot}</span>
+          </div>
+          <div class="bento-click"></div>
+        `;
+        item.dataset.idx = i;
+        item.querySelector(".bento-click").addEventListener("click", () => {
+          window.open(p.url, "_blank", "noopener,noreferrer");
+        });
+      }
+      featGrid.appendChild(item);
+    });
+
+    smartGrid(featGrid, featuredItems.length, 1);
+
+    if (!isMobile) {
+      const featObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            const idx = parseInt(el.dataset.idx);
+            if (!el.querySelector("iframe") && !isNaN(idx)) {
+              const iframe = document.createElement("iframe");
+              iframe.src = featuredItems[idx].url;
+              iframe.title = featuredItems[idx].name;
+              iframe.loading = "lazy";
+              iframe.setAttribute("tabindex", "-1");
+              el.insertBefore(iframe, el.firstChild);
+            }
+            featObserver.unobserve(el);
+          }
+        });
+      }, { rootMargin: "400px" });
+      featGrid.querySelectorAll(".bento-item").forEach(el => featObserver.observe(el));
+    }
+
     // ── Proposals ──
     const proposalItems = [
       { name: "RFP Response — Cedar Ridge 230kV Transmission & Substation", url: "/rfp-response.html" },
@@ -557,6 +615,7 @@
       smartGrid(vidGrid, videos.length, 3);
       smartGrid(presGrid, presentations.length, 3);
       smartGrid(propGrid, proposalItems.length, 2);
+      smartGrid(featGrid, featuredItems.length, 1);
     });
 
     // ── Randomize tint gradients ──
