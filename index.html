@@ -438,6 +438,7 @@
     const briotixTools = "MICROSOFT POWER POINT | ELEVEN LABS";
     const presentations = [
       { name: "The New Prime Reaction", embedUrl: "https://chrestenson.com/prime-reaction/", type: "embed",
+        thumbnail: "https://chrestenson.com/prime-reaction/slides/Slide1.png",
         description: "Brand Name Change Proposal deck — The New Prime Reaction, embedded live.",
         tools: "MICROSOFT POWERPOINT" },
       { name: "Briotix Costco Presentation", id: "BAzL6b1WaDY", type: "youtube",
@@ -590,10 +591,14 @@
         const src = p.type === "youtube"
           ? `https://www.youtube.com/embed/${p.id}?rel=0&modestbranding=1`
           : p.embedUrl;
+        const preview = p.thumbnail
+          ? `<img src="${p.thumbnail}" alt="${p.name}" loading="lazy"
+               style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;" />`
+          : `<iframe src="${src}" title="${p.name}" loading="lazy" tabindex="-1"
+               allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"
+               allowfullscreen scrolling="no"></iframe>`;
         item.innerHTML = `
-          <iframe src="${src}" title="${p.name}" loading="lazy" tabindex="-1"
-            allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"
-            allowfullscreen scrolling="no"></iframe>
+          ${preview}
           <div class="bento-tint tint-red"></div>
           <div class="bento-label">
             <span class="bento-label-name">${p.name}</span>
