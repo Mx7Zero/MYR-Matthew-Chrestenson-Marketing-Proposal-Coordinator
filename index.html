@@ -586,21 +586,25 @@
         item.className = "bento-item";
         item.innerHTML = buildCard(p.name, num, tot, linkUrl, "#f87171");
       } else {
-        item.className = "bento-item interactive";
+        item.className = "bento-item";
         const src = p.type === "youtube"
           ? `https://www.youtube.com/embed/${p.id}?rel=0&modestbranding=1`
           : p.embedUrl;
         item.innerHTML = `
+          <iframe src="${src}" title="${p.name}" loading="lazy" tabindex="-1"
+            allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"
+            allowfullscreen scrolling="no"></iframe>
           <div class="bento-tint tint-red"></div>
           <div class="bento-label">
             <span class="bento-label-name">${p.name}</span>
             <span class="bento-label-num">${num} / ${tot}</span>
           </div>
+          <div class="bento-click"></div>
           ${buildInfoBar(p.description, p.tools)}
-          <iframe src="${src}" title="${p.name}" loading="lazy"
-            allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"
-            allowfullscreen scrolling="no" style="pointer-events:auto"></iframe>
         `;
+        item.querySelector(".bento-click").addEventListener("click", () => {
+          window.open(linkUrl, p.name, "popup,width=1280,height=800,noopener,noreferrer");
+        });
       }
       presGrid.appendChild(item);
     });
