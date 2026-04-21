@@ -317,6 +317,8 @@
 
   <nav class="top-menu" id="topMenu">
     <a href="#hero" class="top-menu-brand" style="text-decoration:none;cursor:pointer">MC Portfolio</a>
+    <a href="#presentations" class="top-menu-link" data-section="presentations">Presentations</a>
+    <span class="top-menu-divider"></span>
     <a href="#featured" class="top-menu-link" data-section="featured">TA DEMO</a>
     <span class="top-menu-divider"></span>
     <a href="#proposals" class="top-menu-link" data-section="proposals">Sample RFP/SOQ</a>
@@ -324,8 +326,6 @@
     <a href="#web-work" class="top-menu-link" data-section="web-work">Web Work</a>
     <span class="top-menu-divider"></span>
     <a href="#video-work" class="top-menu-link" data-section="video-work">Video</a>
-    <span class="top-menu-divider"></span>
-    <a href="#presentations" class="top-menu-link" data-section="presentations">Presentations</a>
   </nav>
 
   <button class="back-to-top" id="backToTop" aria-label="Back to top">
@@ -346,6 +346,10 @@
     <p class="scroll-hint">Scroll to explore</p>
   </section>
 
+  <!-- Presentations Bento -->
+  <div class="bento-section-title" style="color:#f87171">Presentations</div>
+  <div class="bento-page" id="presentations"></div>
+
   <!-- Featured / Current Role Project -->
   <div class="bento-section-title" style="color:#7dd3fc">TA Demo</div>
   <div class="bento-page" id="featured"></div>
@@ -361,10 +365,6 @@
   <!-- Video Bento -->
   <div class="bento-section-title" style="color:#fbbf24">Video</div>
   <div class="bento-page" id="video-work"></div>
-
-  <!-- Presentations Bento -->
-  <div class="bento-section-title" style="color:#f87171">Presentations</div>
-  <div class="bento-page" id="presentations"></div>
 
   <footer class="footer">
     <p class="footer-text">Matthew Chrestenson &mdash; MYR Group &mdash; 2026</p>
@@ -437,9 +437,9 @@
 
     const briotixTools = "MICROSOFT POWER POINT | GOOGLE VIDS | ELEVEN LABS | DAVINCI RESOLVE";
     const presentations = [
-      { name: "Presentations.ai Deck", embedUrl: "https://app.presentations.ai/view/8CQXVcms7d", type: "embed",
-        description: "Brand Name Change Proposal AI-generated deck hosted on Presentations.ai (embedded live).",
-        tools: "Presentations.ai" },
+      { name: "The New Prime Reaction", embedUrl: "https://chrestenson.com/prime-reaction/", type: "embed",
+        description: "Brand Name Change Proposal deck — The New Prime Reaction, embedded live.",
+        tools: "MICROSOFT POWERPOINT" },
       { name: "Briotix Costco Presentation", id: "BAzL6b1WaDY", type: "youtube",
         description: "Recorded presentation pitched to / created for Costco on behalf of Briotix (ergonomics / injury prevention).",
         tools: briotixTools },
@@ -767,7 +767,7 @@
 
       // Active menu link
       const links = topMenu.querySelectorAll(".top-menu-link");
-      const sections = ["featured", "proposals", "web-work", "video-work", "presentations"];
+      const sections = ["presentations", "featured", "proposals", "web-work", "video-work"];
       const scrollY = window.scrollY + window.innerHeight / 3;
       let active = null;
       for (let i = sections.length - 1; i >= 0; i--) {
