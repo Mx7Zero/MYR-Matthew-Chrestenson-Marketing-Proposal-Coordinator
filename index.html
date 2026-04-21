@@ -143,6 +143,44 @@
     .bento-item:hover .bento-label { opacity: 0; }
     .bento-item.revealed .bento-label { opacity: 0; }
 
+    /* Hover info bar — slides up after site reveal */
+    .bento-info-bar {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      z-index: 6;
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: #f5f5f5;
+      padding: 0.9rem 1rem 0.95rem;
+      transform: translateY(100%);
+      transition: transform 0.32s cubic-bezier(0.2, 0.7, 0.2, 1);
+      pointer-events: none;
+      border-top: 1px solid rgba(125, 211, 252, 0.25);
+    }
+    .bento-item:hover .bento-info-bar {
+      transform: translateY(0);
+      transition-delay: 0.4s;
+    }
+    .bento-info-bar .info-desc {
+      font-size: 0.78rem;
+      line-height: 1.45;
+      color: #f0f0f0;
+      margin-bottom: 0.45rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .bento-info-bar .info-tools {
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      color: #7dd3fc;
+      font-weight: 600;
+      text-transform: uppercase;
+      line-height: 1.4;
+    }
+
     .bento-label-name {
       font-size: clamp(0.65rem, 1.2vw, 1rem); font-weight: 500;
       letter-spacing: 0.15em; text-transform: uppercase;
@@ -330,34 +368,80 @@
 
   <script>
     const projects = [
-      { name: "Salesman Toolkit", url: "https://salesman-toolkit.vercel.app/" },
-      { name: "Seala", url: "https://www.seala.com/" },
-      { name: "SUPR Tools", url: "https://supr-tools.vercel.app/" },
-      { name: "SUPR Jobsite Supervisor", url: "https://supr-jobsite-supervisor.vercel.app/" },
-      { name: "Wellspring Creative Partnership", url: "https://wellspring-creative-partnership.vercel.app/" },
-      { name: "VO2 Reaction Cardiorespiratory", url: "https://vo-2-reaction-cardiorespiratory-fit.vercel.app/" },
-      { name: "VO2 Reaction", url: "https://vo-2-reaction-7r1v.vercel.app/" },
-      { name: "VUCA", url: "https://vuca-rho.vercel.app/" },
-      { name: "Prime Valley Ranch", url: "https://www.primevalleyranch.com/" },
-      { name: "ROI Prime Reaction", url: "https://roi.primereaction.us/" },
-      { name: "Prime Facility Vision", url: "https://prime-facility-vision-questionnaire.vercel.app/" },
-      { name: "Prime Reaction Tracker", url: "https://prime-reaction-project-tracker.vercel.app/" },
-      { name: "Not Fat Free", url: "https://www.notfatfree.com/" },
-      { name: "Run Rate", url: "https://run-rate.vercel.app/" },
+      { name: "Salesman Toolkit", url: "https://salesman-toolkit.vercel.app/",
+        description: "\u201CPrimeReaction | Field Ops\u201D \u2014 a sales / field-ops toolkit for PrimeReaction reps.",
+        tools: "Claude CLI | Codex | Gemini | Microsoft Word & Excel" },
+      { name: "Seala Kitchen & Bath", url: "https://www.seala.com/",
+        description: "Marketing site for Seala \u2014 \u201CDenver\u2019s trusted kitchen and bathroom remodeling specialists.\u201D Licensed, insured, 5-year written warranty.",
+        tools: "Claude Code | Claude Co-Work | Gemini | Google Analytics | Meta Analytics" },
+      { name: "SUPR Tools", url: "https://supr-tools.vercel.app/",
+        description: "\u201CFree Diagnostic Tools for Small Contractors\u201D \u2014 suite of benchmarked diagnostics that surface revenue leaks and operational inefficiencies, plus a field coordination app in development.",
+        tools: "Claude Code | Codex | Vercel | Supabase" },
+      { name: "SUPR Jobsite Supervisor", url: "https://supr-jobsite-supervisor.vercel.app/",
+        description: "Voice-first mobile app for construction jobsite coordination: daily logs, auto-handoffs, EN/ES bilingual, for GCs, subs, and crews.",
+        tools: "Claude CLI | Codex | Xcode | Figma | Google Stitch | Vercel | Supabase | Expo Go" },
+      { name: "Wellspring Creative Partnership", url: "https://wellspring-creative-partnership.vercel.app/",
+        description: "Creative-partnership proposal site for two hot-springs resorts \u2014 brand/story pitch, \u201CThere\u2019s a moment.\u201D",
+        tools: "Microsoft PowerPoint | Veo 3 | ElevenLabs | DaVinci Resolve | Replit" },
+      { name: "VO2 Reaction Cardiorespiratory", url: "https://vo-2-reaction-cardiorespiratory-fit.vercel.app/",
+        description: "Management portal for the VO2 Reaction cardiorespiratory fitness program (admin / coach view).",
+        tools: "Replit | GitHub" },
+      { name: "VO2 Reaction", url: "https://vo-2-reaction-7r1v.vercel.app/",
+        description: "\u201CVO2 ProMax \u2014 COR-X\u201D \u2014 consumer-facing page for the VO2 Reaction / COR-X product line.",
+        tools: "Replit | Framer | GitHub" },
+      { name: "VUCA", url: "https://vuca-rho.vercel.app/",
+        description: "VO2 ProMax page: \u201CWhat if you could burn jogging calories at walking heart rates?\u201D \u2014 pitch of the 3:1 metabolic-leverage concept.",
+        tools: "Claude Code | Vercel | GitHub" },
+      { name: "Prime Valley Ranch", url: "https://www.primevalleyranch.com/",
+        description: "Brand site for Prime Valley Ranch: \u201CWe turn wildfire fuel into culinary gold\u201D \u2014 dead oak \u2192 premium cooking wood, wildfire-mitigation angle.",
+        tools: "Framer | GitHub" },
+      { name: "ROI Prime Reaction", url: "https://roi.primereaction.us/",
+        description: "PRIME Reaction ROI Calculator \u2014 interactive tool for prospects/clients to model return on investment.",
+        tools: "Claude Code | Vercel | GitHub" },
+      { name: "Prime Facility Vision", url: "https://prime-facility-vision-questionnaire.vercel.app/",
+        description: "Stakeholder questionnaire for a planned 60,000 SF sports performance + longevity medicine facility in Phoenix, AZ (GLP-1, regenerative therapies).",
+        tools: "Claude CLI | Vercel | GitHub" },
+      { name: "Prime Reaction Tracker", url: "https://prime-reaction-project-tracker.vercel.app/",
+        description: "\u201CPCC Global Work System\u201D \u2014 internal project/work-tracking portal for the Prime Reaction / PCC program.",
+        tools: "Claude Code | Codex | Vercel | Supabase | GitHub" },
+      { name: "Not Fat Free", url: "https://www.notfatfree.com/",
+        description: "Brand site for an animal-fat consumer product line: Not Fat Free.",
+        tools: "Claude Code | Veo 3 | Vercel | GitHub" },
+      { name: "Run Rate", url: "https://run-rate.vercel.app/",
+        description: "Cash-flow runway calculator for contractors \u2014 enter burn rate, see how many months of runway remain.",
+        tools: "Claude Code | Vercel | GitHub" },
     ];
 
+    const videoTools = "Veo 3 | Suno | Logic Pro | Adobe AE | DaVinci Resolve | Topaz Suite | Boris FX | Maxon Red Giant";
     const videos = [
-      { name: "REAXCORE : COR-X", id: "jk1HvfuEdQg" },
-      { name: "REAXTION — Sculpting the Apex Human", id: "Z-oCI4fgXaE" },
-      { name: "American Gaucho — Fire, Flavor and Freedom", id: "bRqUW6SlVAo" },
-      { name: "Seala Kitchen and Bath", id: "03Y21bR3HAA" },
-      { name: "The Gate Is Open — A Pilgrimage Across the Stars", id: "Cl5qBOxF9bA" },
+      { name: "REAXCORE : COR-X", id: "jk1HvfuEdQg",
+        description: "Product/brand film for REAXCORE COR-X (Prime Reaction training system).",
+        tools: videoTools },
+      { name: "REAXTION \u2014 Sculpting the Apex Human", id: "Z-oCI4fgXaE",
+        description: "Hero brand film for REAXTION \u2014 \u201Csculpting the apex human\u201D positioning.",
+        tools: videoTools },
+      { name: "American Gaucho \u2014 Fire, Flavor and Freedom", id: "bRqUW6SlVAo",
+        description: "Brand film for American Gaucho \u2014 fire/flavor/freedom narrative (food/hospitality).",
+        tools: videoTools },
+      { name: "Seala Kitchen and Bath", id: "03Y21bR3HAA",
+        description: "Brand / service video for Seala Kitchen and Bath (Denver remodeling).",
+        tools: videoTools },
+      { name: "The Gate Is Open \u2014 A Pilgrimage Across the Stars", id: "Cl5qBOxF9bA",
+        description: "Narrative / cinematic piece \u2014 \u201CA Pilgrimage Across the Stars\u201D (poetic / speculative tone).",
+        tools: videoTools },
     ];
 
+    const briotixTools = "Microsoft PowerPoint | Google Vids | ElevenLabs | DaVinci Resolve";
     const presentations = [
-      { name: "Presentations.ai Deck", embedUrl: "https://app.presentations.ai/view/8CQXVcms7d", type: "embed" },
-      { name: "Briotix Costco Presentation", id: "BAzL6b1WaDY", type: "youtube" },
-      { name: "Briotix PPE Training", id: "CEq9fcqbs8I", type: "youtube" },
+      { name: "Presentations.ai Deck", embedUrl: "https://app.presentations.ai/view/8CQXVcms7d", type: "embed",
+        description: "Brand Name Change Proposal \u2014 AI-generated deck hosted on Presentations.ai (embedded live).",
+        tools: "Presentations.ai" },
+      { name: "Briotix Costco Presentation", id: "BAzL6b1WaDY", type: "youtube",
+        description: "Recorded presentation pitched to / created for Costco on behalf of Briotix (ergonomics / injury prevention).",
+        tools: briotixTools },
+      { name: "Briotix PPE Training", id: "CEq9fcqbs8I", type: "youtube",
+        description: "PPE training presentation produced for Briotix.",
+        tools: briotixTools },
     ];
 
     // Smart grid: calculates width/height so items always fill with no black space
@@ -396,6 +480,14 @@
       `;
     }
 
+    // ── Helper: build hover info bar ──
+    function buildInfoBar(desc, tools) {
+      if (!desc && !tools) return "";
+      const d = desc ? `<div class="info-desc">${desc}</div>` : "";
+      const t = tools ? `<div class="info-tools">${tools}</div>` : "";
+      return `<div class="bento-info-bar">${d}${t}</div>`;
+    }
+
     // ── Web Work ──
     const webGrid = document.getElementById("web-work");
     projects.forEach((p, i) => {
@@ -413,6 +505,7 @@
             <span class="bento-label-num">${num} / ${tot}</span>
           </div>
           <div class="bento-click"></div>
+          ${buildInfoBar(p.description, p.tools)}
         `;
         item.dataset.idx = i;
         item.querySelector(".bento-click").addEventListener("click", () => {
@@ -470,6 +563,7 @@
           <iframe src="${embedUrl}" title="${v.name}" loading="lazy"
             allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"
             allowfullscreen style="pointer-events:auto"></iframe>
+          ${buildInfoBar(v.description, v.tools)}
         `;
       }
       vidGrid.appendChild(item);
@@ -498,6 +592,7 @@
             <span class="bento-label-name">${p.name}</span>
             <span class="bento-label-num">${num} / ${tot}</span>
           </div>
+          ${buildInfoBar(p.description, p.tools)}
           <iframe src="${src}" title="${p.name}" loading="lazy"
             allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"
             allowfullscreen scrolling="no" style="pointer-events:auto"></iframe>
@@ -510,7 +605,9 @@
 
     // ── Featured ──
     const featuredItems = [
-      { name: "Transamerica · Instructional Designer's Handbook", url: "https://ta-id-training.vercel.app/" },
+      { name: "Transamerica \u00B7 Instructional Designer\u2019s Handbook", url: "https://ta-id-training.vercel.app/",
+        description: "A demo instructional-design handbook / training site built for a Transamerica Senior Instructional Designer context.",
+        tools: "Claude Code | Codex | Vercel | GitHub" },
     ];
 
     const featGrid = document.getElementById("featured");
@@ -530,6 +627,7 @@
             <span class="bento-label-num">${num} / ${tot}</span>
           </div>
           <div class="bento-click"></div>
+          ${buildInfoBar(p.description, p.tools)}
         `;
         item.dataset.idx = i;
         item.querySelector(".bento-click").addEventListener("click", () => {
@@ -563,9 +661,14 @@
     }
 
     // ── Proposals ──
+    const proposalTools = "Codex | Claude Code | Microsoft Word";
     const proposalItems = [
-      { name: "RFP Response — Cedar Ridge 230kV Transmission & Substation", url: "/rfp-response.html" },
-      { name: "SOQ — Renewable Energy Electrical Construction", url: "/soq.html" },
+      { name: "RFP Response \u2014 Cedar Ridge 230kV Transmission & Substation", url: "/rfp-response.html",
+        description: "Sample RFP response positioning MYR Group / Sturgeon Electric for a ~230kV transmission & substation build (Cedar Ridge, WREC). Full proposal with team, experience, safety, and pricing sections.",
+        tools: proposalTools },
+      { name: "SOQ \u2014 Renewable Energy Electrical Construction", url: "/soq.html",
+        description: "Statement of Qualifications for MYR Group / CSI Electrical Contractors covering utility-scale solar, wind collector systems, BESS, and HV substation work.",
+        tools: proposalTools },
     ];
 
     const propGrid = document.getElementById("proposals");
@@ -585,6 +688,7 @@
             <span class="bento-label-num">${num} / ${tot}</span>
           </div>
           <div class="bento-click"></div>
+          ${buildInfoBar(p.description, p.tools)}
         `;
         item.dataset.idx = i;
         item.querySelector(".bento-click").addEventListener("click", () => {
