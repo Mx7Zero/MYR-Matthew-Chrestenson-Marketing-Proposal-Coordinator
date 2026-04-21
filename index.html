@@ -435,7 +435,7 @@
         tools: videoTools },
     ];
 
-    const briotixTools = "MICROSOFT POWER POINT | GOOGLE VIDS | ELEVEN LABS | DAVINCI RESOLVE";
+    const briotixTools = "MICROSOFT POWER POINT | ELEVEN LABS";
     const presentations = [
       { name: "The New Prime Reaction", embedUrl: "https://chrestenson.com/prime-reaction/", type: "embed",
         description: "Brand Name Change Proposal deck — The New Prime Reaction, embedded live.",
@@ -603,7 +603,7 @@
           ${buildInfoBar(p.description, p.tools)}
         `;
         item.querySelector(".bento-click").addEventListener("click", () => {
-          window.open(linkUrl, p.name, "popup,width=1280,height=800,noopener,noreferrer");
+          window.open(linkUrl, "_blank", "noopener,noreferrer");
         });
       }
       presGrid.appendChild(item);
